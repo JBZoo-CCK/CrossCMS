@@ -35,7 +35,6 @@ before_script:
 
   # Prepare Joomla
   - mkdir -p ./cms/joomla
-  - mysql -e 'create database cms_joomla;'
   - php vendor/bin/joomla site:create testsite --www="./cms/joomla" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
 
   # Prepare Wordpress
