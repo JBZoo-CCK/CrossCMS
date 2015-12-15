@@ -2,4 +2,5 @@ build
 vendor
 cms
 phpunit.xml
+phpunit-*.xml
 composer.lock

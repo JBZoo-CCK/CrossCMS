@@ -25,13 +25,13 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./src/Wordpress</directory>
         </whitelist>
     </filter>
 
     <logging>
         <log type="coverage-clover" target="build/logs/clover-wordpress.xml"/>
-        <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>-->
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>
     </logging>
 
 </phpunit>
