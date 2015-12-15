@@ -35,7 +35,7 @@ before_script:
 
   # Prepare Joomla
   - mkdir -p ./cms/joomla
-  - vendor/bin/joomla site:create testsite --www="./cms/joomla" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
+  - vendor/bin/joomla site:create joomla --www="./cms" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
   - ls -l
   - ls -l ./cms
   - ls -l ./cms/joomla
