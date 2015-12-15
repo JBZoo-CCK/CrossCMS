@@ -16,7 +16,7 @@
         "php"              : ">=5.3.10",
         "pimple/pimple"    : "^3.0",
         "jbzoo/data"       : "^1.0",
-        "jbzoo/sqlbuilder" : "^1.0"
+        "jbzoo/sqlbuilder" : "^1.1"
     },
     "require-dev"       : {
         "jbzoo/phpunit"       : "1.x-dev",
