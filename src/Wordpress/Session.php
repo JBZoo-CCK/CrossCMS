@@ -83,20 +83,6 @@ class Session extends AbstractSession
     /**
      * {@inheritdoc}
      */
-    public function setGroup($group = self::GROUP_DFAULT, array $data = array(), $isFullReplace = true)
-    {
-        if ($isFullReplace) {
-            $this->clearGroup($group);
-        }
-
-        foreach ($data as $key => $value) {
-            $this->set($key, $value, $group);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clearGroup($group = self::GROUP_DFAULT)
     {
         if (isset($_SESSION[$this->_namespace][$group])) {
