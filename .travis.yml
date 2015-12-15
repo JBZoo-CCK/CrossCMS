@@ -35,21 +35,21 @@ before_script:
 
   # Prepare Joomla
   - mkdir -p ./cms/joomla
-  - php vendor/bin/joomla site:create testsite --www="./cms/joomla" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
+  - vendor/bin/joomla site:create testsite --www="./cms/joomla" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
 
   # Prepare Wordpress
   - mkdir -p ./cms/wordpress
   - mysql -e 'create database cms_wp;'
-  - php vendor/bin/wp core download --path=./cms/wordpress
-  - php vendor/bin/wp core config --path=./cms/wordpress --dbname=test_wp --dbuser=root --dbhost=127.0.0.1 --verbose
+  - vendor/bin/wp core download --path=./cms/wordpress
+  - vendor/bin/wp core config --path=./cms/wordpress --dbname=test_wp --dbuser=root --dbhost=127.0.0.1 --verbose
 
   # Update env
   - phpenv rehash
 
 script:
   # PHPUnit tests
-  - php vendor/bin/phpunit --configuration phpunit-joomla.xml.dist;
-  - php vendor/bin/phpunit --configuration phpunit-wordpress.xml.dist;
+  - vendor/bin/phpunit --configuration phpunit-joomla.xml.dist;
+  - vendor/bin/phpunit --configuration phpunit-wordpress.xml.dist;
 
   # Check PHP Code Standarts
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
