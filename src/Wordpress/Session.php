@@ -19,6 +19,7 @@ use JBZoo\CrossCMS\AbstractSession;
 /**
  * Class Session
  * @package JBZoo\CrossCMS
+ * @SuppressWarnings(PHPMD.Superglobals)
  */
 class Session extends AbstractSession
 {

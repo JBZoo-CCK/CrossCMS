@@ -24,12 +24,6 @@ use Pimple\Container;
 class Cms extends Container
 {
     /**
-     * @var string
-     */
-    protected $_system = '';
-    protected $_sysPrefix = '';
-
-    /**
      * @var array
      */
     protected $_systemList = array(
@@ -59,51 +53,55 @@ class Cms extends Container
     {
         parent::__construct(array());
 
-        $this->_prepare();
+        $this['global.cms']       = $this->_getCmsType();
+        $this['global.namespace'] = __NAMESPACE__ . '\\' . $this['global.cms'] . '\\';
 
-        $this['session'] = function ($c) {
-            $className = $c->_systemPrefix . 'Session';
+        $this['session'] = function ($cont) {
+            $className = $cont['global.namespace'] . 'Session';
             return new $className();
         };
 
-        $this['config.cms'] = function ($c) {
-            $className = $c->_systemPrefix . 'Config';
+
+        $this['config.cms'] = function ($cont) {
+            $className = $cont['global.namespace'] . 'Config';
             return new $className();
         };
 
-        $this['db'] = function ($c) {
-            $className = $c->_systemPrefix . 'Database';
+
+        $this['db'] = function ($cont) {
+            $className = $cont['global.namespace'] . 'Database';
 
             // init SQLBuilder Configuration
-            SqlBuilder::set($c->_system);
+            SqlBuilder::set($cont['global.cms']);
 
-            /** @var AbstractDatabase $db */
-            $db = new $className();
+            /** @var AbstractDatabase $database */
+            $database = new $className();
 
-            return $db;
+            return $database;
         };
     }
 
     /**
+     * @return string
      * @throws Exception
      */
-    protected function _prepare()
+    protected function _getCMSType()
     {
-        $this->_system = '';
+        $cmsType = '';
 
         foreach ($this->_systemList as $system) {
             $mainClass = __NAMESPACE__ . '\\' . $system . '\\' . $system;
 
             if (class_exists($mainClass) && call_user_func(array($mainClass, 'check'))) {
-                $this->_system = $system;
+                $cmsType = $system;
             }
         }
 
-        if (!$this->_system) {
+        if (!$cmsType) {
             throw new Exception('Undefined CMS system');
         }
 
-        $this->_systemPrefix = __NAMESPACE__ . '\\' . $this->_system . '\\';
+        return $cmsType;
     }
 
     /**

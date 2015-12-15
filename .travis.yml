@@ -45,7 +45,6 @@ before_script:
   - mysql -e 'create database cms_wp;'
   - vendor/bin/wp core download --path=./cms/wordpress
   - vendor/bin/wp core config --path=./cms/wordpress --dbname=cms_wp --dbuser=root --dbhost="127.0.0.1"
-  - cat ./cms/wordpress/wp-config.php
 
   # Update env
   - phpenv rehash

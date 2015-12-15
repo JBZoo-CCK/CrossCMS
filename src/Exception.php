@@ -20,4 +20,5 @@ namespace JBZoo\CrossCMS;
  */
 class Exception extends \Exception
 {
+
 }

@@ -27,5 +27,4 @@ class Wordpress
     {
         return defined('ABSPATH') && ABSPATH;
     }
-
 }

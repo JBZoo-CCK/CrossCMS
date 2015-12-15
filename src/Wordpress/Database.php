@@ -30,6 +30,7 @@ class Database extends AbstractDatabase
 
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function __construct()
     {
