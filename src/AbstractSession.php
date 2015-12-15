@@ -55,13 +55,6 @@ abstract class AbstractSession
     abstract public function getGroup($group = self::GROUP_DFAULT, $default = array());
 
     /**
-     * @param array  $data
-     * @param string $group
-     * @param bool   $isFullReplace
-     */
-    abstract public function setGroup($group = self::GROUP_DFAULT, array $data = array(), $isFullReplace = true);
-
-    /**
      * @param string $key
      * @param string $group
      */
@@ -77,4 +70,19 @@ abstract class AbstractSession
      */
     abstract public function getToken();
 
+    /**
+     * @param array  $data
+     * @param string $group
+     * @param bool   $isFullReplace
+     */
+    public function setGroup($group = self::GROUP_DFAULT, array $data = array(), $isFullReplace = true)
+    {
+        if ($isFullReplace) {
+            $this->clearGroup($group);
+        }
+
+        foreach ($data as $key => $value) {
+            $this->set($key, $value, $group);
+        }
+    }
 }
