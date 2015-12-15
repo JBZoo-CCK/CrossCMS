@@ -9,9 +9,14 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - hhvm
 
 matrix:
   fast_finish: true
+  allow_failures:
+    - php: 5.3
+    - php: 7.0
+    - php: hhvm
 
 env:
   - PHP_TEST_VERSION=5.6
@@ -41,6 +46,7 @@ before_script:
   - mysql -e 'create database cms_wp;'
   - vendor/bin/wp core download --path=./cms/wordpress
   - vendor/bin/wp core config --path=./cms/wordpress --dbname=test_wp --dbuser=root --dbhost="127.0.0.1"
+  - cat ./cms/wordpress/wp-config.php
 
   # Update env
   - phpenv rehash
