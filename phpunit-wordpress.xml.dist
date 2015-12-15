@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit bootstrap="tests/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         syntaxCheck="true"
+         stopOnFailures="true"
+         stopOnError="true"
+         stopOnFailure="true"
+         stopOnIncomplete="true"
+         stopOnSkipped="false"
+        >
+
+    <php>
+        <env name="PATH_WORDPRESS" value="./cms/wordpress"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="General">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover-wordpress.xml"/>
+        <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>-->
+    </logging>
+
+</phpunit>

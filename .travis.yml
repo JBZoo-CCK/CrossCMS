@@ -1,0 +1,71 @@
+language: php
+
+services:
+  - mysql
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+
+matrix:
+  fast_finish: true
+
+env:
+  - PHP_TEST_VERSION=5.6
+
+before_script:
+  # Composer
+  - composer self-update
+  - composer update
+  - composer validate
+
+  # install report tools
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
+        composer require
+          satooshi/php-coveralls
+          squizlabs/php_codesniffer
+          sebastian/phpcpd
+          phploc/phploc
+          phpmd/phpmd
+        ;
+    fi;'
+
+  # Prepare Joomla
+  - mkdir -p cms/joomla
+  - mysql -e 'create database cms_joomla;'
+  - php vendor/bin/joomla site:create testsite --www=cms/joomla --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose
+
+  # Prepare Wordpress
+  - mkdir -p cms/wordpress
+  - mysql -e 'create database cms_wp;'
+  - php vendor/bin/wp core download --path=cms/wordpress
+  - php vendor/bin/wp core config --path=cms/wordpress --dbname=test_wp --dbuser=root --dbhost=127.0.0.1 --verbose
+
+  # Update env
+  - phpenv rehash
+
+script:
+  # PHPUnit tests
+  - php vendor/bin/phpunit --configuration phpunit-joomla.xml.dist;
+  - php vendor/bin/phpunit --configuration phpunit-wordpress.xml.dist;
+
+  # Check PHP Code Standarts
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
+        git clone --branch=master https://github.com/JBZoo/Misc.git build/misc;
+        php vendor/bin/phpcs ./src --standard=build/misc/phpcs/JBZoo/ruleset.xml --report=full;
+        php vendor/bin/phpmd ./src text ./build/misc/phpmd/jbzoo.xml --verbose;
+        php vendor/bin/phpcpd ./src --no-interaction --verbose;
+    fi;'
+
+after_script:
+  # Get statistics
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
+        php vendor/bin/coveralls --verbose;
+        php vendor/bin/phploc ./src --no-interaction --verbose;
+    fi;'
+
+notifications:
+  slack: jbzoo:lKYRTvAF36tRDfKTOK5zhFh9
