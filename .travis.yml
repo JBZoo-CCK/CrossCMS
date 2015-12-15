@@ -36,12 +36,16 @@ before_script:
   # Prepare Joomla
   - mkdir -p ./cms/joomla
   - vendor/bin/joomla site:create testsite --www="./cms/joomla" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
+  - ls -l
+  - ls -l ./cms
+  - ls -l ./cms/joomla
+  - ls -l ./cms/joomla/includes
 
   # Prepare Wordpress
   - mkdir -p ./cms/wordpress
   - mysql -e 'create database cms_wp;'
   - vendor/bin/wp core download --path=./cms/wordpress
-  - vendor/bin/wp core config --path=./cms/wordpress --dbname=test_wp --dbuser=root --dbhost=127.0.0.1
+  - vendor/bin/wp core config --path=./cms/wordpress --dbname=test_wp --dbuser=root --dbhost="127.0.0.1"
 
   # Update env
   - phpenv rehash
@@ -67,4 +71,4 @@ after_script:
     fi;'
 
 notifications:
-  slack: jbzoo:lKYRTvAF36tRDfKTOK5zhFh9
+  # slack: jbzoo:lKYRTvAF36tRDfKTOK5zhFh9
