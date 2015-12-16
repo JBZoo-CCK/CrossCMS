@@ -1,6 +1,6 @@
 build
 vendor
-cms
+resources
 phpunit.xml
 phpunit-*.xml
 composer.lock
