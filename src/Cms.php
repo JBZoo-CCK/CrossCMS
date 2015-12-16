@@ -113,5 +113,4 @@ class Cms extends Container
         $cms = self::getInstance();
         return $cms[$helper];
     }
-
 }

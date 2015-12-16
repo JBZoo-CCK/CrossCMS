@@ -27,5 +27,4 @@ class Joomla
     {
         return defined('_JEXEC') && _JEXEC;
     }
-
 }

@@ -99,5 +99,4 @@ class Session extends AbstractSession
     {
         return \JFactory::getSession()->getToken();
     }
-
 }
