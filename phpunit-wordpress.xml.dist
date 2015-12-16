@@ -14,7 +14,7 @@
         >
 
     <php>
-        <env name="PATH_WORDPRESS" value="./cms/wordpress"/>
+        <env name="PATH_WORDPRESS" value="./resources/wordpress"/>
     </php>
 
     <testsuites>

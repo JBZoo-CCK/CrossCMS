@@ -6,6 +6,7 @@
 [![Latest Stable Version](https://poser.pugx.org/JBZoo/CrossCMS/v/stable)](https://packagist.org/packages/JBZoo/CrossCMS) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JBZoo/CrossCMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JBZoo/CrossCMS/?branch=master)
 
 
+
 ### License
 
 MIT

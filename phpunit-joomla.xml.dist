@@ -14,7 +14,7 @@
         >
 
     <php>
-        <env name="PATH_JOOMLA" value="./cms/joomla"/>
+        <env name="PATH_JOOMLA" value="./resources/joomla"/>
     </php>
 
     <testsuites>
