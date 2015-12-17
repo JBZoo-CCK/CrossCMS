@@ -19,7 +19,7 @@
         "jbzoo/sqlbuilder" : "^1.1"
     },
     "require-dev"       : {
-        "jbzoo/phpunit"       : "1.x-dev",
+        "jbzoo/phpunit"       : "^1.0",
         "joomlatools/console" : "^1.4",
         "wp-cli/wp-cli"       : "^0.21"
     },
@@ -32,6 +32,34 @@
         "branch-alias" : {
             "dev-master" : "1.x-dev"
         }
+    },
+    "config"            : {
+        "optimize-autoloader" : true
+    },
+    "scripts"           : {
+        "test"       : [
+            "@manifest",
+            "@autoload",
+            "@phpunit-j",
+            "@phpunit-wp",
+            "@phpmd",
+            "@phpcs",
+            "@phpcpd",
+            "@phploc"
+        ],
+        "update-all" : [
+            "composer self-update",
+            "composer update"
+        ],
+        "manifest"   : "composer validate",
+        "autoload"   : "composer dump-autoload --optimize --no-scripts",
+        "phpunit-j"  : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
+        "phpunit-wp" : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
+        "phpmd"      : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
+        "phpcs"      : "php ./vendor/squizlabs/php_codesniffer/scripts/phpcs ./src --standard=./vendor/jbzoo/misc/phpcs/JBZoo/ruleset.xml --report=full",
+        "phpcpd"     : "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
+        "phploc"     : "php ./vendor/phploc/phploc/phploc ./src --verbose",
+        "coveralls"  : "php ./vendor/satooshi/php-coveralls/bin/coveralls --verbose"
     },
     "support"           : {
         "issues" : "https://github.com/JBZoo/CrossCMS/issues"

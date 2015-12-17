@@ -16,24 +16,7 @@ matrix:
     - php: 7.0
 
 before_script:
-  - export PHP_TEST_VERSION=5.6
-
-  # Composer
-  - composer self-update
-  - composer clear-cache
-  - composer update  --prefer-source
-  - composer validate
-
-  # install report tools
-  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
-        composer require
-          satooshi/php-coveralls
-          squizlabs/php_codesniffer
-          sebastian/phpcpd
-          phploc/phploc
-          phpmd/phpmd
-        ;
-    fi;'
+  - composer update-all
 
   # Prepare Joomla
   - vendor/bin/joomla site:create joomla --www="./resources" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
@@ -48,24 +31,11 @@ before_script:
   - phpenv rehash
 
 script:
-  # PHPUnit tests
-  - vendor/bin/phpunit --configuration phpunit-joomla.xml.dist;
-  - vendor/bin/phpunit --configuration phpunit-wordpress.xml.dist;
-
-  # Check PHP Code Standarts
-  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
-        git clone --branch=master https://github.com/JBZoo/Misc.git build/misc;
-        php vendor/bin/phpcs ./src --standard=build/misc/phpcs/JBZoo/ruleset.xml --report=full;
-        php vendor/bin/phpmd ./src text ./build/misc/phpmd/jbzoo.xml --verbose;
-        php vendor/bin/phpcpd ./src --no-interaction --verbose;
-    fi;'
+  - composer test
 
 after_script:
-  # Get statistics
-  - sh -c 'if [ "$TRAVIS_PHP_VERSION" = "$PHP_TEST_VERSION" ]; then
-        php vendor/bin/coveralls --verbose;
-        php vendor/bin/phploc ./src --no-interaction --verbose;
-    fi;'
+  - composer coveralls
 
 notifications:
   slack: jbzoo:lKYRTvAF36tRDfKTOK5zhFh9
+
