@@ -37,7 +37,7 @@
         "optimize-autoloader" : true
     },
     "scripts"           : {
-        "test"       : [
+        "test"              : [
             "@manifest",
             "@autoload",
             "@phpunit-j",
@@ -47,19 +47,28 @@
             "@phpcpd",
             "@phploc"
         ],
-        "update-all" : [
+        "update-all"        : [
             "composer self-update",
             "composer update"
         ],
-        "manifest"   : "composer validate",
-        "autoload"   : "composer dump-autoload --optimize --no-scripts",
-        "phpunit-j"  : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
-        "phpunit-wp" : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
-        "phpmd"      : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
-        "phpcs"      : "php ./vendor/squizlabs/php_codesniffer/scripts/phpcs ./src --standard=./vendor/jbzoo/misc/phpcs/JBZoo/ruleset.xml --report=full",
-        "phpcpd"     : "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
-        "phploc"     : "php ./vendor/phploc/phploc/phploc ./src --verbose",
-        "coveralls"  : "php ./vendor/satooshi/php-coveralls/bin/coveralls --verbose"
+        "prepare-joomla"    : [
+            "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose"
+        ],
+        "prepare-wordpress" : [
+            "mkdir -p ./resources/wordpress",
+            "mysql -e 'create database cms_wp;'",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1"
+        ],
+        "manifest"          : "composer validate",
+        "autoload"          : "composer dump-autoload --optimize --no-scripts",
+        "phpunit-j"         : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
+        "phpunit-wp"        : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
+        "phpmd"             : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
+        "phpcs"             : "php ./vendor/squizlabs/php_codesniffer/scripts/phpcs ./src --standard=./vendor/jbzoo/misc/phpcs/JBZoo/ruleset.xml --report=full",
+        "phpcpd"            : "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
+        "phploc"            : "php ./vendor/phploc/phploc/phploc ./src --verbose",
+        "coveralls"         : "php ./vendor/satooshi/php-coveralls/bin/coveralls --verbose"
     },
     "support"           : {
         "issues" : "https://github.com/JBZoo/CrossCMS/issues"

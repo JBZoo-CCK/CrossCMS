@@ -17,18 +17,8 @@ matrix:
 
 before_script:
   - composer update-all
-
-  # Prepare Joomla
-  - vendor/bin/joomla site:create joomla --www="./resources" --mysql-login="root:" --mysql-host="127.0.0.1" --mysql-database=cms_joomla --verbose
-
-  # Prepare Wordpress
-  - mkdir -p ./resources/wordpress
-  - mysql -e 'create database cms_wp;'
-  - vendor/bin/wp core download --path=./resources/wordpress
-  - vendor/bin/wp core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost="127.0.0.1"
-
-  # Update env
-  - phpenv rehash
+  - composer prepare-joomla
+  - composer prepare-wordpress
 
 script:
   - composer test
