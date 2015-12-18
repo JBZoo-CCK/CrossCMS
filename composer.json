@@ -48,8 +48,8 @@
             "@phploc"
         ],
         "update-all"        : [
-            "composer self-update",
-            "composer update"
+            "composer self-update --no-interaction",
+            "composer update --no-interaction"
         ],
         "prepare-joomla"    : [
             "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose"
@@ -60,8 +60,8 @@
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1"
         ],
-        "manifest"          : "composer validate",
-        "autoload"          : "composer dump-autoload --optimize --no-scripts",
+        "manifest"          : "composer validate --no-interaction",
+        "autoload"          : "composer dump-autoload --optimize --no-scripts --no-interaction",
         "phpunit-j"         : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
         "phpunit-wp"        : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
         "phpmd"             : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
