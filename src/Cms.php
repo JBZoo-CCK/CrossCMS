@@ -82,9 +82,14 @@ class Cms extends Container
 
         $this['config'] = function ($cont) {
             $className = $cont['global.namespace'] . 'Config';
+            $config    = new $className();
 
-            /** @var AbstractConfig $config */
-            $config = new $className();
+            return $config;
+        };
+
+        $this['env'] = function ($cont) {
+            $className = $cont['global.namespace'] . 'Env';
+            $config    = new $className();
 
             return $config;
         };
