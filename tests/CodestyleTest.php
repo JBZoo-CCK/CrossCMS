@@ -20,6 +20,5 @@ namespace JBZoo\PHPUnit;
  */
 class CodestyleTest extends Codestyle
 {
-    protected $_packageName = "CrossCMS";
-    protected $_packageAuthor = "";
+    protected $_packageName = 'CrossCMS';
 }

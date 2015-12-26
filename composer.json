@@ -15,8 +15,10 @@
     "require"           : {
         "php"              : ">=5.3.10",
         "pimple/pimple"    : "^3.0",
+        "jbzoo/sqlbuilder" : "^1.0",
         "jbzoo/data"       : "^1.0",
-        "jbzoo/sqlbuilder" : "^1.1"
+        "jbzoo/utils"      : "^1.0",
+        "jbzoo/path"       : "1.x-dev"
     },
     "require-dev"       : {
         "jbzoo/phpunit"       : "^1.0",
@@ -56,7 +58,7 @@
         ],
         "prepare-wordpress" : [
             "mkdir -p ./resources/wordpress",
-            "mysql -e 'create database cms_wp;'",
+            "mysql -e 'create database cms_wp'",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1"
         ],

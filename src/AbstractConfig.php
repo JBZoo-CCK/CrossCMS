@@ -21,9 +21,57 @@ namespace JBZoo\CrossCMS;
 abstract class AbstractConfig
 {
     /**
-     * @param  string $key
-     * @param  mixed  $default
-     * @return mixed
+     * @return string
      */
-    abstract public function get($key, $default = null);
+    abstract public function sitename();
+
+    /**
+     * @return string
+     */
+    abstract public function sitedesc();
+
+    /**
+     * @return string
+     */
+    abstract public function email();
+
+    /**
+     * @return string
+     */
+    abstract public function dbHost();
+
+    /**
+     * @return string
+     */
+    abstract public function dbUser();
+
+    /**
+     * @return string
+     */
+    abstract public function dbPass();
+
+    /**
+     * @return string
+     */
+    abstract public function dbName();
+
+    /**
+     * @return string
+     */
+    abstract public function dbPrefix();
+
+    /**
+     * @return string
+     */
+    abstract public function dbType();
+
+    /**
+     * @return bool
+     */
+    abstract public function isDebug();
+
+    /**
+     * @return string
+     */
+    abstract public function timezone();
 }

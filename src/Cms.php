@@ -79,6 +79,15 @@ class Cms extends Container
 
             return $database;
         };
+
+        $this['config'] = function ($cont) {
+            $className = $cont['global.namespace'] . 'Config';
+
+            /** @var AbstractConfig $config */
+            $config = new $className();
+
+            return $config;
+        };
     }
 
     /**
@@ -105,12 +114,13 @@ class Cms extends Container
     }
 
     /**
-     * @param $helper
+     * @param string $helper
      * @return mixed
      */
-    public static function get($helper)
+    public static function _($helper)
     {
         $cms = self::getInstance();
+
         return $cms[$helper];
     }
 }

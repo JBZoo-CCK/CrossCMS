@@ -19,20 +19,16 @@ namespace PHPSTORM_META {
 
     $STATIC_METHOD_TYPES = [
 
-        new \JBZoo\CrossCMS\Cms      => [
+        new \JBZoo\CrossCMS\Cms    => [
             "session" instanceof \JBZoo\CrossCMS\AbstractSession,
             "db" instanceof \JBZoo\CrossCMS\AbstractDatabase,
+            "config" instanceof \JBZoo\CrossCMS\AbstractConfig,
         ],
 
-        \JBZoo\CrossCMS\Cms::get('') => [
+        \JBZoo\CrossCMS\Cms::_('') => [
             "session" instanceof \JBZoo\CrossCMS\AbstractSession,
             "db" instanceof \JBZoo\CrossCMS\AbstractDatabase,
+            "config" instanceof \JBZoo\CrossCMS\AbstractConfig,
         ],
-
-        \jbcms('')                   => [
-            "session" instanceof \JBZoo\CrossCMS\AbstractSession,
-            "db" instanceof \JBZoo\CrossCMS\AbstractDatabase,
-        ],
-
     ];
 }
