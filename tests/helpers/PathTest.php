@@ -50,9 +50,9 @@ class PathTest extends PHPUnit
             array(Cms::TYPE_WORDPRESS, 'crosscms', '.'),
             array(Cms::TYPE_WORDPRESS, 'root', PROJECT_RESOURCES . '/wordpress'),
             array(Cms::TYPE_WORDPRESS, 'upload', PROJECT_RESOURCES . '/wordpress/wp-content/uploads'),
-            array(Cms::TYPE_WORDPRESS, 'tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
-            array(Cms::TYPE_WORDPRESS, 'logs', PROJECT_RESOURCES . '/wordpress/logs'),
-            array(Cms::TYPE_WORDPRESS, 'cache', PROJECT_RESOURCES . '/wordpress/cache'),
+            //array(Cms::TYPE_WORDPRESS, 'tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
+            //array(Cms::TYPE_WORDPRESS, 'logs', PROJECT_RESOURCES . '/wordpress/logs'),
+            //array(Cms::TYPE_WORDPRESS, 'cache', PROJECT_RESOURCES . '/wordpress/cache'),
             //array(Cms::TYPE_WORDPRESS, 'tmpl', PROJECT_RESOURCES . '/wordpress/wp-content/themes'),
         );
     }
