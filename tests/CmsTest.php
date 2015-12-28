@@ -28,9 +28,14 @@ class TestCms extends PHPUnit
         isClass('\JBZoo\CrossCMS\Cms', Cms::getInstance());
     }
 
-    public function testSession()
+    public function testInstances()
     {
         $cms = Cms::getInstance();
+
         isClass('\JBZoo\CrossCMS\AbstractSession', $cms['session']);
+        isClass('\JBZoo\CrossCMS\AbstractConfig', $cms['config']);
+        isClass('\JBZoo\CrossCMS\AbstractDatabase', $cms['db']);
+        isClass('\JBZoo\CrossCMS\AbstractEnv', $cms['env']);
+        isClass('\JBZoo\Path\Path', $cms['path']);
     }
 }

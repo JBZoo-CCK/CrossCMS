@@ -14,32 +14,41 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\Path\Path;
+
 /**
- * Class AbstractSession
+ * Class AbstractPath
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractEnv
+abstract class AbstractPath
 {
     /**
      * @return string
      */
-    abstract public function getVersion();
+    abstract public function getRoot();
 
     /**
-     * @return bool
+     * @return string
      */
-    abstract public function isSite();
+    abstract public function getUpload();
 
     /**
-     * @return bool
+     * @return string
      */
-    abstract public function isAdmin();
+    abstract public function getCache();
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isCli()
-    {
-        return PHP_SAPI === 'cli' || defined('STDOUT');
-    }
+    abstract public function getTmpl();
+
+    /**
+     * @return string
+     */
+    abstract public function getTmp();
+
+    /**
+     * @return string
+     */
+    abstract public function getLogs();
 }

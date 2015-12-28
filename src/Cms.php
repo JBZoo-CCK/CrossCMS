@@ -14,7 +14,9 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\Path\Path;
 use JBZoo\SqlBuilder\SqlBuilder;
+use JBZoo\Utils\FS;
 use Pimple\Container;
 
 /**
@@ -23,13 +25,26 @@ use Pimple\Container;
  */
 class Cms extends Container
 {
+    const TYPE_JOOMLA    = 'Joomla';
+    const TYPE_WORDPRESS = 'Wordpress';
+
     /**
      * @var array
      */
     protected $_systemList = array(
-        'Joomla',
-        'Wordpress',
+        self::TYPE_JOOMLA,
+        self::TYPE_WORDPRESS,
     );
+
+    /**
+     * @param string $helper
+     * @return mixed
+     */
+    public static function _($helper)
+    {
+        $cms = self::getInstance();
+        return $cms[$helper];
+    }
 
     /**
      * @return Cms
@@ -53,45 +68,60 @@ class Cms extends Container
     {
         parent::__construct(array());
 
-        $this['global.cms']       = $this->_getCmsType();
-        $this['global.namespace'] = __NAMESPACE__ . '\\' . $this['global.cms'] . '\\';
+        $this['type'] = $this->_getCmsType();
+        $this['ns']   = __NAMESPACE__ . '\\' . $this['type'] . '\\';
 
-        $this['session'] = function ($cont) {
-            $className = $cont['global.namespace'] . 'Session';
+        $this['session'] = function ($cms) {
+            $className = $cms['ns'] . 'Session';
             return new $className();
         };
 
 
-        $this['config.cms'] = function ($cont) {
-            $className = $cont['global.namespace'] . 'Config';
-            return new $className();
-        };
+        $this['db'] = function ($cms) {
 
+            SqlBuilder::set($cms['type']); // init SQLBuilder Driver
 
-        $this['db'] = function ($cont) {
-            $className = $cont['global.namespace'] . 'Database';
-
-            // init SQLBuilder Configuration
-            SqlBuilder::set($cont['global.cms']);
-
-            /** @var AbstractDatabase $database */
-            $database = new $className();
+            $className = $cms['ns'] . 'Database';
+            $database  = new $className();
 
             return $database;
         };
 
-        $this['config'] = function ($cont) {
-            $className = $cont['global.namespace'] . 'Config';
-            $config    = new $className();
 
-            return $config;
+        $this['config'] = function ($cms) {
+            $className = $cms['ns'] . 'Config';
+            $helper    = new $className();
+
+            return $helper;
         };
 
-        $this['env'] = function ($cont) {
-            $className = $cont['global.namespace'] . 'Env';
-            $config    = new $className();
 
-            return $config;
+        $this['env'] = function ($cms) {
+            $className = $cms['ns'] . 'Env';
+            $helper    = new $className();
+
+            return $helper;
+        };
+
+
+        $this['path'] = function ($cms) {
+            $className = $cms['ns'] . 'Path';
+
+            /** @var AbstractPath $helper */
+            $helper = new $className();
+
+            $path = Path::getInstance('crosscms');
+
+            $path->setRoot($helper->getRoot());
+            $path->register($helper->getRoot(), 'root');
+            $path->register($helper->getUpload(), 'upload');
+            $path->register($helper->getCache(), 'cache');
+            $path->register($helper->getTmpl(), 'tmpl');
+            $path->register($helper->getLogs(), 'logs');
+            $path->register($helper->getTmp(), 'tmp');
+            $path->register(__DIR__ . '/..', 'crosscms');
+
+            return $path;
         };
     }
 
@@ -116,16 +146,5 @@ class Cms extends Container
         }
 
         return $cmsType;
-    }
-
-    /**
-     * @param string $helper
-     * @return mixed
-     */
-    public static function _($helper)
-    {
-        $cms = self::getInstance();
-
-        return $cms[$helper];
     }
 }
