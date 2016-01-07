@@ -17,7 +17,7 @@ namespace JBZoo\CrossCMS\Joomla;
 use JBZoo\CrossCMS\AbstractConfig;
 
 /**
- * Class Session
+ * Class Config
  * @package JBZoo\CrossCMS
  */
 class Config extends AbstractConfig
