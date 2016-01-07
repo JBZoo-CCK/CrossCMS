@@ -56,7 +56,7 @@
         ],
         "prepare-joomla"    : [
             "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose",
-            "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla --www=./resources plg_debug"
+            "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla --www=./resources debug"
         ],
         "prepare-wordpress" : [
             "mkdir -p ./resources/wordpress",
