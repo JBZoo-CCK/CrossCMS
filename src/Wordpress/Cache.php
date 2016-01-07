@@ -87,5 +87,4 @@ class Cache extends AbstractCache
 
         echo $output;
     }
-
 }

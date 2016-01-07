@@ -122,13 +122,13 @@ class Cms extends Container
 
             return $path;
         };
-        
-        
+
+
         $this['cache'] = function ($cms) {
             $className = $cms['ns'] . 'Cache';
             $helper    = new $className();
             return $helper;
-        };        
+        };
     }
 
     /**
