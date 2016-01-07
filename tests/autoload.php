@@ -20,31 +20,27 @@ if ($autoload = realpath('./vendor/autoload.php')) {
     exit(1);
 }
 
-// Browser emulator
-$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-$_SERVER['HTTP_HOST']       = 'domain.com';
-$_SERVER['SERVER_NAME']     = 'domain.com';
-$_SERVER['REQUEST_METHOD']  = 'GET';
-$_SERVER['REMOTE_ADDR']     = '127.0.0.1';
+include_once 'web.php';
 
-$PHP_SELF = $GLOBALS['PHP_SELF'] = $_SERVER['PHP_SELF'] = '/index.php';
+$isWeb = defined('WEB_EMULATE') && WEB_EMULATE;
 
 // include CMS framework
-if ($cmsPath = getenv('PATH_JOOMLA')) {
-    define('CMS_JOOMLA_PATH', realpath($cmsPath));
-    require_once __DIR__ . '/autoload-joomla.php';
+if (!$isWeb) {
 
-} elseif ($cmsPath = getenv('PATH_WORDPRESS')) {
-    define('CMS_WORDPRESS_PATH', realpath($cmsPath));
-    require_once __DIR__ . '/autoload-wordpress.php';
+    if ($cmsPath = getenv('PATH_JOOMLA')) {
+        define('CMS_JOOMLA_PATH', realpath($cmsPath));
+        define('CMS_PATH', CMS_JOOMLA_PATH);
+        require_once __DIR__ . '/autoload-joomla.php';
 
-} else {
-    echo 'Undefined CMS type!' . PHP_EOL;
-    exit(1);
+    } elseif ($cmsPath = getenv('PATH_WORDPRESS')) {
+        define('CMS_WORDPRESS_PATH', realpath($cmsPath));
+        define('CMS_PATH', CMS_WORDPRESS_PATH);
+        require_once __DIR__ . '/autoload-wordpress.php';
+
+    } else {
+        echo 'Undefined CMS type!' . PHP_EOL;
+        exit(1);
+    }
 }
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('magic_quotes_runtime', 0);
-ini_set('zend.ze1_compatibility_mode', '0');
-ini_set('precision', 14);
+include_once 'show-errors.php';
