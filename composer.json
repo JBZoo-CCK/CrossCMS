@@ -43,8 +43,8 @@
         "test"              : [
             "@manifest",
             "@autoload",
-            "@phpunit-j",
             "@phpunit-wp",
+            "@phpunit-j",
             "@phpmd",
             "@phpcs",
             "@phpcpd",
