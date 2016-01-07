@@ -61,7 +61,9 @@
             "mysql -e 'create database cms_wp'",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1",
-            "mkdir -p ./resources/wordpress/{cache,tmp,logs}"
+            "mkdir -p ./resources/wordpress/cache",
+            "mkdir -p ./resources/wordpress/tmp",
+            "mkdir -p ./resources/wordpress/logs"
         ],
         "manifest"          : "composer validate --no-interaction",
         "autoload"          : "composer dump-autoload --optimize --no-interaction",

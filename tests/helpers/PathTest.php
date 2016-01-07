@@ -58,15 +58,6 @@ class PathTest extends PHPUnit
         if ($cms['type'] === Cms::TYPE_WORDPRESS) {
             $path = Cms::_('path');
 
-            if ($aliasPath == 'cache') {
-                dump($path, 0);
-                dump($exceptPath, 0);
-                dump($exceptPath, 0);
-                dump($aliasPath, 0);
-                dump(realpath($exceptPath), 0);
-                dump(realpath($path->get($aliasPath . ':')), 0);
-            }
-
             isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }
     }
@@ -77,7 +68,7 @@ class PathTest extends PHPUnit
             array('root', PROJECT_RESOURCES . '/wordpress'),
             array('upload', PROJECT_RESOURCES . '/wordpress/wp-content/uploads'),
             array('tmpl', PROJECT_RESOURCES . '/wordpress/wp-content/themes'),
-            array('cache', PROJECT_RESOURCES . '/wordpress/cache'), // TODO JBZoo/Path WTF!!!
+            array('cache', PROJECT_RESOURCES . '/wordpress/cache'),
             array('logs', PROJECT_RESOURCES . '/wordpress/logs'),
             array('tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
             array('crosscms', './src'),
