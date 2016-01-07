@@ -37,8 +37,8 @@ class AssetsTest extends PHPUnit
             $crawler = new Crawler($html);
             $scripts = $crawler->filter('script[src="/media/jui/js/jquery.min.js"]');
 
-            echo $html;
-            cliMessage('HTML :' . $html);
+            //echo $html;
+            //cliMessage('HTML :' . $html);
             cliMessage('HTML length=' . strlen($html));
             cliMessage('Scripts count = ' . count($scripts));
         }
