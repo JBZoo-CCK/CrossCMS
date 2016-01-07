@@ -57,6 +57,16 @@ class PathTest extends PHPUnit
 
         if ($cms['type'] === Cms::TYPE_WORDPRESS) {
             $path = Cms::_('path');
+
+            if ($aliasPath == 'cache') {
+                dump($path, 0);
+                dump($exceptPath, 0);
+                dump($exceptPath, 0);
+                dump($aliasPath, 0);
+                dump(realpath($exceptPath), 0);
+                dump(realpath($path->get($aliasPath . ':')), 0);
+            }
+
             isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }
     }
