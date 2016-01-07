@@ -74,8 +74,5 @@ class CacheTest extends PHPUnit
 
 
         isSame($outputBeforeCache, $outputAfterCache);
-
-        dump($GLOBALS['wp_object_cache']);
-
     }
 }
