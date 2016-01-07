@@ -31,7 +31,7 @@ class PathTest extends PHPUnit
 
         if ($cms['type'] === Cms::TYPE_JOOMLA) {
             $path = Cms::_('path');
-            isSame(realpath($exceptPath), $path->get($aliasPath . ':'));
+            isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }
     }
 
@@ -57,7 +57,7 @@ class PathTest extends PHPUnit
 
         if ($cms['type'] === Cms::TYPE_WORDPRESS) {
             $path = Cms::_('path');
-            isSame(realpath($exceptPath), $path->get($aliasPath . ':'));
+            isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }
     }
 

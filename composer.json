@@ -51,7 +51,7 @@
         ],
         "update-all"        : [
             "composer self-update --no-interaction",
-            "composer update --no-interaction"
+            "composer update --optimize-autoloader --prefer-source --no-interaction"
         ],
         "prepare-joomla"    : [
             "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose"
@@ -64,7 +64,7 @@
             "mkdir -p ./resources/wordpress/{cache,tmp,logs}"
         ],
         "manifest"          : "composer validate --no-interaction",
-        "autoload"          : "composer dump-autoload --optimize --no-scripts --no-interaction",
+        "autoload"          : "composer dump-autoload --optimize --no-interaction",
         "phpunit-j"         : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
         "phpunit-wp"        : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
         "phpmd"             : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
