@@ -67,9 +67,9 @@ class PathTest extends PHPUnit
             array('root', PROJECT_RESOURCES . '/wordpress'),
             array('upload', PROJECT_RESOURCES . '/wordpress/wp-content/uploads'),
             array('tmpl', PROJECT_RESOURCES . '/wordpress/wp-content/themes'),
-            //array('cache', PROJECT_RESOURCES . '/wordpress/cache'), // TODO JBZoo/Path WTF!!!
-            //array('logs', PROJECT_RESOURCES . '/wordpress/logs'),
-            //array('tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
+            array('cache', PROJECT_RESOURCES . '/wordpress/cache'), // TODO JBZoo/Path WTF!!!
+            array('logs', PROJECT_RESOURCES . '/wordpress/logs'),
+            array('tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
             array('crosscms', './src'),
         );
     }
