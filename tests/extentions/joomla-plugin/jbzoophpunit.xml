@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+    <name>JBZoo PHPUnit</name>
+    <author>JBZoo.com</author>
+    <creationDate>Jan 2016</creationDate>
+    <copyright>MIT. All rights reserved.</copyright>
+    <license>MIT</license>
+    <authorEmail>admin@jbzoo.com</authorEmail>
+    <authorUrl>jbzoo.com</authorUrl>
+    <version>1.0.0</version>
+
+    <description>JBZoo PHPUnit Plugin for unit-testing</description>
+
+    <files>
+        <filename plugin="jbzoophpunit">jbzoophpunit.php</filename>
+    </files>
+
+</extension>

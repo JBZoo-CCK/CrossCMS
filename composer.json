@@ -43,21 +43,28 @@
         "test"              : [
             "@manifest",
             "@autoload",
-            "@phpunit-wp",
-            "@phpunit-j",
+            "@phpunit-joomla",
+            "@phpunit-wordpress",
             "@phpmd",
             "@phpcs",
             "@phpcpd",
             "@phploc"
         ],
+
         "update-all"        : [
             "composer self-update --no-interaction",
-            "composer update --optimize-autoloader --prefer-source --no-interaction"
+            "composer update --optimize-autoloader --no-interaction"
         ],
+
         "prepare-joomla"    : [
             "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose",
-            "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla --www=./resources debug"
+            "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla debug --www=./resources",
+
+            "zip -rj ./build/joomla-plugin.zip tests/extentions/joomla-plugin",
+            "php ./vendor/joomlatools/console/bin/joomla extension:installfile joomla ./build/joomla-plugin.zip --www=./resources",
+            "php ./vendor/joomlatools/console/bin/joomla extension:enable joomla jbzoophpunit --www=./resources"
         ],
+
         "prepare-wordpress" : [
             "mkdir -p ./resources/wordpress",
             "mysql -e 'create database cms_wp'",
@@ -65,12 +72,18 @@
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1",
             "mkdir -p ./resources/wordpress/cache",
             "mkdir -p ./resources/wordpress/tmp",
-            "mkdir -p ./resources/wordpress/logs"
+            "mkdir -p ./resources/wordpress/logs",
+
+            "zip -rj ./build/wp-plugin.zip tests/extentions/wp-plugin",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin install ./build/wp-plugin.zip --force --path=./resources/wordpress",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin activate wp-plugin --path=./resources/wordpress"
         ],
+
+        "phpunit-joomla"    : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
+        "phpunit-wordpress" : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
+
         "manifest"          : "composer validate --no-interaction",
         "autoload"          : "composer dump-autoload --optimize --no-interaction",
-        "phpunit-j"         : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist",
-        "phpunit-wp"        : "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist",
         "phpmd"             : "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
         "phpcs"             : "php ./vendor/squizlabs/php_codesniffer/scripts/phpcs ./src --standard=./vendor/jbzoo/misc/phpcs/JBZoo/ruleset.xml --report=full",
         "phpcpd"            : "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
