@@ -13,12 +13,10 @@
  */
 
 define('_JEXEC', 1); // We are a valid entry point.
-define('JPATH_BASE', CMS_JOOMLA_PATH);
+define('JPATH_BASE', CMS_PATH_JOOMLA);
 
 require_once JPATH_BASE . '/includes/defines.php';
 require_once JPATH_LIBRARIES . '/import.legacy.php';
 require_once JPATH_LIBRARIES . '/cms.php';
-
-
 
 JFactory::getApplication('site');

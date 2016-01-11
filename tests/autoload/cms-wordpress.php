@@ -12,7 +12,7 @@
  * @link      https://github.com/JBZoo/CrossCMS
  */
 
-define('ABSPATH', CMS_WORDPRESS_PATH . DS);
+define('ABSPATH', CMS_PATH_WORDPRESS . DS);
 
 define('WP_USE_EXT_MYSQL', true);
 define('WP_DEBUG_DISPLAY', true);

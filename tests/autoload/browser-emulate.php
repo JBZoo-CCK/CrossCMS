@@ -26,7 +26,7 @@ $_SERVER['SERVER_SOFTWARE'] = 'Apache/2.2.29';
 // HTTP headers
 $_SERVER['HTTP_HOST']            = 'crosscms.com';
 $_SERVER['HTTP_ACCEPT']          = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
-$_SERVER['HTTP_USER_AGENT']      = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+$_SERVER['HTTP_USER_AGENT']      = 'JBZoo PHPUnit Tester';
 $_SERVER['HTTP_CONNECTION']      = 'keep-alive';
 $_SERVER['HTTP_CACHE_CONTROL']   = 'max-age=0';
 $_SERVER['HTTP_ACCEPT_ENCODING'] = 'gzip, deflate, sdch';

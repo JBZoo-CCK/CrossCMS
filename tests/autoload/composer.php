@@ -12,13 +12,14 @@
  * @link      https://github.com/JBZoo/CrossCMS
  */
 
+if (!ini_get('date.timezone')) {
+    ini_set('date.timezone', 'UTC');
+}
 
-define('WEB_EMULATE', true);
-
-include_once 'autoload.php';
-
-$_SERVER['DOCUMENT_ROOT']   = realpath('./resources/joomla');
-$_SERVER['SCRIPT_FILENAME'] = realpath('./resources/joomla/index.php');
-
-include_once './resources/joomla/index.php';
-
+// main autoload
+if ($autoload = realpath('./vendor/autoload.php')) {
+    require_once $autoload;
+} else {
+    echo 'Please execute "composer update" !' . PHP_EOL;
+    exit(1);
+}
