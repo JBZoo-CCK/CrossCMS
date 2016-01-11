@@ -56,6 +56,11 @@
             "composer update --optimize-autoloader --no-interaction"
         ],
 
+        "prepare"           : [
+            "mkdir -p ./build",
+            "mkdir -p ./resources"
+        ],
+
         "prepare-joomla"    : [
             "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose",
             "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla debug --www=./resources",

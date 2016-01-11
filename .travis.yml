@@ -17,6 +17,7 @@ matrix:
 
 before_script:
   - composer update-all
+  - composer prepare
   - composer prepare-joomla
   - composer prepare-wordpress
 
