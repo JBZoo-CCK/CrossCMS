@@ -129,6 +129,12 @@ class Cms extends Container
             $helper    = new $className();
             return $helper;
         };
+
+        $this['assets'] = function ($cms) {
+            $className = $cms['ns'] . 'Assets';
+            $helper    = new $className();
+            return $helper;
+        };
     }
 
     /**
