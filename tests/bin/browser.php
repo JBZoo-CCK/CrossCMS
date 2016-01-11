@@ -12,6 +12,8 @@
  * @link      https://github.com/JBZoo/CrossCMS
  */
 
+require_once realpath('./vendor/autoload.php');
+
 // Set HTTP-Request variables
 foreach ($_SERVER['argv'] as $argKey => $argValue) {
     if (strpos($argValue, '--jbzoo-env') === 0) {
