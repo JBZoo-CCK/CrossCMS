@@ -20,7 +20,7 @@ use JBZoo\CrossCMS\Cms;
  * Class TestCms
  * @package JBZoo\PHPUnit
  */
-class TestCms extends PHPUnit
+class CmsTest extends PHPUnit
 {
 
     public function testInit()
