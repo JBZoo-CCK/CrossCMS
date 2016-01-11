@@ -75,13 +75,13 @@
             "mysql -e 'create database cms_wp'",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1",
-            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core install --path=./resources/wordpress --url=crosscms.com",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core install --path=./resources/wordpress --url=crosscms.com --title=CrossCMS --admin_user=admin --admin_password=123456 --admin_email=crosscms@jbzoo.com",
             "mkdir -p ./resources/wordpress/cache",
             "mkdir -p ./resources/wordpress/tmp",
             "mkdir -p ./resources/wordpress/logs",
 
             "zip -rj ./build/wp-plugin.zip tests/extentions/wp-plugin",
-            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin install ./build/wp-plugin.zip --force --path=./resources/wordpress",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin install --path=./resources/wordpress ./build/wp-plugin.zip --force",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin activate wp-plugin --path=./resources/wordpress"
         ],
 
