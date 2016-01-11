@@ -58,6 +58,8 @@
 
         "prepare"           : [
             "mkdir -p ./build",
+            "mkdir -p ./build/logs",
+            "mkdir -p ./build/clover",
             "mkdir -p ./resources"
         ],
 
