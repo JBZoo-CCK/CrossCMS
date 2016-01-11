@@ -15,6 +15,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractAssets;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Assets
@@ -39,30 +40,30 @@ class Assets extends AbstractAssets
         $handle = uniqid('crosscms-js-', true);
         wp_enqueue_script($handle, $file);
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function cssCode($file)
+    public function cssCode($code)
     {
-        $env = Cms::_('env');
-        $code = sprintf('<style>%s</style>' . PHP_EOL, $code);
+        $env    = Cms::_('env');
+        $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
         $filter = $env->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
-        
+
         add_action($filter, function () use ($code) {
             echo $code;
         });
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function jsCode($code)
     {
-        $env = Cms::_('env');
-        $code = sprintf('<script>%s</script>' . PHP_EOL, $code);
+        $env    = Cms::_('env');
+        $code   = sprintf('<script>%s</script>' . PHP_EOL, $code);
         $filter = $env->isAdmin() ? 'admin_print_scripts' : 'wp_print_scripts';
-        
+
         add_action($filter, function () use ($code) {
             echo $code;
         }, 30);
