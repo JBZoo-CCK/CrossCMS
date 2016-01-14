@@ -23,6 +23,8 @@ use JBZoo\CrossCMS\Cms;
 class PathTest extends PHPUnit
 {
     /**
+     * @param string $aliasPath
+     * @param string $exceptPath
      * @dataProvider providerJoomla
      */
     public function testJoomla($aliasPath, $exceptPath)
@@ -38,17 +40,19 @@ class PathTest extends PHPUnit
     public function providerJoomla()
     {
         return array(
-            array('root', PROJECT_RESOURCES . '/joomla'),
-            array('upload', PROJECT_RESOURCES . '/joomla/images'),
-            array('cache', PROJECT_RESOURCES . '/joomla/cache'),
-            array('tmpl', PROJECT_RESOURCES . '/joomla/templates'),
-            array('logs', PROJECT_RESOURCES . '/joomla/logs'),
-            array('tmp', PROJECT_RESOURCES . '/joomla/tmp'),
+            array('root', PROJECT_RES . '/joomla'),
+            array('upload', PROJECT_RES . '/joomla/images'),
+            array('cache', PROJECT_RES . '/joomla/cache'),
+            array('tmpl', PROJECT_RES . '/joomla/templates'),
+            array('logs', PROJECT_RES . '/joomla/logs'),
+            array('tmp', PROJECT_RES . '/joomla/tmp'),
             array('crosscms', './src'),
         );
     }
 
     /**
+     * @param string $aliasPath
+     * @param string $exceptPath
      * @dataProvider providerWordpress
      */
     public function testWordpress($aliasPath, $exceptPath)
@@ -65,12 +69,12 @@ class PathTest extends PHPUnit
     public function providerWordpress()
     {
         return array(
-            array('root', PROJECT_RESOURCES . '/wordpress'),
-            array('upload', PROJECT_RESOURCES . '/wordpress/wp-content/uploads'),
-            array('tmpl', PROJECT_RESOURCES . '/wordpress/wp-content/themes'),
-            array('cache', PROJECT_RESOURCES . '/wordpress/cache'),
-            array('logs', PROJECT_RESOURCES . '/wordpress/logs'),
-            array('tmp', PROJECT_RESOURCES . '/wordpress/tmp'),
+            array('root', PROJECT_RES . '/wordpress'),
+            array('upload', PROJECT_RES . '/wordpress/wp-content/uploads'),
+            array('tmpl', PROJECT_RES . '/wordpress/wp-content/themes'),
+            array('cache', PROJECT_RES . '/wordpress/cache'),
+            array('logs', PROJECT_RES . '/wordpress/logs'),
+            array('tmp', PROJECT_RES . '/wordpress/tmp'),
             array('crosscms', './src'),
         );
     }

@@ -14,6 +14,8 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\Utils\Cli;
+
 /**
  * Class AbstractSession
  * @package JBZoo\CrossCMS
@@ -40,6 +42,6 @@ abstract class AbstractEnv
      */
     public function isCli()
     {
-        return PHP_SAPI === 'cli' || defined('STDOUT');
+        return Cli::check();
     }
 }

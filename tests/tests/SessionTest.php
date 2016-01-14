@@ -59,13 +59,13 @@ class SessionTest extends PHPUnit
         $session = $this->_getSession();
 
         $session->setGroup('group', array('k' => 1, 'k2' => 2));
-        same(array('k' => 1, 'k2' => 2), $session->getGroup('group'));
+        isSame(array('k' => 1, 'k2' => 2), $session->getGroup('group'));
 
         $session->setGroup('group', array('k3' => 3), false);
-        same(array('k' => 1, 'k2' => 2, 'k3' => 3), $session->getGroup('group'));
+        isSame(array('k' => 1, 'k2' => 2, 'k3' => 3), $session->getGroup('group'));
 
         $session->setGroup('group', array('k4' => 4), true);
-        same(array('k4' => 4), $session->getGroup('group'));
+        isSame(array('k4' => 4), $session->getGroup('group'));
     }
 
     public function testToken()

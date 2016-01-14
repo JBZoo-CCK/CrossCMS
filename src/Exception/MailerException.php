@@ -12,13 +12,13 @@
  * @link      https://github.com/JBZoo/CrossCMS
  */
 
-namespace JBZoo\CrossCMS;
+namespace JBZoo\CrossCMS\Exception;
 
 /**
- * Class Exception
+ * Class Mailer
  * @package JBZoo\CrossCMS
  */
-class Exception extends \Exception
+class MailerException extends Exception
 {
 
 }

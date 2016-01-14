@@ -17,14 +17,13 @@
         "pimple/pimple"    : "^3.0",
         "jbzoo/sqlbuilder" : "^1.0",
         "jbzoo/data"       : "^1.0",
-        "jbzoo/utils"      : "^1.0",
+        "jbzoo/utils"      : "^1.1.2",
         "jbzoo/path"       : "1.x-dev"
     },
     "require-dev"       : {
-        "jbzoo/phpunit"       : "^1.0",
+        "jbzoo/phpunit"       : "^1.2",
         "joomlatools/console" : "^1.4",
-        "wp-cli/wp-cli"       : "^0.21",
-        "symfony/process"     : "^2.8"
+        "wp-cli/wp-cli"       : "^0.21"
     },
     "autoload"          : {
         "psr-4" : {
@@ -64,7 +63,7 @@
         ],
 
         "prepare-joomla"    : [
-            "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=cms_joomla --verbose",
+            "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=test_cms_j --verbose",
             "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla debug --www=./resources",
 
             "zip -rj ./build/joomla-plugin.zip tests/extentions/joomla-plugin",
@@ -74,9 +73,9 @@
 
         "prepare-wordpress" : [
             "mkdir -p ./resources/wordpress",
-            "mysql -e 'create database cms_wp'",
+            "mysql -e 'create database test_cms_wp'",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core download --path=./resources/wordpress",
-            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=cms_wp --dbuser=root --dbhost=127.0.0.1",
+            "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core config --path=./resources/wordpress --dbname=test_cms_wp --dbuser=root --dbhost=127.0.0.1",
             "php ./vendor/wp-cli/wp-cli/php/boot-fs.php core install --path=./resources/wordpress --url=crosscms.com --title=CrossCMS --admin_user=admin --admin_password=123456 --admin_email=admin@example.com",
             "mkdir -p ./resources/wordpress/cache",
             "mkdir -p ./resources/wordpress/tmp",

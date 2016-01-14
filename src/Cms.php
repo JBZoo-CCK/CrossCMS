@@ -135,6 +135,12 @@ class Cms extends Container
             $helper    = new $className();
             return $helper;
         };
+
+        $this['mailer'] = function ($cms) {
+            $className = $cms['ns'] . 'Mailer';
+            $helper    = new $className();
+            return $helper;
+        };
     }
 
     /**
