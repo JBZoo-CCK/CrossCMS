@@ -19,6 +19,7 @@ before_script:
   - composer update-all
   - composer prepare
   - composer prepare-joomla
+  - cat ./resources/joomla/configuration.php
   - composer prepare-wordpress
 
 script:
