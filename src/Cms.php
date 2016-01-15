@@ -14,6 +14,7 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\CrossCMS\Exception\Exception;
 use JBZoo\Path\Path;
 use JBZoo\SqlBuilder\SqlBuilder;
 use Pimple\Container;
@@ -138,6 +139,12 @@ class Cms extends Container
 
         $this['mailer'] = function ($cms) {
             $className = $cms['ns'] . 'Mailer';
+            $helper    = new $className();
+            return $helper;
+        };
+
+        $this['request'] = function ($cms) {
+            $className = $cms['ns'] . 'Request';
             $helper    = new $className();
             return $helper;
         };

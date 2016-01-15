@@ -19,7 +19,7 @@ $_SERVER['DOCUMENT_ROOT']   = realpath('.');
 
 // Local host
 $_SERVER['REMOTE_ADDR']     = '127.0.0.1';
-$_SERVER['SERVER_PORT']     = '127.0.0.1';
+$_SERVER['SERVER_PORT']     = '80';
 $_SERVER['REMOTE_PORT']     = '54778';
 $_SERVER['SERVER_SOFTWARE'] = 'Apache/2.2.29';
 

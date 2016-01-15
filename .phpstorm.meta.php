@@ -22,6 +22,7 @@ namespace PHPSTORM_META {
         \JBZoo\CrossCMS\Cms::_('') => [
             "session"   instanceof \JBZoo\CrossCMS\AbstractSession,
             "db"        instanceof \JBZoo\CrossCMS\AbstractDatabase,
+            "request"   instanceof \JBZoo\CrossCMS\AbstractRequest,
             "config"    instanceof \JBZoo\CrossCMS\AbstractConfig,
             "assets"    instanceof \JBZoo\CrossCMS\AbstractAssets,
             "mailer"    instanceof \JBZoo\CrossCMS\AbstractMailer,
