@@ -42,11 +42,12 @@ before_script:
   - composer prepare-wordpress
 
 script:
-  - composer test
-
   # Just for fun =)
   - php ./vendor/bin/phpunit -c phpunit-joomla.xml.dist --filter "/::testEscape( .*)?$/" ./tests/tests/DatabaseTest.php
   - php ./vendor/bin/phpunit -c phpunit-wordpress.xml.dist --filter "/::testEscape( .*)?$/" ./tests/tests/DatabaseTest.php
+
+  # Full stack
+  - composer test
 
 after_script:
   - composer coveralls
