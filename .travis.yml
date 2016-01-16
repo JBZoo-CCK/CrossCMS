@@ -34,7 +34,6 @@ before_script:
   - mkdir -p ./resource
 
   # Install PHP Libs
-  - composer self-update
   - composer update --optimize-autoloader
 
   # Install CMS
