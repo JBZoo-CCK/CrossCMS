@@ -17,8 +17,8 @@ define('ABSPATH', CMS_PATH_WORDPRESS . DS);
 define('WP_USE_EXT_MYSQL', true);
 define('WP_DEBUG_DISPLAY', true);
 define('WP_INSTALLING', true);
-define('SAVEQUERIES', true);
-define('WP_CACHE', false);
+//define('SAVEQUERIES', true);
+//define('WP_CACHE', false);
 
 define('WP_TESTS_TABLE_PREFIX', false);
 define('WP_TESTS_FORCE_KNOWN_BUGS', false);
@@ -26,6 +26,9 @@ define('DISABLE_WP_CRON', true);
 define('WP_MEMORY_LIMIT', -1);
 define('WP_MAX_MEMORY_LIMIT', -1);
 define('WP_TESTS_DOMAIN', 'domain.com');
+
+define('SAVEQUERIES', false);
+define('WP_CACHE', true);
 
 /*
  * Globalize some WordPress variables, because PHPUnit loads this file inside a function
