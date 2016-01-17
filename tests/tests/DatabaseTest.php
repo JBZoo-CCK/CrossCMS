@@ -37,10 +37,10 @@ class DatabaseTest extends PHPUnit
         $db     = $this->_getDb();
         $select = 'SELECT PI() AS pi';
 
-        same(array(array('pi' => '3.141593')), $db->fetchAll($select));
-        same(array('pi' => '3.141593'), $db->fetchRow($select));
-        same(array('3.141593'), $db->fetchArray($select));
-        same(1, $db->query($select));
+        isSame(array(array('pi' => '3.141593')), $db->fetchAll($select));
+        isSame(array('pi' => '3.141593'), $db->fetchRow($select));
+        isSame(array('3.141593'), $db->fetchArray($select));
+        isSame(1, $db->query($select));
     }
 
     public function testSqlBuilder()
@@ -55,14 +55,14 @@ class DatabaseTest extends PHPUnit
     {
         $db = $this->_getDb();
 
-        same(0, $db->insertId());
+        isSame(0, $db->insertId());
     }
 
     public function testEscape()
     {
         $db = $this->_getDb();
 
-        same(' abc123-+\\\'\"` ', $db->escape(' abc123-+\'"` '));
+        isSame(' abc123-+\\\'\"` ', $db->escape(' abc123-+\'"` '));
     }
 
     public function testPrefix()

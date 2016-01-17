@@ -22,6 +22,14 @@ use JBZoo\CrossCMS\Cms;
  */
 class RequestTest extends PHPUnit
 {
+    protected function setUp()
+    {
+        $_REQUEST = array();
+        $_GET     = array();
+        $_POST    = array();
+        $_FILES   = array();
+        $_COOKIE  = array();
+    }
 
     public function testMethod()
     {
@@ -63,5 +71,64 @@ class RequestTest extends PHPUnit
     public function testGetUri()
     {
         isTrue(Cms::_('request')->getUri());
+    }
+
+    public function testGetUndefined()
+    {
+        $req = Cms::_('request');
+
+        isNull($req->get('undefined'));
+        isNull($req->get('undefined', null));
+        isSame(123, $req->get('undefined', 123));
+    }
+
+    public function testGetFilterRaw()
+    {
+        $req = Cms::_('request');
+
+        $req->set('foo', ' 123,456 ');
+
+        isSame(' 123,456 ', $req->get('foo'));
+        isSame(' 123,456 ', $req->get('foo', null));
+        isSame(' 123,456 ', $req->get('foo', null, 'raw'));
+        isSame('123,456', $req->get('foo', null, 'raw, trim'));
+    }
+
+    public function testGetFilterSeveral()
+    {
+        $req = Cms::_('request');
+
+        $req->set('foo', '    <b>124.456</b> asd');
+
+        isSame('124.456 asd', $req->get('foo', null, 'trim, strip'));
+        isSame('124-456-asd', $req->get('foo', null, 'trim, alias'));
+        isSame(124.0, $req->get('foo', null, 'trim, alias, float'));
+        isSame(124, $req->get('foo', null, 'trim, float, int'));
+        isSame('', $req->get('foo', null, 'trim, float, int, alpha'));
+    }
+
+    public function testGetFilterCustom()
+    {
+        $req = Cms::_('request');
+
+        $req->set('foo', '    124-456');
+
+        isSame('789-456', $req->get('foo', null, function ($value) {
+            $value = trim($value);
+            $value = str_replace('124', '789', $value);
+            return $value;
+        }));
+    }
+
+    public function testHeader()
+    {
+        $req = Cms::_('request');
+
+        isSame('JBZoo PHPUnit Tester', $req->header('user_agent'));
+        isSame('jbzoo-phpunit-tester', $req->header('user_agent', 'null', 'alias'));
+        isSame('value', $req->header('undefined', 'value'));
+        isSame('value123', $req->header('undefined', 'value', function ($value) {
+            return $value . '123';
+        }));
     }
 }

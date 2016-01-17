@@ -17,6 +17,7 @@ namespace JBZoo\CrossCMS;
 use JBZoo\Data\Data;
 use JBZoo\Utils\Filter;
 use JBZoo\Utils\Http;
+use JBZoo\Utils\Str;
 use JBZoo\Utils\Url;
 use JBZoo\Utils\Vars;
 
@@ -159,6 +160,7 @@ abstract class AbstractRequest
      * @param string $name
      * @param mixed  $default
      * @return mixed
+     * @internal param bool $isRaw
      */
     abstract protected function _get($name, $default = null);
 

@@ -40,7 +40,8 @@ class Request extends AbstractRequest
      */
     protected function _get($name, $default = null)
     {
-        return $this->_input->get($name, $default);
+        // Yeap, HTML is not RAW, but it safes your website
+        return $this->_input->get($name, $default, 'html');
     }
 
     /**
