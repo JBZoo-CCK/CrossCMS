@@ -18,7 +18,7 @@
         "jbzoo/sqlbuilder" : "^1.0",
         "jbzoo/data"       : "^1.0",
         "jbzoo/utils"      : "1.x-dev",
-        "jbzoo/path"       : "1.x-dev"
+        "jbzoo/path"       : "^1.0"
     },
     "require-dev"       : {
         "jbzoo/phpunit"       : "^1.2",
