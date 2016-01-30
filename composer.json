@@ -58,7 +58,7 @@
         ],
 
         "prepare-joomla"    : [
-            "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=test_cms_j --release=3.5.0-beta2 --verbose",
+            "php ./vendor/joomlatools/console/bin/joomla site:create joomla --www=./resources --mysql-login=root: --mysql-host=127.0.0.1 --mysql-database=test_cms_j --verbose",
             "php ./vendor/joomlatools/console/bin/joomla extension:disable joomla debug --www=./resources",
             "php ./tests/bin/prepare-joomla-config.php",
 
