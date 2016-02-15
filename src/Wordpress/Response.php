@@ -74,7 +74,7 @@ class Response extends AbstractResponse
             '    <title>' . esc_attr(translate('500 - Internal Server Error')) . '</title>',
             '</head>',
             '<body>',
-            '<h1>' . esc_attr(translate($message)) . '</h1>',
+            '<h1>' . esc_html(translate($message)) . '</h1>',
             $trace,
             '</body>',
             '</html>',
