@@ -21,28 +21,13 @@ defined('_JEXEC') or die;
  */
 class PlgSystemJBZooPHPUnit extends JPlugin
 {
-    /**
-     * @var bool
-     */
-    protected $_isInit = false;
-
-    /**
-     * @param object $subject The object to observe.
-     * @param array  $config  An optional associative array of configuration settings.
-     * @throws Exception
-     */
-    public function __construct(&$subject, $config)
-    {
-        parent::__construct($subject, $config);
-
-        // Include libs
-        if (!$this->_request('jbzoo-phpunit')) {
-            throw new Exception('JBZoo PHPUnit tests is not detected!');
-        }
-    }
-
     public function onAfterInitialise()
     {
+        if (!class_exists('\JBZoo\CrossCMS\Cms')) {
+            if ($autoloadPath = realpath('../../vendor/autoload.php')) {
+                require_once $autoloadPath;
+            }
+        }
     }
 
     public function onAfterRoute()
@@ -51,23 +36,62 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
     public function onAfterDispatch()
     {
-        $assets = Cms::_('assets');
+        if (!$this->_request('jbzoo-phpunit')) {
+            return false;
+        }
 
+        /* Assets *****************************************************************************************************/
         if ($test = $this->_request('test-assets-jsfile')) {
-            $assets->jsFile($test . '.js');
+            Cms::_('assets')->jsFile($test . '.js');
         }
 
         if ($test = $this->_request('test-assets-jscode')) {
-            $assets->jsCode($test);
+            Cms::_('assets')->jsCode($test);
         }
 
-        
         if ($test = $this->_request('test-assets-cssfile')) {
-            $assets->cssFile($test . '.css');
+            Cms::_('assets')->cssFile($test . '.css');
         }
 
         if ($test = $this->_request('test-assets-csscode')) {
-            $assets->cssCode($test);
+            Cms::_('assets')->cssCode($test);
+        }
+
+        /* Response ***************************************************************************************************/
+        if ($test = $this->_request('test-response-set404')) {
+            Cms::_('response')->set404();
+        }
+
+        if ($test = $this->_request('test-response-set500')) {
+            Cms::_('response')->set500($test);
+        }
+
+        if ($test = $this->_request('test-response-redirect')) {
+            Cms::_('response')->redirect($test);
+        }
+
+        if ($test = $this->_request('test-response-json')) {
+            Cms::_('response')->json((array)$test, true);
+        }
+
+        if ($test = $this->_request('test-response-text')) {
+            Cms::_('response')->text();
+        }
+
+        if ($test = $this->_request('test-response-title')) {
+            Cms::_('response')->setTitle($test);
+        }
+
+        if ($test = $this->_request('test-response-keywords')) {
+            Cms::_('response')->setKeywords($test);
+        }
+
+        if ($test = $this->_request('test-response-description')) {
+            Cms::_('response')->setDesc($test);
+        }
+
+        if ($test = $this->_request('test-response-noindex')) {
+            Cms::_('response')->noindex();
         }
     }
 

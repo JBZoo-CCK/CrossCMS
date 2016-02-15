@@ -124,10 +124,10 @@ class RequestTest extends PHPUnit
     {
         $req = Cms::_('request');
 
-        isSame('JBZoo PHPUnit Tester', $req->header('user_agent'));
-        isSame('jbzoo-phpunit-tester', $req->header('user_agent', 'null', 'alias'));
-        isSame('value', $req->header('undefined', 'value'));
-        isSame('value123', $req->header('undefined', 'value', function ($value) {
+        isSame('JBZoo PHPUnit Tester', $req->getHeader('user_agent'));
+        isSame('jbzoo-phpunit-tester', $req->getHeader('user_agent', 'null', 'alias'));
+        isSame('value', $req->getHeader('undefined', 'value'));
+        isSame('value123', $req->getHeader('undefined', 'value', function ($value) {
             return $value . '123';
         }));
     }

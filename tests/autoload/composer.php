@@ -23,3 +23,7 @@ if ($autoload = realpath('./vendor/autoload.php')) {
     echo 'Please execute "composer update" !' . PHP_EOL;
     exit(1);
 }
+
+// Forsed show PHP errors
+require_once __DIR__ . '/Helper.php';
+

@@ -14,25 +14,68 @@ Author URI: http://jbzoo.com
 
 use JBZoo\CrossCMS\Cms;
 
-if (isset($_REQUEST['jbzoo-phpunit'])) {
-
-    $assets = Cms::_('assets');
-
-    if (isset($_REQUEST['test-assets-jsfile'])) {
-        $assets->jsFile('http://site.com/' . $_REQUEST['test-assets-jsfile'] . 'js');
+if (!class_exists('\JBZoo\CrossCMS\Cms')) {
+    if ($autoloadPath = realpath('../../vendor/autoload.php')) {
+        require_once $autoloadPath;
     }
+}
 
-    if (isset($_REQUEST['test-assets-jscode'])) {
-        $assets->jsCode($_REQUEST['test-assets-jscode']);
-    }
+if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
+    add_action('wp', function () {
 
-    if (isset($_REQUEST['test-assets-cssfile'])) {
-        $assets->cssFile('http://site.com/' . $_REQUEST['test-assets-cssfile'] . 'css');
-    }
+        /* Assets *****************************************************************************************************/
+        if (isset($_REQUEST['test-assets-jsfile'])) {
+            Cms::_('assets')->jsFile('http://site.com/' . $_REQUEST['test-assets-jsfile'] . 'js');
+        }
 
-    if (isset($_REQUEST['test-assets-csscode'])) {
-        $assets->cssCode($_REQUEST['test-assets-csscode']);
-    }
+        if (isset($_REQUEST['test-assets-jscode'])) {
+            Cms::_('assets')->jsCode($_REQUEST['test-assets-jscode']);
+        }
 
+        if (isset($_REQUEST['test-assets-cssfile'])) {
+            Cms::_('assets')->cssFile('http://site.com/' . $_REQUEST['test-assets-cssfile'] . 'css');
+        }
+
+        if (isset($_REQUEST['test-assets-csscode'])) {
+            Cms::_('assets')->cssCode($_REQUEST['test-assets-csscode']);
+        }
+
+        /* Response ***************************************************************************************************/
+        if (isset($_REQUEST['test-response-set404'])) {
+            Cms::_('response')->set404();
+        }
+
+        if (isset($_REQUEST['test-response-set500'])) {
+            Cms::_('response')->set500($_REQUEST['test-response-set500']);
+        }
+
+        if (isset($_REQUEST['test-response-redirect'])) {
+            Cms::_('response')->redirect($_REQUEST['test-response-redirect']);
+        }
+
+        if (isset($_REQUEST['test-response-json'])) {
+            Cms::_('response')->json((array)$_REQUEST['test-response-json'], true);
+        }
+
+        if (isset($_REQUEST['test-response-text'])) {
+            Cms::_('response')->text();
+        }
+
+        if (isset($_REQUEST['test-response-title'])) {
+            Cms::_('response')->setTitle($_REQUEST['test-response-title']);
+        }
+
+        if (isset($_REQUEST['test-response-noindex'])) {
+            Cms::_('response')->noindex();
+        }
+
+        if (isset($_REQUEST['test-response-description'])) {
+            Cms::_('response')->setDesc($_REQUEST['test-response-description']);
+        }
+
+        if (isset($_REQUEST['test-response-keywords'])) {
+            Cms::_('response')->setKeywords($_REQUEST['test-response-keywords']);
+        }
+    });
 }

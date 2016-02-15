@@ -35,7 +35,6 @@ if ($basepath = getenv('PATH_JOOMLA')) {
     throw new \Exception('Undefined CMS Type!');
 }
 
-
 $cmsResult = ob_get_contents();
 ob_end_clean();
 

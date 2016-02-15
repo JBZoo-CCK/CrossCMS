@@ -36,7 +36,7 @@ abstract class AbstractRequest
      * @param string|\Closure $filters
      * @return mixed
      */
-    public function header($name, $default = null, $filters = null)
+    public function getHeader($name, $default = null, $filters = null)
     {
         $value = $this->_header($name, $default);
 
@@ -94,7 +94,7 @@ abstract class AbstractRequest
     public function getMethod()
     {
         $method = Vars::get($_SERVER['REQUEST_METHOD'], '');
-        $method = $this->header('X-HTTP-Method-Override', $method);
+        $method = $this->getHeader('X-HTTP-Method-Override', $method);
         $method = strtoupper($method);
 
         return $method;
@@ -124,8 +124,9 @@ abstract class AbstractRequest
     {
         $method = Vars::get($_SERVER['HTTP_X_REQUESTED_WITH'], '');
         $method = Filter::cmd($method);
+        $orig   = Filter::cmd('XMLHttpRequestt');
 
-        return 'xmlhttprequest' === $method;
+        return $orig === $method;
     }
 
     /**
