@@ -44,7 +44,7 @@ class Helper
             //'coverage-html'   => PROJECT_ROOT . '/build/web/' . $cmsType . '-' . $testName . '/html',
             'jbzoo-env'       => self::query($request),
             'stderr'          => '', // Hack for CMS session starting
-        ), PROJECT_ROOT, 0);
+        ), PROJECT_ROOT, (int)getenv('PHPUNIT_CMD_DEBUG'));
 
         return $html;
     }
