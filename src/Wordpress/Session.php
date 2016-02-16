@@ -33,11 +33,9 @@ class Session extends AbstractSession
      */
     public function __construct()
     {
-        // @codeCoverageIgnorStart
         if (!session_id() && !headers_sent()) {
-            session_start();
+            session_start(); // @codeCoverageIgnore
         }
-        // @codeCoverageIgnorEnd
     }
 
     /**

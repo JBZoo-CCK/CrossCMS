@@ -66,6 +66,8 @@ class SessionTest extends PHPUnit
 
         $session->setGroup('group', array('k4' => 4), true);
         isSame(array('k4' => 4), $session->getGroup('group'));
+
+        isSame(array('key' => 'value'), $session->getGroup('undefined', array('key' => 'value')));
     }
 
     public function testToken()
