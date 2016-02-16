@@ -45,6 +45,7 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function set404($message = 'Not Found')
     {
@@ -58,6 +59,7 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function set500($message = 'Internal Server Error')
     {
@@ -71,6 +73,7 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function json(array $data = array(), $result = true)
     {
@@ -112,6 +115,7 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function redirect($url, $status = 303)
     {
@@ -138,9 +142,13 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function addMeta($meta)
+    public function addMeta($meta, $value = null)
     {
-        $this->_doc->addCustomTag($meta);
+        if (null === $value) {
+            $this->_doc->addCustomTag($meta);
+        } else {
+            $this->_doc->setMetadata($meta, $value);
+        }
     }
 
     /**

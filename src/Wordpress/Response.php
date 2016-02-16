@@ -51,6 +51,7 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.ExitExpression)
+     * @codeCoverageIgnore
      */
     public function set500($message = 'Internal Server Error')
     {
@@ -84,6 +85,7 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function redirect($url, $status = 303)
     {
@@ -93,6 +95,7 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.ExitExpression)
+     * @codeCoverageIgnore
      */
     public function json(array $data = array(), $result = true)
     {

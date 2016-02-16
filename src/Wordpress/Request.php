@@ -54,6 +54,7 @@ class Request extends AbstractRequest
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function checkToken($name = 'crosscms')
     {

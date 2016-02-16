@@ -104,9 +104,11 @@ abstract class AbstractResponse
 
     /**
      * Set document metadata
-     * @param string $meta
+     * @param string      $meta
+     * @param string|null $value
+     * @return mixed
      */
-    abstract public function addMeta($meta);
+    abstract public function addMeta($meta, $value = null);
 
     /**
      * General nocache headers

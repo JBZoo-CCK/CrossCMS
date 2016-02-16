@@ -88,7 +88,6 @@ abstract class AbstractRequest
 
     /**
      * Gets the request method.
-     *
      * @return  string
      */
     public function getMethod()
@@ -170,12 +169,6 @@ abstract class AbstractRequest
      * @param mixed  $value
      */
     abstract protected function _set($name, $value);
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    //abstract public function file($name);
 
     /**
      * Get session token for csrf security
