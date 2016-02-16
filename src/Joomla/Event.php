@@ -53,6 +53,7 @@ class Event extends AbstractEvent
      *      public function onAfterRender()
      *      {
      *          Cms::_('event')->triggerContent();
+     *          Cms::_('event')->trigger(AbstractEvent::EVENT_SHUTDOWN);
      *      }
      *  }
      */

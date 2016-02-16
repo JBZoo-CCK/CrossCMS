@@ -43,6 +43,12 @@ class Event extends AbstractEvent
      *      Cms::_('event')->filterContent($content);
      *      return $content;
      *  });
+     *
+     *
+     *  // Shutdown callback
+     *  add_action('shutdown', function () {
+     *      Cms::_('event')->trigger(AbstractEvent::EVENT_SHUTDOWN);
+     *  });
      */
 
     /**

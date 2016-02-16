@@ -26,9 +26,10 @@ abstract class AbstractEvent
     const POSTFIX_ADMIN = '.admin';
     const POSTFIX_SITE  = '.site';
 
-    const EVENT_HEADER  = 'header';
-    const EVENT_CONTENT = 'content';
-    const EVENT_INIT    = 'init';
+    const EVENT_INIT     = 'init';
+    const EVENT_CONTENT  = 'content';
+    const EVENT_HEADER   = 'header';
+    const EVENT_SHUTDOWN = 'shutdown';
 
     /**
      * @var EventManager

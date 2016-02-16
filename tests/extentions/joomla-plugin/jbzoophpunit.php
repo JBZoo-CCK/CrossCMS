@@ -136,7 +136,7 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             });
 
             Cms::_('event')->on('cms.content.admin', function (&$body) {
-                $body .= $_REQUEST['test-event-content']['content.site'];
+                $body .= $_REQUEST['test-event-content']['content.admin'];
             }, EventManager::LOW);
 
             Cms::_('event')->on('cms.content', function (&$body) {
