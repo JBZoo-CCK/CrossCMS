@@ -12,7 +12,9 @@ Author URI: http://jbzoo.com
 */
 
 
+use JBZoo\CrossCMS\AbstractEvent;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Event\EventManager;
 use JBZoo\Utils\Vars;
 
 if (!class_exists('\JBZoo\CrossCMS\Cms')) {
@@ -105,4 +107,66 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
             );
         }
     });
+
+    /* Event::init ****************************************************************************************************/
+    if (isset($_REQUEST['test-event-init'])) {
+
+        Cms::_('event')->on('cms.init.site', function () {
+            echo $_REQUEST['test-event-init']['init.site'];
+        });
+
+        Cms::_('event')->on('cms.init.admin', function () {
+            echo $_REQUEST['test-event-init']['init.admin'];
+        }, EventManager::LOW);
+
+        Cms::_('event')->on('cms.init', function () {
+            echo $_REQUEST['test-event-init']['init'];
+        }, EventManager::HIGH);
+
+        // Examples of trigger for Wordpress
+        add_action('wp', function () {
+            Cms::_('event')->trigger(AbstractEvent::EVENT_INIT);
+        });
+    }
+
+    /* Event::header **************************************************************************************************/
+    if (isset($_REQUEST['test-event-header'])) {
+
+        Cms::_('event')->on('cms.header.site', function () {
+            echo $_REQUEST['test-event-header']['header.site'];
+        });
+
+        Cms::_('event')->on('cms.header.admin', function () {
+            echo $_REQUEST['test-event-header']['header.admin'];
+        }, EventManager::LOW);
+
+        Cms::_('event')->on('cms.header', function () {
+            echo $_REQUEST['test-event-header']['header'];
+        }, EventManager::HIGH);
+
+        // Examples of trigger for Wordpress
+        add_action('wp_head', function () {
+            Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
+        });
+    }
+
+    /* Event::content *************************************************************************************************/
+    if (isset($_REQUEST['test-event-content'])) {
+        Cms::_('event')->on('cms.content.site', function (&$body) {
+            $body .= $_REQUEST['test-event-content']['content.site'];
+        });
+
+        Cms::_('event')->on('cms.content.admin', function (&$body) {
+            $body .= $_REQUEST['test-event-content']['content.site'];
+        }, EventManager::LOW);
+
+        Cms::_('event')->on('cms.content', function (&$body) {
+            $body .= $_REQUEST['test-event-content']['content'];
+        }, EventManager::HIGH);
+
+        add_filter('the_content', function ($content) {
+            Cms::_('event')->filterContent($content);
+            return $content;
+        });
+    }
 }

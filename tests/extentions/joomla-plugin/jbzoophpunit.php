@@ -12,13 +12,16 @@
  * @link      https://github.com/JBZoo/CrossCMS
  */
 
+use JBZoo\CrossCMS\AbstractEvent;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Event\EventManager;
 use JBZoo\Utils\Vars;
 
 defined('_JEXEC') or die;
 
 /**
  * Class PlgSystemJBZooPHPUnit
+ * @SuppressWarnings(PHPMD.Superglobals)
  */
 class PlgSystemJBZooPHPUnit extends JPlugin
 {
@@ -29,6 +32,11 @@ class PlgSystemJBZooPHPUnit extends JPlugin
                 require_once $autoloadPath;
             }
         }
+
+        /* Event ******************************************************************************************************/
+        $this->_eventInitTests();
+
+
     }
 
     public function onAfterRoute()
@@ -121,10 +129,46 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
     public function onAfterRender()
     {
+        /* Event:content **********************************************************************************************/
+        if ($this->_request('test-event-content')) {
+            Cms::_('event')->on('cms.content.site', function (&$body) {
+                $body .= $_REQUEST['test-event-content']['content.site'];
+            });
+
+            Cms::_('event')->on('cms.content.admin', function (&$body) {
+                $body .= $_REQUEST['test-event-content']['content.site'];
+            }, EventManager::LOW);
+
+            Cms::_('event')->on('cms.content', function (&$body) {
+                $body .= $_REQUEST['test-event-content']['content'];
+            }, EventManager::HIGH);
+
+            Cms::_('event')->filterContent();
+        }
     }
 
     public function onBeforeCompileHead()
     {
+        if (!$this->_request('jbzoo-phpunit')) {
+            return;
+        }
+
+        /* Event:header ***********************************************************************************************/
+        if ($this->_request('test-event-header')) {
+            Cms::_('event')->on('cms.header.site', function () {
+                echo $_REQUEST['test-event-header']['header.site'];
+            });
+
+            Cms::_('event')->on('cms.header.admin', function () {
+                echo $_REQUEST['test-event-header']['header.admin'];
+            }, EventManager::LOW);
+
+            Cms::_('event')->on('cms.header', function () {
+                echo $_REQUEST['test-event-header']['header'];
+            }, EventManager::HIGH);
+
+            Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
+        }
     }
 
     public function onSearch()
@@ -133,6 +177,28 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
     public function onSearchAreas()
     {
+    }
+
+
+    protected function _eventInitTests()
+    {
+        /* Event:init *************************************************************************************************/
+        if ($this->_request('test-event-init')) {
+            Cms::_('event')->on('cms.init.site', function () {
+                echo $_REQUEST['test-event-init']['init.site'];
+            });
+
+            Cms::_('event')->on('cms.init.admin', function () {
+                echo $_REQUEST['test-event-init']['init.admin'];
+            }, EventManager::LOW);
+
+            Cms::_('event')->on('cms.init', function () {
+                echo $_REQUEST['test-event-init']['init'];
+            }, EventManager::HIGH);
+
+            // Execute Trigger
+            Cms::_('event')->trigger(AbstractEvent::EVENT_INIT);
+        }
     }
 
     /**

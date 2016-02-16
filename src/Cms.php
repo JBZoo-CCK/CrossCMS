@@ -15,6 +15,7 @@
 namespace JBZoo\CrossCMS;
 
 use JBZoo\CrossCMS\Exception\Exception;
+use JBZoo\Event\EventManager;
 use JBZoo\Path\Path;
 use JBZoo\SqlBuilder\SqlBuilder;
 use Pimple\Container;
@@ -78,7 +79,6 @@ class Cms extends Container
 
 
         $this['db'] = function ($cms) {
-
             SqlBuilder::set($cms['type']); // init SQLBuilder Driver
 
             $className = $cms['ns'] . 'Database';
@@ -152,6 +152,15 @@ class Cms extends Container
         $this['response'] = function ($cms) {
             $className = $cms['ns'] . 'Response';
             $helper    = new $className();
+            return $helper;
+        };
+
+        $this['event'] = function ($cms) {
+
+            $eventManager = new EventManager();
+
+            $className = $cms['ns'] . 'Event';
+            $helper    = new $className($eventManager);
             return $helper;
         };
     }
