@@ -23,13 +23,14 @@ use JBZoo\CrossCMS\AbstractEvent;
 class Event extends AbstractEvent
 {
     /**
-     * Example of Joomla Plugin (system)
+     *  Example of Joomla Plugin (system)
      *
-     * use JBZoo\CrossCMS\Cms;
-     * use JBZoo\CrossCMS\AbstractEvent;
      *
-     * class PlgSystemJBZoo extends JPlugin
-     * {
+     *  use JBZoo\CrossCMS\Cms;
+     *  use JBZoo\CrossCMS\AbstractEvent;
+     *
+     *  class PlgSystemJBZoo extends JPlugin
+     *  {
      *      // Init
      *      public function onAfterInitialise()
      *      {
@@ -53,7 +54,7 @@ class Event extends AbstractEvent
      *      {
      *          Cms::_('event')->triggerContent();
      *      }
-     * }
+     *  }
      */
 
     /**

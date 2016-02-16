@@ -23,7 +23,7 @@ use JBZoo\CrossCMS\AbstractEvent;
 class Event extends AbstractEvent
 {
     /**
-     * Example of Wordpress Plugin with hooks
+     *  Example of Wordpress Plugin with hooks
      *
      *
      *  // Init

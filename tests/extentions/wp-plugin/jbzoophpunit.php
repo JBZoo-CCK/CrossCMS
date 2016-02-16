@@ -25,9 +25,8 @@ if (!class_exists('\JBZoo\CrossCMS\Cms')) {
 
 if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
+    /* Assets *********************************************************************************************************/
     add_action('wp', function () {
-
-        /* Assets *****************************************************************************************************/
         if (isset($_REQUEST['test-assets-jsfile'])) {
             Cms::_('assets')->jsFile('http://site.com/' . $_REQUEST['test-assets-jsfile'] . 'js');
         }
@@ -43,8 +42,10 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
         if (isset($_REQUEST['test-assets-csscode'])) {
             Cms::_('assets')->cssCode($_REQUEST['test-assets-csscode']);
         }
+    });
 
-        /* Response ***************************************************************************************************/
+    /* Response *******************************************************************************************************/
+    add_action('wp', function () {
         if (isset($_REQUEST['test-response-set404'])) {
             Cms::_('response')->set404();
         }
