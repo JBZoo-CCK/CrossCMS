@@ -48,7 +48,7 @@ class Event extends AbstractEvent
      *          Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
      *      }
      *
-     *      // Content handlers (for marcroses)
+     *      // Content handlers (for macroses)
      *      public function onAfterRender()
      *      {
      *          Cms::_('event')->triggerContent();

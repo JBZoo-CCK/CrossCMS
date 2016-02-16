@@ -23,6 +23,29 @@ use JBZoo\CrossCMS\AbstractEvent;
 class Event extends AbstractEvent
 {
     /**
+     * Example of Wordpress Plugin with hooks
+     *
+     *
+     *  // Init
+     *  add_action('wp', function () {
+     *      Cms::_('event')->trigger(AbstractEvent::EVENT_INIT);
+     *  });
+     *
+     *
+     *  // Header render
+     *  add_action('wp_head', function () {
+     *      Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
+     *  });
+     *
+     *
+     *  // Content handlers (for macroses)
+     *  add_filter('the_content', function ($content) {
+     *      Cms::_('event')->filterContent($content);
+     *      return $content;
+     *  });
+     */
+
+    /**
      * {@inheritdoc}
      */
     public function filterContent(&$content = null)
