@@ -94,4 +94,19 @@ class ResponseTest extends PHPUnit
         isContain('noindex', $html);
         isContain('nofollow', $html);
     }
+
+    public function testNocache()
+    {
+        Helper::runIsolatedCMS(__METHOD__, array('test-response-nocache' => 1));
+    }
+
+    public function testRaw()
+    {
+        Helper::runIsolatedCMS(__METHOD__, array('test-response-raw' => 1));
+    }
+
+    public function testComponent()
+    {
+        Helper::runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
+    }
 }

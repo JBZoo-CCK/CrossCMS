@@ -77,5 +77,17 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
         if (isset($_REQUEST['test-response-keywords'])) {
             Cms::_('response')->setKeywords($_REQUEST['test-response-keywords']);
         }
+
+        if (isset($_REQUEST['test-response-nocache'])) {
+            Cms::_('response')->noCache();
+        }
+
+        if (isset($_REQUEST['test-response-raw'])) {
+            Cms::_('response')->raw();
+        }
+
+        if (isset($_REQUEST['test-response-component'])) {
+            Cms::_('response')->component();
+        }
     });
 }

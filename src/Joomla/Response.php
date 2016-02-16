@@ -48,6 +48,7 @@ class Response extends AbstractResponse
      */
     public function set404($message = 'Not Found')
     {
+        $this->noCache();
         if (class_exists('\JError')) {
             \JError::raiseError(404, $message); // Change to new API
         } else {
@@ -60,6 +61,7 @@ class Response extends AbstractResponse
      */
     public function set500($message = 'Internal Server Error')
     {
+        $this->noCache();
         if (class_exists('\JError')) {
             \JError::raiseError(500, $message); // Change to new API
         } else {

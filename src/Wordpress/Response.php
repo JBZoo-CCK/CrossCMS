@@ -45,7 +45,7 @@ class Response extends AbstractResponse
     {
         $this->_wp_query->set_404();
         status_header(404);
-        nocache_headers();
+        $this->noCache();
     }
 
     /**
@@ -63,7 +63,7 @@ class Response extends AbstractResponse
         }
 
         status_header(500);
-        nocache_headers();
+        $this->noCache();
         $this->setHeader('Content-Type', 'text/html; charset=utf-8');
 
         echo implode(PHP_EOL, array(

@@ -93,6 +93,18 @@ class PlgSystemJBZooPHPUnit extends JPlugin
         if ($test = $this->_request('test-response-noindex')) {
             Cms::_('response')->noindex();
         }
+
+        if ($test = $this->_request('test-response-nocache')) {
+            Cms::_('response')->noCache();
+        }
+
+        if ($test = $this->_request('test-response-raw')) {
+            Cms::_('response')->raw();
+        }
+
+        if ($test = $this->_request('test-response-component')) {
+            Cms::_('response')->component();
+        }
     }
 
     public function onBeforeRender()
