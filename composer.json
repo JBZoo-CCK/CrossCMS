@@ -45,8 +45,8 @@
         "test"              : [
             "@manifest",
             "@autoload",
-            "@phpunit-joomla",
             "@phpunit-wordpress",
+            "@phpunit-joomla",
             "@phpmd",
             "@phpcs",
             "@phpcpd",
