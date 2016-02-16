@@ -76,7 +76,7 @@ class ResponseTest extends PHPUnit
         $uniq = uniqid();
         $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-keywords' => $uniq));
 
-        isContain('<meta name="keywords" content="' . $uniq . '" />', $html);
+        isLike('#<meta name=[\'\"]keywords[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $html);
     }
 
     public function testDescription()
@@ -84,7 +84,7 @@ class ResponseTest extends PHPUnit
         $uniq = uniqid();
         $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-description' => $uniq));
 
-        isContain('<meta name="description" content="' . $uniq . '" />', $html);
+        isLike('#<meta name=[\'\"]description[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $html);
     }
 
     public function testNoindex()
@@ -108,5 +108,21 @@ class ResponseTest extends PHPUnit
     public function testComponent()
     {
         Helper::runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
+    }
+
+    public function testAddMeta()
+    {
+        $value = uniqid();
+        $html  = Helper::runIsolatedCMS(__METHOD__, array('test-response-addmeta' => array(
+            'meta'  => 'somemeta1',
+            'value' => $value,
+        )));
+        isLike('#<meta name=[\'\"]somemeta1[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $html);
+
+        $value = uniqid();
+        $html  = Helper::runIsolatedCMS(__METHOD__, array('test-response-addmeta' => array(
+            'meta' => '<meta name=\'somemeta2\' content=\'' . $value . '\' />',
+        )));
+        isLike('#<meta name=[\'\"]somemeta2[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $html);
     }
 }

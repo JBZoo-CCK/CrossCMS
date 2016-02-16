@@ -27,7 +27,7 @@ class Response extends AbstractResponse
     /**
      * @var \WP_Query
      */
-    private $_wp_query = null;
+    private $_wp_query;
 
     /**
      * {@inheritdoc}
@@ -182,7 +182,7 @@ class Response extends AbstractResponse
             if (null === $value) {
                 echo $meta . PHP_EOL;
             } else {
-                echo '<meta name="' . esc_attr($meta) . '" content="' . esc_attr($value) . '" />' . PHP_EOL;
+                echo '<meta name="' . $meta . '" content="' . $value . '" />' . PHP_EOL;
             }
         }, 9999);
     }

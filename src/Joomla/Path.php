@@ -42,7 +42,7 @@ class Path extends AbstractPath
             return $path;
         }
 
-        return $this->getRoot() . DIRECTORY_SEPARATOR . 'images';
+        return $this->getRoot() . DIRECTORY_SEPARATOR . 'images'; // @codeCoverageIgnore
     }
 
     /**
@@ -72,7 +72,7 @@ class Path extends AbstractPath
             return $tmpPath;
         }
 
-        return $this->getRoot() . DIRECTORY_SEPARATOR . 'tmp';
+        return $this->getRoot() . DIRECTORY_SEPARATOR . 'tmp'; // @codeCoverageIgnore
     }
 
     /**
@@ -86,6 +86,6 @@ class Path extends AbstractPath
             return $tmpPath;
         }
 
-        return $this->getRoot() . DIRECTORY_SEPARATOR . 'logs';
+        return $this->getRoot() . DIRECTORY_SEPARATOR . 'logs'; // @codeCoverageIgnore
     }
 }

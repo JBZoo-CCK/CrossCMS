@@ -13,6 +13,7 @@ Author URI: http://jbzoo.com
 
 
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Vars;
 
 if (!class_exists('\JBZoo\CrossCMS\Cms')) {
     if ($autoloadPath = realpath('../../vendor/autoload.php')) {
@@ -88,6 +89,20 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
         if (isset($_REQUEST['test-response-component'])) {
             Cms::_('response')->component();
+        }
+
+        if (isset($_REQUEST['test-response-addmeta'])) {
+
+            $_REQUEST['test-response-addmeta']['meta'] = str_replace(
+                array('\\"', "\\'"),
+                array('"', "'"),
+                $_REQUEST['test-response-addmeta']['meta']
+            );
+
+            Cms::_('response')->addMeta(
+                $_REQUEST['test-response-addmeta']['meta'],
+                Vars::get($_REQUEST['test-response-addmeta']['value'])
+            );
         }
     });
 }

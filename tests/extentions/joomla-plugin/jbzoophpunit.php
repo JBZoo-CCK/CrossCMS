@@ -13,6 +13,7 @@
  */
 
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Vars;
 
 defined('_JEXEC') or die;
 
@@ -104,6 +105,13 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         if ($test = $this->_request('test-response-component')) {
             Cms::_('response')->component();
+        }
+
+        if ($test = $this->_request('test-response-addmeta')) {
+            Cms::_('response')->addMeta(
+                $_REQUEST['test-response-addmeta']['meta'],
+                Vars::get($_REQUEST['test-response-addmeta']['value'])
+            );
         }
     }
 
