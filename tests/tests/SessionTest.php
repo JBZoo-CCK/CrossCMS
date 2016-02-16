@@ -74,4 +74,13 @@ class SessionTest extends PHPUnit
         isTrue(is_string($session->getToken()));
     }
 
+    public function testHas()
+    {
+        $session = $this->_getSession();
+
+        $session->set('key', 123);
+        isTrue($session->has('key'));
+        isFalse($session->has('undefined'));
+    }
+
 }
