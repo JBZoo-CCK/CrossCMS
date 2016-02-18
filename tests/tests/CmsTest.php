@@ -33,11 +33,24 @@ class CmsTest extends PHPUnit
     {
         $cms = Cms::getInstance();
 
-        isClass('\JBZoo\CrossCMS\AbstractSession', $cms['session']);
-        isClass('\JBZoo\CrossCMS\AbstractConfig', $cms['config']);
-        isClass('\JBZoo\CrossCMS\AbstractDatabase', $cms['db']);
-        isClass('\JBZoo\CrossCMS\AbstractCache', $cms['cache']);
-        isClass('\JBZoo\CrossCMS\AbstractEnv', $cms['env']);
-        isClass('\JBZoo\Path\Path', $cms['path']);
+        $helpers = array(
+            "db"       => '\JBZoo\CrossCMS\AbstractDatabase',
+            "response" => '\JBZoo\CrossCMS\AbstractResponse',
+            "session"  => '\JBZoo\CrossCMS\AbstractSession',
+            "request"  => '\JBZoo\CrossCMS\AbstractRequest',
+            "config"   => '\JBZoo\CrossCMS\AbstractConfig',
+            "assets"   => '\JBZoo\CrossCMS\AbstractAssets',
+            "mailer"   => '\JBZoo\CrossCMS\AbstractMailer',
+            "event"    => '\JBZoo\CrossCMS\AbstractEvent',
+            "cache"    => '\JBZoo\CrossCMS\AbstractCache',
+            "http"     => '\JBZoo\CrossCMS\AbstractHttp',
+            "env"      => '\JBZoo\CrossCMS\AbstractEnv',
+            "path"     => '\JBZoo\Path\Path',
+        );
+
+        foreach ($helpers as $key => $className) {
+            isClass($className, $cms[$key]);
+        }
+
     }
 }
