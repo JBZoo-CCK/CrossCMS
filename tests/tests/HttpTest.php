@@ -42,15 +42,20 @@ class HttpTest extends PHPUnit
             'debug'      => 1,
             'ssl_verify' => 0, // For travis ... =(
         ));
-        isSame('"Hello World!"', $resp, 'SSL Error:' . $resp);
 
+        if ('"Hello World!"' === $resp) {
+            isSame('"Hello World!"', $resp);
 
-        $resp = Cms::_('http')->request('https://mockbin.org/request', array(), array(
-            'debug'      => 1,
-            'ssl_verify' => 0, // For travis ... =(
-        ));
-        $data = new JSON($resp);
-        isSame('https://mockbin.org/request', $data->get('url'), 'SSL Error:' . $resp);
+            $resp = Cms::_('http')->request('https://mockbin.org/request', array(), array(
+                'debug'      => 1,
+                'ssl_verify' => 0, // For travis ... =(
+            ));
+            $data = new JSON($resp);
+            isSame('https://mockbin.org/request', $data->get('url'));
+
+        } else {
+            cliMessage('CrossCMS SSL Error: ' . $resp);
+        }
     }
 
     public function testSimple_404()
