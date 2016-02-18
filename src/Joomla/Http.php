@@ -34,7 +34,7 @@ class Http extends AbstractHttp
         $headers = $options->get('headers');
         $timeout = $options->get('timeout');
 
-        $httpClient = \JHttpFactory::getHttp();
+        $httpClient = \JHttpFactory::getHttp(null, 'stream');
 
         $httpClient->setOption('userAgent', $options->get('user_agent'));
 
