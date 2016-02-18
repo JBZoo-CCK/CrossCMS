@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractHttp;
+use JBZoo\CrossCMS\Exception\Exception;
 use JBZoo\Data\Data;
 
 /**
@@ -49,13 +50,15 @@ class Http extends AbstractHttp
     protected function _compactResponse($apiResponse)
     {
         if ($apiResponse instanceof \WP_Error) {
-            throw new \Exception(implode($apiResponse->get_error_messages()));
+            throw new Exception(implode($apiResponse->get_error_messages()));
         }
 
+        $apiResponse = new Data($apiResponse);
+
         $response = array(
-            'code'    => (int)$apiResponse['response']['code'],
-            'headers' => array_change_key_case($apiResponse['headers'], CASE_LOWER),
-            'body'    => $apiResponse['body'],
+            'code'    => (int)$apiResponse->find('response.code', 0),
+            'headers' => array_change_key_case($apiResponse->get('headers'), CASE_LOWER),
+            'body'    => $apiResponse->get('body'),
         );
 
         $response = new Data($response);

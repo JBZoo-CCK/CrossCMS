@@ -258,4 +258,22 @@ class HttpTest extends PHPUnit
         ));
         isSame(404, $resp);
     }
+
+    public function testDebug()
+    {
+        $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
+            'response' => AbstractHttp::RESPONSE_FULL,
+            'method'   => 'undefined',
+            'debug'    => 0,
+        ));
+
+        isNull($resp->get('body'));
+
+        $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
+            'response' => AbstractHttp::RESPONSE_FULL,
+            'method'   => 'undefined',
+            'debug'    => 1,
+        ));
+        isContain('CrossCMS Error: ', $resp->get('body'));
+    }
 }

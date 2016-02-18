@@ -60,7 +60,7 @@ class Http extends AbstractHttp
             $apiResponse = $httpClient->patch($url, $args, $headers, $timeout);
 
         } else {
-            throw new \Exception('Undefined request method: ' . $method);
+            $apiResponse = $httpClient->get($url, $headers, $timeout);
         }
 
         return $apiResponse;

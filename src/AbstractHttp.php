@@ -15,7 +15,9 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\CrossCMS\Exception\Exception;
 use JBZoo\Data\Data;
+use JBZoo\Utils\Arr;
 use JBZoo\Utils\Str;
 use JBZoo\Utils\Url;
 
@@ -79,30 +81,31 @@ abstract class AbstractHttp
     {
         $result = null;
 
+        // Merge with default
+        $options = array_merge($this->_defaultOptions, (array)$options);
+        $options = new Data($options);
+
+        // Prepare options for request
+        $args       = (array)$args;
+        $timeout    = (int)$options->get('timeout');
+        $headers    = (array)$options->get('headers');
+        $userAgent  = trim($options->get('user_agent'));
+        $resultType = Str::clean($options->get('response'), true);
+
+        // Prepare options for cache
+        $isCache  = (int)$options->get('cache');
+        $cacheTTL = (int)$options->get('cache_ttl');
+        $cacheId  = array('url' => $url, 'data' => $args, 'options' => $options->getArrayCopy());
+
         try {
-            // Merge with default
-            $options = array_merge($this->_defaultOptions, (array)$options);
-            $options = new Data($options);
-
-            // Prepare options for request
-            $args       = (array)$args;
-            $timeout    = (int)$options->get('timeout');
-            $headers    = (array)$options->get('headers');
-            $method     = trim(Str::up($options->get('method')));
-            $userAgent  = trim($options->get('user_agent'));
-            $resultType = Str::clean($options->get('response'), true);
-
-            // Prepare options for cache
-            $isCache  = (int)$options->get('cache');
-            $cacheTTL = (int)$options->get('cache_ttl');
-            $cacheId  = array('url' => $url, 'data' => $args, 'options' => $options->getArrayCopy());
+            $method = $this->_getMethod($options->get('method'));
 
             // Check cache
             if ($isCache && $result = Cms::_('cache')->get($cacheId, self::CACHE_GROUP)) {
                 return $result;
             }
 
-            // Add args to url if
+            // Add args to url for GET methods
             if (self::METHOD_GET === $method) {
                 $url  = Url::addArg($args, $url);
                 $args = array();
@@ -116,19 +119,27 @@ abstract class AbstractHttp
                 'user_agent' => $userAgent,
             )));
 
-            // Prepare response format
-            $response = $this->_compactResponse($apiResp);
-            $result   = $this->_getResultByType($response, $resultType);
-
-            // Store to cache
-            if ($isCache && null !== $result) {
-                Cms::_('cache')->set($cacheId, $result, self::CACHE_GROUP, true, $cacheTTL);
-            }
-
         } catch (\Exception $e) {
-            if ($options->get('debug')) {
-                return $e->getMessage();
+
+            $body = null;
+            if ((int)$options->get('debug')) {
+                $body = 'CrossCMS Error: ' . $e->getMessage();
             }
+
+            $apiResp = new Data(array(
+                'body'    => $body,
+                'headers' => array(),
+                'code'    => 0,
+            ));
+        }
+
+        // Prepare response format
+        $response = $this->_compactResponse($apiResp);
+        $result   = $this->_getResultByType($response, $resultType);
+
+        // Store to cache
+        if ($isCache && null !== $result) {
+            Cms::_('cache')->set($cacheId, $result, self::CACHE_GROUP, true, $cacheTTL);
         }
 
         return $result;
@@ -159,5 +170,33 @@ abstract class AbstractHttp
         }
 
         return $result;
+    }
+
+    /**
+     * Clean and validate HTTP-method type
+     *
+     * @param string $method
+     * @return string
+     * @throws Exception
+     */
+    protected function _getMethod($method)
+    {
+        $method = trim(Str::up($method));
+
+        $validList = array(
+            self::METHOD_GET,
+            self::METHOD_POST,
+            self::METHOD_HEAD,
+            self::METHOD_PUT,
+            self::METHOD_DELETE,
+            self::METHOD_OPTIONS,
+            self::METHOD_PATCH,
+        );
+
+        if (Arr::in($method, $validList)) {
+            return $method;
+        } else {
+            throw new Exception('Unsupported Request Method: ' . $method);
+        }
     }
 }
