@@ -75,7 +75,7 @@ class HttpTest extends PHPUnit
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'method'   => AbstractHttp::METHOD_HEAD,
-            'response' => AbstractHttp::RESPONSE_FULL,
+            'response' => AbstractHttp::RESULT_FULL,
         ));
 
         isSame('HEAD', $resp->find('headers.access-control-allow-methods'));
@@ -144,23 +144,23 @@ class HttpTest extends PHPUnit
 
     public function testTimeout()
     {
-        $resp = Cms::_('http')->request('http://mockbin.org/delay/2001', array(), array(
-            'timeout' => 1,
+        $resp = Cms::_('http')->request('http://mockbin.org/delay/5001', array(), array(
+            'timeout' => 2,
         ));
         isNull($resp);
 
-        $resp = Cms::_('http')->request('http://mockbin.org/delay/2002', array(), array(
-            'timeout' => 3,
+        $resp = Cms::_('http')->request('http://mockbin.org/delay/5002', array(), array(
+            'timeout' => 10,
         ));
 
         $data = new JSON($resp);
-        isSame(2002, $data->get('delay'));
+        isSame(5002, $data->get('delay'));
     }
 
     public function testGetCode()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
-            'response' => AbstractHttp::RESPONSE_CODE,
+            'response' => AbstractHttp::RESULT_CODE,
         ));
 
         isSame(200, $resp);
@@ -169,7 +169,7 @@ class HttpTest extends PHPUnit
     public function testGetHeaders()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
-            'response' => AbstractHttp::RESPONSE_HEAD,
+            'response' => AbstractHttp::RESULT_HEAD,
         ));
 
         isSame('foo', $resp->get('x-custom-header'));
@@ -179,7 +179,7 @@ class HttpTest extends PHPUnit
     public function testGetBody()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
-            'response' => AbstractHttp::RESPONSE_BODY,
+            'response' => AbstractHttp::RESULT_BODY,
         ));
 
         isSame('{"key":"value"}', $resp);
@@ -188,7 +188,7 @@ class HttpTest extends PHPUnit
     public function testGetFull()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
-            'response' => AbstractHttp::RESPONSE_FULL,
+            'response' => AbstractHttp::RESULT_FULL,
         ));
 
         $data = new JSON($resp);
@@ -254,7 +254,7 @@ class HttpTest extends PHPUnit
     public function testCode404()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/code/404', array(), array(
-            'response' => AbstractHttp::RESPONSE_CODE,
+            'response' => AbstractHttp::RESULT_CODE,
         ));
         isSame(404, $resp);
     }
@@ -262,7 +262,7 @@ class HttpTest extends PHPUnit
     public function testDebug()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
-            'response' => AbstractHttp::RESPONSE_FULL,
+            'response' => AbstractHttp::RESULT_FULL,
             'method'   => 'undefined',
             'debug'    => 0,
         ));
@@ -270,7 +270,7 @@ class HttpTest extends PHPUnit
         isNull($resp->get('body'));
 
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
-            'response' => AbstractHttp::RESPONSE_FULL,
+            'response' => AbstractHttp::RESULT_FULL,
             'method'   => 'undefined',
             'debug'    => 1,
         ));

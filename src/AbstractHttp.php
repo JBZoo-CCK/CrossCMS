@@ -35,10 +35,10 @@ abstract class AbstractHttp
     const METHOD_OPTIONS = 'OPTIONS';
     const METHOD_PATCH   = 'PATCH';
 
-    const RESPONSE_FULL = 'full';
-    const RESPONSE_BODY = 'body';
-    const RESPONSE_CODE = 'code';
-    const RESPONSE_HEAD = 'headers';
+    const RESULT_FULL = 'full';
+    const RESULT_BODY = 'body';
+    const RESULT_CODE = 'code';
+    const RESULT_HEAD = 'headers';
 
     const CACHE_GROUP = 'crosscms_http';
 
@@ -49,7 +49,7 @@ abstract class AbstractHttp
         'timeout'    => 5,
         'method'     => self::METHOD_GET,
         'headers'    => array(),
-        'response'   => self::RESPONSE_BODY,
+        'response'   => self::RESULT_BODY,
         'cache'      => 0,
         'cache_ttl'  => 60, // in minutes!
         'user_agent' => 'CrossCMS HTTP Client v1.x-dev',
@@ -88,6 +88,7 @@ abstract class AbstractHttp
         // Prepare options for request
         $args       = (array)$args;
         $timeout    = (int)$options->get('timeout');
+        $isDebug    = (int)$options->get('debug');
         $headers    = (array)$options->get('headers');
         $userAgent  = trim($options->get('user_agent'));
         $resultType = Str::clean($options->get('response'), true);
@@ -98,12 +99,12 @@ abstract class AbstractHttp
         $cacheId  = array('url' => $url, 'data' => $args, 'options' => $options->getArrayCopy());
 
         try {
-            $method = $this->_getMethod($options->get('method'));
-
             // Check cache
             if ($isCache && $result = Cms::_('cache')->get($cacheId, self::CACHE_GROUP)) {
                 return $result;
             }
+
+            $method = $this->_getMethod($options->get('method'));
 
             // Add args to url for GET methods
             if (self::METHOD_GET === $method) {
@@ -116,13 +117,14 @@ abstract class AbstractHttp
                 'timeout'    => $timeout,
                 'headers'    => $headers,
                 'method'     => $method,
+                'debug'      => $isDebug,
                 'user_agent' => $userAgent,
             )));
 
         } catch (\Exception $e) {
 
             $body = null;
-            if ((int)$options->get('debug')) {
+            if ($isDebug) {
                 $body = 'CrossCMS Error: ' . $e->getMessage();
             }
 
@@ -153,16 +155,16 @@ abstract class AbstractHttp
     protected function _getResultByType(Data $response, $resultType)
     {
         // response type
-        if ($resultType == self::RESPONSE_BODY && 200 === $response->get('code')) {
+        if ($resultType == self::RESULT_BODY && 200 === $response->get('code')) {
             $result = $response->get('body');
 
-        } elseif ($resultType == self::RESPONSE_HEAD) {
+        } elseif ($resultType == self::RESULT_HEAD) {
             $result = new Data($response->get('headers'));
 
-        } elseif ($resultType == self::RESPONSE_CODE) {
+        } elseif ($resultType == self::RESULT_CODE) {
             $result = $response->get('code');
 
-        } elseif ($resultType == self::RESPONSE_FULL) {
+        } elseif ($resultType == self::RESULT_FULL) {
             $result = $response;
 
         } else {

@@ -41,6 +41,12 @@ class Http extends AbstractHttp
             'redirection' => 20,
         ));
 
+        if ($options->get('debug') && $apiResponse instanceof \WP_Error) {
+            $apiResponse = array(
+                'body' => implode($apiResponse->get_error_messages()),
+            );
+        }
+
         return $apiResponse;
     }
 
@@ -49,15 +55,11 @@ class Http extends AbstractHttp
      */
     protected function _compactResponse($apiResponse)
     {
-        if ($apiResponse instanceof \WP_Error) {
-            throw new Exception(implode($apiResponse->get_error_messages()));
-        }
-
         $apiResponse = new Data($apiResponse);
 
         $response = array(
             'code'    => (int)$apiResponse->find('response.code', 0),
-            'headers' => array_change_key_case($apiResponse->get('headers'), CASE_LOWER),
+            'headers' => array_change_key_case((array)$apiResponse->get('headers', array()), CASE_LOWER),
             'body'    => $apiResponse->get('body'),
         );
 
