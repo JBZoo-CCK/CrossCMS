@@ -268,6 +268,7 @@ class HttpTest extends PHPUnit
         ));
 
         isNull($resp->get('body'));
+        //isFalse($resp->get('info'));
 
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'response' => AbstractHttp::RESULT_FULL,
@@ -276,11 +277,18 @@ class HttpTest extends PHPUnit
         ));
 
         isContain('CrossCMS Error: ', $resp->get('body'));
+        //isTrue($resp->get('info')); // TODO Add extended debug information (trace, times, memory, etc)
     }
 
     public function testHttps()
     {
         $resp = Cms::_('http')->request('https://mockbin.org/gzip', array());
         isSame('"Hello World!"', $resp);
+
+        $resp = Cms::_('http')->request('https://mockbin.org/request', array());
+
+        $data = new JSON($resp);
+
+        isSame('https://mockbin.org/request', $data->get('url'));
     }
 }
