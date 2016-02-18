@@ -274,6 +274,7 @@ class HttpTest extends PHPUnit
             'method'   => 'undefined',
             'debug'    => 1,
         ));
+
         isContain('CrossCMS Error: ', $resp->get('body'));
     }
 }

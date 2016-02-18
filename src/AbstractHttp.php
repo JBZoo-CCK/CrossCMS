@@ -35,10 +35,10 @@ abstract class AbstractHttp
     const METHOD_OPTIONS = 'OPTIONS';
     const METHOD_PATCH   = 'PATCH';
 
-    const RESPONSE_BODY = 'body';
-    const RESPONSE_HEAD = 'head';
-    const RESPONSE_CODE = 'code';
     const RESPONSE_FULL = 'full';
+    const RESPONSE_BODY = 'body';
+    const RESPONSE_CODE = 'code';
+    const RESPONSE_HEAD = 'headers';
 
     const CACHE_GROUP = 'crosscms_http';
 
