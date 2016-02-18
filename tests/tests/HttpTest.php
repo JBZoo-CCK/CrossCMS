@@ -282,13 +282,15 @@ class HttpTest extends PHPUnit
 
     public function testHttps()
     {
-        $resp = Cms::_('http')->request('https://mockbin.org/gzip', array());
-        isSame('"Hello World!"', $resp);
+        $resp = Cms::_('http')->request('https://mockbin.org/gzip', array(), array('debug' => 1));
+        if ('"Hello World!"' === $resp) {
+            isSame('"Hello World!"', $resp);
 
-        $resp = Cms::_('http')->request('https://mockbin.org/request', array());
-
-        $data = new JSON($resp);
-
-        isSame('https://mockbin.org/request', $data->get('url'));
+            $resp = Cms::_('http')->request('https://mockbin.org/request', array(), array('debug' => 1));
+            $data = new JSON($resp);
+            isSame('https://mockbin.org/request', $data->get('url'));
+        } else {
+            cliMessage('HTTPS Error Message: ' . $resp);
+        }
     }
 }
