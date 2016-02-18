@@ -277,4 +277,10 @@ class HttpTest extends PHPUnit
 
         isContain('CrossCMS Error: ', $resp->get('body'));
     }
+
+    public function testHttps()
+    {
+        $resp = Cms::_('http')->request('https://mockbin.org/gzip', array());
+        isSame('"Hello World!"', $resp);
+    }
 }
