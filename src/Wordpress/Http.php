@@ -16,7 +16,6 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractHttp;
-use JBZoo\CrossCMS\Exception\Exception;
 use JBZoo\Data\Data;
 
 /**

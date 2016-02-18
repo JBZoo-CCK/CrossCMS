@@ -28,7 +28,7 @@ class Cache extends AbstractCache
      */
     public function isEnabled()
     {
-        return (int)\JFactory::getConfig()->get('caching', 0);
+        return (bool)\JFactory::getConfig()->get('caching', 0);
     }
 
     /**

@@ -16,9 +16,9 @@
 namespace JBZoo\CrossCMS;
 
 use JBZoo\CrossCMS\Exception\MailerException;
+use JBZoo\Utils\Filter;
 use JBZoo\Utils\FS;
 use JBZoo\Utils\Arr;
-use JBZoo\Utils\Vars;
 
 /**
  * Class AbstractMailer
@@ -66,7 +66,7 @@ abstract class AbstractMailer
     protected $_atachments;
 
     /**
-     * @var array
+     * @var int
      */
     protected $_validateMode;
 
@@ -107,7 +107,7 @@ abstract class AbstractMailer
     {
         $this->_recipient = array();
 
-        if ($email = Vars::email($email)) {
+        if ($email = Filter::email($email)) {
             $this->_recipient[0] = $email;
             $this->_recipient[1] = $name;
             return true;
@@ -125,7 +125,7 @@ abstract class AbstractMailer
     {
         $this->_from = array();
 
-        if ($email = Vars::email($email)) {
+        if ($email = Filter::email($email)) {
             $this->_from[0] = $email;
             $this->_from[1] = $name;
             return true;

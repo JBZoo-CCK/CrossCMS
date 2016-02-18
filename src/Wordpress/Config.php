@@ -129,7 +129,7 @@ class Config extends AbstractConfig
             return (bool)WP_DEBUG;
         }
 
-        return ''; // @codeCoverageIgnore
+        return false; // @codeCoverageIgnore
     }
 
     /**
