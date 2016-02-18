@@ -42,16 +42,25 @@ before_script:
   # Install PHP Libs
   - composer update --optimize-autoloader
 
-  # Install CMS
-  - composer prepare-joomla
-  - composer prepare-wordpress
-
   # Disable xdebug PHP module
   - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
 
 script:
   # Full stack
-  - composer test
+  - composer manifest
+  - composer autoload
+
+  - composer prepare-wordpress
+  - composer phpunit-wordpress
+
+  - composer prepare-joomla
+  - composer phpunit-joomla
+
+  # Other tests
+  - composer phpmd
+  - composer phpcs
+  - composer phpcpd
+  - composer phploc
 
 after_script:
   - composer coveralls
