@@ -162,20 +162,7 @@ class HttpTest extends PHPUnit
         isSame('PATCH', $data->get('method'));
     }
 
-    public function testSend_headers()
-    {
-        $uniq     = uniqid();
-        $resp     = Cms::_('http')->request('http://mockbin.org/headers', array(), array(
-            'headers' => array(
-                'x-custom-header' => $uniq,
-            ),
-        ));
-        $data     = new JSON($resp);
-        $dataFlat = $data->flattenRecursive();
-
-        isTrue(in_array('x-custom-header', $dataFlat, true));
-        isTrue(in_array($uniq, $dataFlat, true));
-    }
+    /* Result *********************************************************************************************************/
 
     public function testResult_code()
     {
@@ -217,6 +204,8 @@ class HttpTest extends PHPUnit
         isSame('foo', $data->find('headers.x-custom-header'));
         isSame(200, $data->find('code'));
     }
+
+    /* Options ********************************************************************************************************/
 
     public function testOption_cache()
     {
@@ -282,6 +271,8 @@ class HttpTest extends PHPUnit
         //isTrue($resp->get('info')); // TODO Add extended debug information (trace, times, memory, etc)
     }
 
+    /* Redirects ******************************************************************************************************/
+
     public function testRedirect_simple()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/redirect/303', array());
@@ -299,5 +290,22 @@ class HttpTest extends PHPUnit
         $args = array('to' => 'http://mockbin.org/gzip');
         $resp = Cms::_('http')->request('http://mockbin.org/redirect/308/10', $args);
         isSame('"Hello World!"', $resp);
+    }
+
+    /* Other **********************************************************************************************************/
+
+    public function testSend_headers()
+    {
+        $uniq     = uniqid();
+        $resp     = Cms::_('http')->request('http://mockbin.org/headers', array(), array(
+            'headers' => array(
+                'x-custom-header' => $uniq,
+            ),
+        ));
+        $data     = new JSON($resp);
+        $dataFlat = $data->flattenRecursive();
+
+        isTrue(in_array('x-custom-header', $dataFlat, true));
+        isTrue(in_array($uniq, $dataFlat, true));
     }
 }
