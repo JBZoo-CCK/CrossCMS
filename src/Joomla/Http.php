@@ -36,6 +36,8 @@ class Http extends AbstractHttp
 
         $httpClient = \JHttpFactory::getHttp();
 
+        $httpClient->setOption('userAgent', $options->get('user_agent'));
+
         if (self::METHOD_GET === $method) {
             $apiResponse = $httpClient->get($url, $headers, $timeout);
 

@@ -32,10 +32,12 @@ class Http extends AbstractHttp
         $httpClient = _wp_http_get_object();
 
         $apiResponse = $httpClient->request($url, array(
-            'method'  => $options->get('method'),
-            'body'    => $args,
-            'headers' => $options->get('headers'),
-            'timeout' => $options->get('timeout'),
+            'body'        => $args,
+            'method'      => $options->get('method'),
+            'headers'     => $options->get('headers'),
+            'timeout'     => $options->get('timeout'),
+            'user-agent'  => $options->get('user_agent'),
+            'redirection' => 20,
         ));
 
         return $apiResponse;

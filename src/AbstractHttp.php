@@ -44,13 +44,14 @@ abstract class AbstractHttp
      * @type array
      */
     protected $_defaultOptions = array(
-        'timeout'   => 10,
-        'method'    => self::METHOD_GET,
-        'headers'   => array(),
-        'response'  => self::RESPONSE_BODY,
-        'cache'     => 0,
-        'cache_ttl' => 60, // in minutes!
-        'debug'     => 0,
+        'timeout'    => 5,
+        'method'     => self::METHOD_GET,
+        'headers'    => array(),
+        'response'   => self::RESPONSE_BODY,
+        'cache'      => 0,
+        'cache_ttl'  => 60, // in minutes!
+        'user_agent' => 'CrossCMS HTTP Client v1.x-dev',
+        'debug'      => 0,
     );
 
     /**
@@ -88,6 +89,7 @@ abstract class AbstractHttp
             $timeout    = (int)$options->get('timeout');
             $headers    = (array)$options->get('headers');
             $method     = trim(Str::up($options->get('method')));
+            $userAgent  = trim($options->get('user_agent'));
             $resultType = Str::clean($options->get('response'), true);
 
             // Prepare options for cache
@@ -108,9 +110,10 @@ abstract class AbstractHttp
 
             // Request via CMS API
             $apiResp = $this->_request($url, $args, new Data(array(
-                'timeout' => $timeout,
-                'headers' => $headers,
-                'method'  => $method,
+                'timeout'    => $timeout,
+                'headers'    => $headers,
+                'method'     => $method,
+                'user_agent' => $userAgent,
             )));
 
             // Prepare response format
