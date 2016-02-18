@@ -163,6 +163,13 @@ class Cms extends Container
             $helper    = new $className($eventManager);
             return $helper;
         };
+
+
+        $this['http'] = function ($cms) {
+            $className = $cms['ns'] . 'Http';
+            $helper    = new $className();
+            return $helper;
+        };
     }
 
     /**

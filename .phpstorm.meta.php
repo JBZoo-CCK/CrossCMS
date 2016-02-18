@@ -29,6 +29,7 @@ namespace PHPSTORM_META {
             "mailer"    instanceof \JBZoo\CrossCMS\AbstractMailer,
             "event"     instanceof \JBZoo\CrossCMS\AbstractEvent,
             "cache"     instanceof \JBZoo\CrossCMS\AbstractCache,
+            "http"      instanceof \JBZoo\CrossCMS\AbstractHttp,
             "env"       instanceof \JBZoo\CrossCMS\AbstractEnv,
             "path"      instanceof \JBZoo\Path\Path,
         ],

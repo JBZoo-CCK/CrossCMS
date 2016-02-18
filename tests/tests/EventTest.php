@@ -52,15 +52,4 @@ class EventTest extends PHPUnit
 
         isContain('-ab--cd-', $html);
     }
-
-    public function testShutdown()
-    {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-event-shutdown' => array(
-            'shutdown'       => '-a1-',
-            'shutdown.site'  => '-b2-',
-            'shutdown.admin' => '-c3-',
-        )));
-
-        isContain('-a1--b2-', $html);
-    }
 }
