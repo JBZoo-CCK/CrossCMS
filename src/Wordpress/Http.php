@@ -37,6 +37,7 @@ class Http extends AbstractHttp
             'headers'     => $options->get('headers'),
             'timeout'     => $options->get('timeout'),
             'user-agent'  => $options->get('user_agent'),
+            'sslverify'   => $options->get('ssl_verify'),
             'redirection' => 20,
         ));
 

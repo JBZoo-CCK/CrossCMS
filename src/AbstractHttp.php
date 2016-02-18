@@ -53,6 +53,7 @@ abstract class AbstractHttp
         'cache'      => 0,
         'cache_ttl'  => 60, // in minutes!
         'user_agent' => 'CrossCMS HTTP Client v1.x-dev',
+        'ssl_verify' => 1,
         'debug'      => 0,
     );
 
@@ -89,6 +90,7 @@ abstract class AbstractHttp
         $args       = (array)$args;
         $timeout    = (int)$options->get('timeout');
         $isDebug    = (int)$options->get('debug');
+        $sslVerify  = (int)$options->get('ssl_verify');
         $headers    = (array)$options->get('headers');
         $userAgent  = trim($options->get('user_agent'));
         $resultType = Str::clean($options->get('response'), true);
@@ -119,6 +121,7 @@ abstract class AbstractHttp
                 'method'     => $method,
                 'debug'      => $isDebug,
                 'user_agent' => $userAgent,
+                'ssl_verify' => $sslVerify,
             )));
 
         } catch (\Exception $e) {

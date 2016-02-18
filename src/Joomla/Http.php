@@ -30,11 +30,17 @@ class Http extends AbstractHttp
      */
     protected function _request($url, array $args, Data $options)
     {
-        $method  = $options->get('method');
-        $headers = $options->get('headers');
-        $timeout = $options->get('timeout');
+        $method    = $options->get('method');
+        $headers   = $options->get('headers');
+        $timeout   = $options->get('timeout');
+        $sslVerify = $options->get('ssl_verify');
 
-        $httpClient = \JHttpFactory::getHttp(null, 'stream');
+        if ($sslVerify) {
+            // "curl" driver doesn't have such option
+            $httpClient = \JHttpFactory::getHttp(); // try to find curl driver
+        } else {
+            $httpClient = \JHttpFactory::getHttp(null, 'stream');
+        }
 
         $httpClient->setOption('userAgent', $options->get('user_agent'));
 

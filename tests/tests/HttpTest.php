@@ -28,13 +28,48 @@ class HttpTest extends PHPUnit
 
     protected $_url = 'http://mockbin.org/bin/28cbba67-c8f3-42f2-bc4d-5610f044e913';
 
-    public function testSimpleRequest()
+    /* Simple *********************************************************************************************************/
+
+    public function testSimple_request()
     {
         $resp = Cms::_('http')->request($this->_url, array('qwerty' => '123456'));
         isSame('{"key":"value"}', $resp);
     }
 
-    public function testGET()
+    public function testSimple_https()
+    {
+        $resp = Cms::_('http')->request('https://mockbin.org/gzip', array(), array(
+            'debug'      => 1,
+            'ssl_verify' => 0, // For travis ... =(
+        ));
+        isSame('"Hello World!"', $resp, 'SSL Error:' . $resp);
+
+
+        $resp = Cms::_('http')->request('https://mockbin.org/request', array(), array(
+            'debug'      => 1,
+            'ssl_verify' => 0, // For travis ... =(
+        ));
+        $data = new JSON($resp);
+        isSame('https://mockbin.org/request', $data->get('url'), 'SSL Error:' . $resp);
+    }
+
+    public function testSimple_404()
+    {
+        $resp = Cms::_('http')->request('http://mockbin.org/code/404', array(), array(
+            'response' => AbstractHttp::RESULT_CODE,
+        ));
+        isSame(404, $resp);
+    }
+
+    public function testSimple_gzip()
+    {
+        $resp = Cms::_('http')->request('http://mockbin.org/gzip', array());
+        isSame('"Hello World!"', $resp);
+    }
+
+    /* Methods ********************************************************************************************************/
+
+    public function testMethod_GET()
     {
         $uniq = uniqid();
         $resp = Cms::_('http')->request('http://mockbin.org/request', array('qwerty' => $uniq));
@@ -57,7 +92,7 @@ class HttpTest extends PHPUnit
         isSame('http://mockbin.org/request?qwerty=' . $uniq, $data->get('url'));
     }
 
-    public function testPOST()
+    public function testMethod_POST()
     {
         $uniq = uniqid();
         $resp = Cms::_('http')->request('http://mockbin.org/request', array('qwerty' => $uniq), array(
@@ -71,7 +106,7 @@ class HttpTest extends PHPUnit
         isSame('http://mockbin.org/request', $data->get('url'));
     }
 
-    public function testHEAD()
+    public function testMethod_HEAD()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'method'   => AbstractHttp::METHOD_HEAD,
@@ -81,7 +116,7 @@ class HttpTest extends PHPUnit
         isSame('HEAD', $resp->find('headers.access-control-allow-methods'));
     }
 
-    public function testPUT()
+    public function testMethod_PUT()
     {
         $uniq = uniqid();
         $resp = Cms::_('http')->request('http://mockbin.org/request', array('qwerty' => $uniq), array(
@@ -94,7 +129,7 @@ class HttpTest extends PHPUnit
         isSame($uniq, $data->find('postData.params.qwerty'));
     }
 
-    public function testDELETE()
+    public function testMethod_DELETE()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'method' => AbstractHttp::METHOD_DELETE,
@@ -105,7 +140,7 @@ class HttpTest extends PHPUnit
         isSame('DELETE', $data->get('method'));
     }
 
-    public function testOPTIONS()
+    public function testMethod_OPTIONS()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'method' => AbstractHttp::METHOD_OPTIONS,
@@ -116,7 +151,7 @@ class HttpTest extends PHPUnit
         isSame('OPTIONS', $data->get('method'));
     }
 
-    public function testPATCH()
+    public function testMethod_PATCH()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'method' => AbstractHttp::METHOD_PATCH,
@@ -127,7 +162,7 @@ class HttpTest extends PHPUnit
         isSame('PATCH', $data->get('method'));
     }
 
-    public function testHeaders()
+    public function testSend_headers()
     {
         $uniq     = uniqid();
         $resp     = Cms::_('http')->request('http://mockbin.org/headers', array(), array(
@@ -142,22 +177,7 @@ class HttpTest extends PHPUnit
         isTrue(in_array($uniq, $dataFlat, true));
     }
 
-    public function testTimeout()
-    {
-        $resp = Cms::_('http')->request('http://mockbin.org/delay/5001', array(), array(
-            'timeout' => 2,
-        ));
-        isNull($resp);
-
-        $resp = Cms::_('http')->request('http://mockbin.org/delay/5002', array(), array(
-            'timeout' => 10,
-        ));
-
-        $data = new JSON($resp);
-        isSame(5002, $data->get('delay'));
-    }
-
-    public function testGetCode()
+    public function testResult_code()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
             'response' => AbstractHttp::RESULT_CODE,
@@ -166,7 +186,7 @@ class HttpTest extends PHPUnit
         isSame(200, $resp);
     }
 
-    public function testGetHeaders()
+    public function testResult_headers()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
             'response' => AbstractHttp::RESULT_HEAD,
@@ -176,7 +196,7 @@ class HttpTest extends PHPUnit
         isSame('bar', $resp->get('x-custom-header-2'));
     }
 
-    public function testGetBody()
+    public function testResult_body()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
             'response' => AbstractHttp::RESULT_BODY,
@@ -185,7 +205,7 @@ class HttpTest extends PHPUnit
         isSame('{"key":"value"}', $resp);
     }
 
-    public function testGetFull()
+    public function testResult_full()
     {
         $resp = Cms::_('http')->request($this->_url, array(), array(
             'response' => AbstractHttp::RESULT_FULL,
@@ -198,7 +218,7 @@ class HttpTest extends PHPUnit
         isSame(200, $data->find('code'));
     }
 
-    public function testCache()
+    public function testOption_cache()
     {
         $uniq = uniqid();
         $args = array('qwerty' => $uniq);
@@ -213,32 +233,22 @@ class HttpTest extends PHPUnit
         isSame($dataBefore->get('starteddatetime'), $dataAfter->get('starteddatetime'));
     }
 
-    public function testGzip()
+    public function testOption_timeout()
     {
-        $resp = Cms::_('http')->request('http://mockbin.org/gzip', array());
-        isSame('"Hello World!"', $resp);
+        $resp = Cms::_('http')->request('http://mockbin.org/delay/5001', array(), array(
+            'timeout' => 2,
+        ));
+        isNull($resp);
+
+        $resp = Cms::_('http')->request('http://mockbin.org/delay/5002', array(), array(
+            'timeout' => 10,
+        ));
+
+        $data = new JSON($resp);
+        isSame(5002, $data->get('delay'));
     }
 
-    public function testRedirect()
-    {
-        $resp = Cms::_('http')->request('http://mockbin.org/redirect/303', array());
-        isSame('"redirect finished"', $resp);
-    }
-
-    public function testRedirectToUrl()
-    {
-        $resp = Cms::_('http')->request('http://mockbin.org/redirect/303', array('to' => 'http://mockbin.org/gzip'));
-        isSame('"Hello World!"', $resp);
-    }
-
-    public function testRedirectLoop()
-    {
-        $args = array('to' => 'http://mockbin.org/gzip');
-        $resp = Cms::_('http')->request('http://mockbin.org/redirect/308/10', $args);
-        isSame('"Hello World!"', $resp);
-    }
-
-    public function testUserAgent()
+    public function testOption_userAgent()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/agent');
         isSame('"CrossCMS HTTP Client v1.x-dev"', $resp);
@@ -251,15 +261,7 @@ class HttpTest extends PHPUnit
         isSame('"Custom name' . $uniq . '"', $resp);
     }
 
-    public function testCode404()
-    {
-        $resp = Cms::_('http')->request('http://mockbin.org/code/404', array(), array(
-            'response' => AbstractHttp::RESULT_CODE,
-        ));
-        isSame(404, $resp);
-    }
-
-    public function testDebug()
+    public function testOption_debug()
     {
         $resp = Cms::_('http')->request('http://mockbin.org/request', array(), array(
             'response' => AbstractHttp::RESULT_FULL,
@@ -280,17 +282,22 @@ class HttpTest extends PHPUnit
         //isTrue($resp->get('info')); // TODO Add extended debug information (trace, times, memory, etc)
     }
 
-    public function testHttps()
+    public function testRedirect_simple()
     {
-        $resp = Cms::_('http')->request('https://mockbin.org/gzip', array(), array('debug' => 1));
-        if ('"Hello World!"' === $resp) {
-            isSame('"Hello World!"', $resp);
+        $resp = Cms::_('http')->request('http://mockbin.org/redirect/303', array());
+        isSame('"redirect finished"', $resp);
+    }
 
-            $resp = Cms::_('http')->request('https://mockbin.org/request', array(), array('debug' => 1));
-            $data = new JSON($resp);
-            isSame('https://mockbin.org/request', $data->get('url'));
-        } else {
-            cliMessage('HTTPS Error Message: ' . $resp);
-        }
+    public function testRedirect_toUrl()
+    {
+        $resp = Cms::_('http')->request('http://mockbin.org/redirect/303', array('to' => 'http://mockbin.org/gzip'));
+        isSame('"Hello World!"', $resp);
+    }
+
+    public function testRedirect_loop()
+    {
+        $args = array('to' => 'http://mockbin.org/gzip');
+        $resp = Cms::_('http')->request('http://mockbin.org/redirect/308/10', $args);
+        isSame('"Hello World!"', $resp);
     }
 }
