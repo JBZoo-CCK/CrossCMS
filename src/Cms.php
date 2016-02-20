@@ -73,47 +73,21 @@ class Cms extends Container
         $this['type'] = $this->_getCmsType();
         $this['ns']   = __NAMESPACE__ . '\\' . $this['type'] . '\\';
 
-        $this['session'] = function ($cms) {
-            $className = $cms['ns'] . 'Session';
-            return new $className();
-        };
-
-
         $this['db'] = function ($cms) {
             SqlBuilder::set($cms['type']); // init SQLBuilder Driver
-
             $className = $cms['ns'] . 'Database';
             $database  = new $className();
-
             return $database;
         };
-
-
-        $this['config'] = function ($cms) {
-            $className = $cms['ns'] . 'Config';
-            $helper    = new $className();
-
-            return $helper;
-        };
-
-
-        $this['env'] = function ($cms) {
-            $className = $cms['ns'] . 'Env';
-            $helper    = new $className();
-            return $helper;
-        };
-
 
         $this['path'] = function ($cms) {
             $className = $cms['ns'] . 'Path';
 
             /** @var AbstractPath $helper */
             $helper = new $className();
-
-            $path = Path::getInstance('crosscms');
+            $path   = Path::getInstance('crosscms');
 
             $path->setRoot($helper->getRoot());
-
             $path->add($helper->getRoot(), 'root');
             $path->add($helper->getUpload(), 'upload');
             $path->add($helper->getCache(), 'cache');
@@ -125,50 +99,10 @@ class Cms extends Container
             return $path;
         };
 
-
-        $this['cache'] = function ($cms) {
-            $className = $cms['ns'] . 'Cache';
-            $helper    = new $className();
-            return $helper;
-        };
-
-        $this['assets'] = function ($cms) {
-            $className = $cms['ns'] . 'Assets';
-            $helper    = new $className();
-            return $helper;
-        };
-
-        $this['mailer'] = function ($cms) {
-            $className = $cms['ns'] . 'Mailer';
-            $helper    = new $className();
-            return $helper;
-        };
-
-        $this['request'] = function ($cms) {
-            $className = $cms['ns'] . 'Request';
-            $helper    = new $className();
-            return $helper;
-        };
-
-        $this['response'] = function ($cms) {
-            $className = $cms['ns'] . 'Response';
-            $helper    = new $className();
-            return $helper;
-        };
-
         $this['event'] = function ($cms) {
-
             $eventManager = new EventManager();
-
-            $className = $cms['ns'] . 'Event';
-            $helper    = new $className($eventManager);
-            return $helper;
-        };
-
-
-        $this['http'] = function ($cms) {
-            $className = $cms['ns'] . 'Http';
-            $helper    = new $className();
+            $className    = $cms['ns'] . 'Event';
+            $helper       = new $className($eventManager);
             return $helper;
         };
     }
@@ -194,5 +128,24 @@ class Cms extends Container
         }
 
         return $cmsType;
+    }
+
+    /**
+     * @param string $id
+     * @return mixed
+     */
+    function offsetGet($id)
+    {
+        $id = strtolower($id);
+
+        if (!isset($this[$id])) {
+            $this[$id] = function ($cms) use ($id) {
+                $className = $cms['ns'] . ucfirst($id);
+                $helper    = new $className();
+                return $helper;
+            };
+        }
+
+        return parent::offsetGet($id);
     }
 }
