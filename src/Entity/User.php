@@ -16,6 +16,8 @@
 namespace JBZoo\CrossCMS\Entity;
 
 use JBZoo\Data\Data;
+use JBZoo\Utils\Arr;
+use JBZoo\Utils\Url;
 
 /**
  * Class AbstractAssets
@@ -111,5 +113,37 @@ class User
     public function isGuest()
     {
         return 0 === $this->_id;
+    }
+
+    /**
+     * Get user avatar by email
+     *
+     * @param int    $avatarSize
+     * @param string $defaultPic
+     * @return string
+     */
+    public function getAvatar($avatarSize = 64, $defaultPic = 'identicon')
+    {
+        $md5        = md5(trim($this->_email));
+        $avatarSize = (int)$avatarSize;
+        $defaultPic = trim($defaultPic);
+
+        $validList = array('404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro', 'blank');
+
+        if (strpos($defaultPic, 'http') === 0) {
+            $default = urlencode($defaultPic);
+        } elseif (Arr::in((string)$defaultPic, $validList)) {
+            $default = $defaultPic;
+        } else {
+            $default = 'identicon';
+        }
+
+        if (Url::isHttps()) {
+            $avatarUrl = 'https://secure.gravatar.com/avatar/' . $md5 . '.jpg?s=' . $avatarSize . '&d=' . $default;
+        } else {
+            $avatarUrl = 'http://www.gravatar.com/avatar/' . $md5 . '.jpg?s=' . $avatarSize . '&d=' . $default;
+        }
+
+        return $avatarUrl;
     }
 }

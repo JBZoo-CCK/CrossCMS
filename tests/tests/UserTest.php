@@ -115,4 +115,36 @@ class UserTest extends PHPUnit
         isSame(null, $helper->getByLogin(uniqid()));
         isSame(null, $helper->getByEmail(uniqid()));
     }
+
+    public function testGravatar()
+    {
+        $helper = $this->_getUser();
+
+        $user = $helper->getCurrent();
+        isSame(
+            'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=64&d=identicon',
+            $user->getAvatar()
+        );
+
+        isSame(
+            'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=128&d=identicon',
+            $user->getAvatar(128)
+        );
+
+        isSame(
+            'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=128&d=identicon',
+            $user->getAvatar(128, 'qwerty')
+        );
+
+        isSame(
+            'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=128&d=http%3A%2F%2Fexample.com%2Fimages%2Favatar.jpg',
+            $user->getAvatar(128, 'http://example.com/images/avatar.jpg')
+        );
+
+        $_SERVER['HTTPS'] = 'on';
+        isSame(
+            'https://secure.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?s=128&d=mm',
+            $user->getAvatar(128, 'mm')
+        );
+    }
 }
