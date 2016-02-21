@@ -44,6 +44,7 @@ before_script:
 
   # Disable xdebug PHP module
   - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
+  - php -i
 
 script:
   # Full stack
