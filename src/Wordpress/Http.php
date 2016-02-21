@@ -41,6 +41,8 @@ class Http extends AbstractHttp
             'redirection' => 20,
         ));
 
+        var_dump($apiResponse);
+
         if ($options->get('debug') && $apiResponse instanceof \WP_Error) {
             $apiResponse = array(
                 'body' => implode($apiResponse->get_error_messages()),

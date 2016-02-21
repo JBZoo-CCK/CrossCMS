@@ -63,8 +63,7 @@ class HttpTest extends PHPUnit
         $resp = Cms::_('http')->request('http://mockbin.org/code/404', array(), array(
             'response' => AbstractHttp::RESULT_CODE,
         ));
-        //isSame(404, $resp);
-        skip();
+        isSame(404, $resp);
     }
 
     public function testSimple_gzip()
