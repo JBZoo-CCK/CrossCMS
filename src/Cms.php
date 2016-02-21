@@ -134,7 +134,7 @@ class Cms extends Container
      * @param string $id
      * @return mixed
      */
-    function offsetGet($id)
+    public function offsetGet($id)
     {
         $id = strtolower($id);
 

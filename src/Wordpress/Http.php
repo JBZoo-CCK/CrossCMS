@@ -41,8 +41,6 @@ class Http extends AbstractHttp
             'redirection' => 20,
         ));
 
-        var_dump($apiResponse);
-
         if ($options->get('debug') && $apiResponse instanceof \WP_Error) {
             $apiResponse = array(
                 'body' => implode($apiResponse->get_error_messages()),
@@ -60,7 +58,7 @@ class Http extends AbstractHttp
         $apiResponse = new Data($apiResponse);
 
         $response = array(
-            'code'    => (int)$apiResponse->find('response.code', 0),
+            'code'    => $apiResponse->find('response.code', 0, 'int'),
             'headers' => array_change_key_case((array)$apiResponse->get('headers', array()), CASE_LOWER),
             'body'    => $apiResponse->get('body'),
         );
