@@ -15,7 +15,7 @@
 
 define('ABSPATH', CMS_PATH_WORDPRESS . DS);
 
-define('WP_USE_EXT_MYSQL', true);
+define('WP_USE_EXT_MYSQL', false);
 define('WP_DEBUG_DISPLAY', true);
 define('WP_INSTALLING', true);
 define('SAVEQUERIES', false);

@@ -31,6 +31,7 @@ namespace PHPSTORM_META {
             "event"     instanceof \JBZoo\CrossCMS\AbstractEvent,
             "cache"     instanceof \JBZoo\CrossCMS\AbstractCache,
             "http"      instanceof \JBZoo\CrossCMS\AbstractHttp,
+            "lang"      instanceof \JBZoo\CrossCMS\AbstractLang,
             "user"      instanceof \JBZoo\CrossCMS\AbstractUser,
             "env"       instanceof \JBZoo\CrossCMS\AbstractEnv,
             "path"      instanceof \JBZoo\Path\Path,
