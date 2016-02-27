@@ -17,6 +17,7 @@ namespace JBZoo\CrossCMS;
 
 use JBZoo\CrossCMS\Exception\Exception;
 use JBZoo\Event\EventManager;
+use JBZoo\Lang\Lang;
 use JBZoo\Path\Path;
 use JBZoo\SqlBuilder\SqlBuilder;
 use Pimple\Container;
@@ -103,6 +104,16 @@ class Cms extends Container
             $eventManager = new EventManager();
             $className    = $cms['ns'] . 'Event';
             $helper       = new $className($eventManager);
+            return $helper;
+        };
+
+        $this['lang'] = function ($cms) {
+            $className = $cms['ns'] . 'Lang';
+            $helper    = new $className();
+
+            $lang = new Lang($helper->getCode());
+            $helper->setCustomLang($lang);
+
             return $helper;
         };
     }
