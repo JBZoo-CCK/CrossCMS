@@ -36,7 +36,7 @@ class DateTest extends PHPUnit
     {
         $date = $this->_getDate();
 
-        $time = '1323738123'; // '2011-12-13 12:34:56'
+        $time = '1323738123'; // '2011-12-13 01:02:03'
 
         // Sql is default
         isSame('2011-12-13 01:02:03', $date->format($time), 'default format');
