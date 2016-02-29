@@ -122,6 +122,27 @@ class PlgSystemJBZooPHPUnit extends JPlugin
                 Vars::get($_REQUEST['test-response-addmeta']['value'])
             );
         }
+
+        /* Libs *******************************************************************************************************/
+        if ($test = $this->_request('test-libs-jquery')) {
+            Cms::_('libs')->jQuery();
+        }
+
+        if ($test = $this->_request('test-libs-jqueryui')) {
+            Cms::_('libs')->jQueryUI();
+        }
+
+        if ($test = $this->_request('test-libs-autocomplete')) {
+            Cms::_('libs')->jQueryAutocomplete();
+        }
+
+        if ($test = $this->_request('test-libs-datepicker')) {
+            Cms::_('libs')->jQueryDatePicker();
+        }
+
+        if ($test = $this->_request('test-libs-colorpicker')) {
+            Cms::_('libs')->colorPicker();
+        }
     }
 
     public function onBeforeRender()

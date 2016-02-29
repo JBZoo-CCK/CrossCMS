@@ -179,4 +179,25 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
             return $content;
         });
     }
+
+    /* Libs ***********************************************************************************************************/
+    if (isset($_REQUEST['test-libs-jquery'])) {
+        Cms::_('libs')->jQuery();
+    }
+
+    if (isset($_REQUEST['test-libs-jqueryui'])) {
+        Cms::_('libs')->jQueryUI();
+    }
+
+    if (isset($_REQUEST['test-libs-autocomplete'])) {
+        Cms::_('libs')->jQueryAutocomplete();
+    }
+
+    if (isset($_REQUEST['test-libs-datepicker'])) {
+        Cms::_('libs')->jQueryDatePicker();
+    }
+
+    if (isset($_REQUEST['test-libs-colorpicker'])) {
+        Cms::_('libs')->colorPicker();
+    }
 }

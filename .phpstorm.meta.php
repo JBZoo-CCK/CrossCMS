@@ -34,6 +34,7 @@ namespace PHPSTORM_META {
             "lang"      instanceof \JBZoo\CrossCMS\AbstractLang,
             "user"      instanceof \JBZoo\CrossCMS\AbstractUser,
             "date"      instanceof \JBZoo\CrossCMS\AbstractDate,
+            "libs"      instanceof \JBZoo\CrossCMS\AbstractLibs,
             "env"       instanceof \JBZoo\CrossCMS\AbstractEnv,
             "path"      instanceof \JBZoo\Path\Path,
         ],
