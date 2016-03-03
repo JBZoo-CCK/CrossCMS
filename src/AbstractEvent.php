@@ -64,6 +64,8 @@ abstract class AbstractEvent
      *
      * @param string $triggerName
      * @param array  $arguments
+     * @return int|string
+     *
      * @throws \JBZoo\Event\ExceptionStop
      */
     public function trigger($triggerName, array $arguments = array())
