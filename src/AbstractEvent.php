@@ -70,13 +70,15 @@ abstract class AbstractEvent
     {
         $triggerName = self::PREFIX . $triggerName;
 
-        $this->_eManager->trigger($triggerName, $arguments);
+        $count = $this->_eManager->trigger($triggerName, $arguments);
 
         if ($this->_isAdmin()) {
-            $this->_eManager->trigger($triggerName . self::POSTFIX_ADMIN, $arguments);
+            $count += $this->_eManager->trigger($triggerName . self::POSTFIX_ADMIN, $arguments);
         } else {
-            $this->_eManager->trigger($triggerName . self::POSTFIX_SITE, $arguments);
+            $count += $this->_eManager->trigger($triggerName . self::POSTFIX_SITE, $arguments);
         }
+
+        return $count;
     }
 
     /**
