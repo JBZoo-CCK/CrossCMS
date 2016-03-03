@@ -51,7 +51,7 @@ class Event extends AbstractEvent
      *      }
      *
      *      // Content handlers (for macroses)
-     *      public function onAfterRender()
+     *      public function onAfterRespond()
      *      {
      *          Cms::_('event')->triggerContent();
      *          Cms::_('event')->trigger(AbstractEvent::EVENT_SHUTDOWN);

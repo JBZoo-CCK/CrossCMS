@@ -23,14 +23,13 @@ use JBZoo\Event\EventManager;
  */
 abstract class AbstractEvent
 {
-    const PREFIX        = 'cms.';
     const POSTFIX_ADMIN = '.admin';
     const POSTFIX_SITE  = '.site';
 
-    const EVENT_INIT     = 'init';
-    const EVENT_CONTENT  = 'content';
-    const EVENT_HEADER   = 'header';
-    const EVENT_SHUTDOWN = 'shutdown';
+    const EVENT_INIT     = 'cms.init';
+    const EVENT_CONTENT  = 'cms.content';
+    const EVENT_HEADER   = 'cms.header';
+    const EVENT_SHUTDOWN = 'cms.shutdown';
 
     /**
      * @var EventManager
@@ -70,7 +69,7 @@ abstract class AbstractEvent
      */
     public function trigger($triggerName, array $arguments = array())
     {
-        $triggerName = self::PREFIX . $triggerName;
+        $triggerName = $triggerName;
 
         $count = $this->_eManager->trigger($triggerName, $arguments);
 
