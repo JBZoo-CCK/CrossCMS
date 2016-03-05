@@ -131,11 +131,12 @@ class Cms extends Container
 
             if (class_exists($mainClass) && call_user_func(array($mainClass, 'check'))) {
                 $cmsType = $system;
+                break;
             }
         }
 
         if (!$cmsType) {
-            throw new Exception('Undefined CMS system');
+            throw new Exception('Undefined current CMS system');
         }
 
         return $cmsType;

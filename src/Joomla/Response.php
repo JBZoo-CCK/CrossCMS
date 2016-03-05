@@ -15,6 +15,7 @@
 
 namespace JBZoo\CrossCMS\Joomla;
 
+use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\AbstractResponse;
 use JBZoo\CrossCMS\Cms;
 use JBZoo\Utils\Vars;
@@ -50,12 +51,10 @@ class Response extends AbstractResponse
      */
     public function set404($message = 'Not Found')
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $this->noCache();
-        if (class_exists('\JError')) {
-            \JError::raiseError(404, $message); // Change to new API
-        } else {
-            throw new \Exception($message, 404);
-        }
+        throw new \Exception($message, 404);
     }
 
     /**
@@ -64,12 +63,10 @@ class Response extends AbstractResponse
      */
     public function set500($message = 'Internal Server Error')
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $this->noCache();
-        if (class_exists('\JError')) {
-            \JError::raiseError(500, $message); // Change to new API
-        } else {
-            throw new \Exception($message, 500);
-        }
+        throw new \Exception($message, 500);
     }
 
     /**
@@ -78,6 +75,8 @@ class Response extends AbstractResponse
      */
     public function json(array $data = array(), $result = true)
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
 
@@ -120,6 +119,8 @@ class Response extends AbstractResponse
      */
     public function redirect($url, $status = 303)
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         \JFactory::getApplication()->redirect($url, $status);
     }
 

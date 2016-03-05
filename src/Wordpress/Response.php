@@ -15,6 +15,7 @@
 
 namespace JBZoo\CrossCMS\Wordpress;
 
+use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\AbstractResponse;
 use JBZoo\CrossCMS\Cms;
 use JBZoo\Utils\Vars;
@@ -44,6 +45,8 @@ class Response extends AbstractResponse
      */
     public function set404($message = 'Not Found')
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $this->_wp_query->set_404();
         status_header(404);
         $this->noCache();
@@ -56,6 +59,8 @@ class Response extends AbstractResponse
      */
     public function set500($message = 'Internal Server Error')
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $trace = '';
         if (Cms::_('config')->isDebug()) {
             ob_start();
@@ -90,6 +95,8 @@ class Response extends AbstractResponse
      */
     public function redirect($url, $status = 303)
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         wp_redirect($url, (int)$status);
     }
 
@@ -100,6 +107,8 @@ class Response extends AbstractResponse
      */
     public function json(array $data = array(), $result = true)
     {
+        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
 
