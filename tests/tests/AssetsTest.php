@@ -19,7 +19,7 @@ namespace JBZoo\PHPUnit;
  * Class AssetsTest
  * @package JBZoo\PHPUnit
  */
-class AssetsTest extends PHPUnit
+class AssetsTest extends CrossCMS
 {
 
     public function testJSFile()

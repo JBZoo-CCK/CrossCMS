@@ -21,24 +21,24 @@ use JBZoo\CrossCMS\Cms;
  * Class ConfigTest
  * @package JBZoo\PHPUnit
  */
-class ConfigTest extends PHPUnit
+class ConfigTest extends CrossCMS
 {
     public function testConfig()
     {
-        $config = Cms::_('config');
+        $cms = Cms::getInstance();
 
-        isTrue(is_bool($config->isDebug()));
+        isTrue(is_bool($cms['config']->isDebug()));
 
-        isTrue(is_string($config->sitename()));
-        isTrue(is_string($config->sitedesc()));
-        isTrue(is_string($config->email()));
-        isTrue(is_string($config->dbHost()));
-        isTrue(is_string($config->dbName()));
-        isTrue(is_string($config->dbUser()));
-        isTrue(is_string($config->dbPass()));
-        isTrue(is_string($config->dbPrefix()));
-        isTrue(is_string($config->dbType()));
-        isTrue(is_string($config->timezone()));
+        isTrue(is_string($cms['config']->sitename()));
+        isTrue(is_string($cms['config']->sitedesc()));
+        isTrue(is_string($cms['config']->email()));
+        isTrue(is_string($cms['config']->dbHost()));
+        isTrue(is_string($cms['config']->dbName()));
+        isTrue(is_string($cms['config']->dbUser()));
+        isTrue(is_string($cms['config']->dbPass()));
+        isTrue(is_string($cms['config']->dbPrefix()));
+        isTrue(is_string($cms['config']->dbType()));
+        isTrue(is_string($cms['config']->timezone()));
     }
 
 }

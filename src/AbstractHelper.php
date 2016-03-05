@@ -16,32 +16,24 @@
 namespace JBZoo\CrossCMS;
 
 /**
- * Class AbstractAssets
+ * Class AbstractHelper
  * @package JBZoo\CrossCMS
+ *
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
-abstract class AbstractAssets extends AbstractHelper
+abstract class AbstractHelper
 {
     /**
-     * @param string $file
-     * @return bool
+     * @var Cms
      */
-    abstract public function cssFile($file);
+    protected $_cms;
 
     /**
-     * @param string $file
-     * @return bool
+     * Constructor.
+     * @param Cms $cms
      */
-    abstract public function jsFile($file);
-
-    /**
-     * @param string $code
-     * @return bool
-     */
-    abstract public function jsCode($code);
-
-    /**
-     * @param string $code
-     * @return bool
-     */
-    abstract public function cssCode($code);
+    public function __construct(Cms $cms)
+    {
+        $this->_cms = $cms;
+    }
 }

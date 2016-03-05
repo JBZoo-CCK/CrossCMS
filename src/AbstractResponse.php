@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class Request
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractResponse
+abstract class AbstractResponse extends AbstractHelper
 {
     /**
      * Send code 404 - Page not found

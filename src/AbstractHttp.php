@@ -25,7 +25,7 @@ use JBZoo\Utils\Url;
  * Class AbstractHttp
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractHttp
+abstract class AbstractHttp extends AbstractHelper
 {
     const METHOD_GET     = 'GET';
     const METHOD_POST    = 'POST';
@@ -102,7 +102,7 @@ abstract class AbstractHttp
 
         try {
             // Check cache
-            if ($isCache && $result = Cms::_('cache')->get($cacheId, self::CACHE_GROUP)) {
+            if ($isCache && $result = $this->_cms['cache']->get($cacheId, self::CACHE_GROUP)) {
                 return $result;
             }
 
@@ -144,7 +144,7 @@ abstract class AbstractHttp
 
         // Store to cache
         if ($isCache && null !== $result) {
-            Cms::_('cache')->set($cacheId, $result, self::CACHE_GROUP, true, $cacheTTL);
+            $this->_cms['cache']->set($cacheId, $result, self::CACHE_GROUP, true, $cacheTTL);
         }
 
         return $result;

@@ -19,7 +19,7 @@ namespace JBZoo\PHPUnit;
  * Class ResponseTest
  * @package JBZoo\PHPUnit
  */
-class ResponseTest extends PHPUnit
+class ResponseTest extends CrossCMS
 {
     public function testCode404()
     {

@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class UserTest
  * @package JBZoo\PHPUnit
  */
-class DateTest extends PHPUnit
+class DateTest extends CrossCMS
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractDate

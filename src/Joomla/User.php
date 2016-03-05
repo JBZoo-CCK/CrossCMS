@@ -102,14 +102,12 @@ class User extends AbstractUser
      */
     protected function _findUserIdBy($key, $value)
     {
-        $db = Cms::_('db');
-
         $select = (new Select('#__users', 'tUser'))
             ->select('tUser.id')
             ->where(['tUser.' . $key, '= ?s'], $value)
             ->limit(1);
 
-        $result = $db->fetchRow($select);
+        $result = $this->_cms['db']->fetchRow($select);
 
         return $result ? $result['id'] : null;
     }

@@ -22,11 +22,11 @@ use JBZoo\CrossCMS\Cms;
  * Class MailerTest
  * @package JBZoo\PHPUnit
  */
-class MailerTest extends PHPUnit
+class MailerTest extends CrossCMS
 {
     public function testSimpleMessage()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -37,7 +37,7 @@ class MailerTest extends PHPUnit
 
     public function testHTMLMessage()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -48,7 +48,7 @@ class MailerTest extends PHPUnit
 
     public function testNoHTMLMessage()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -60,7 +60,7 @@ class MailerTest extends PHPUnit
 
     public function testSetFrom()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -72,7 +72,7 @@ class MailerTest extends PHPUnit
 
     public function testSetFromWithName()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -84,7 +84,7 @@ class MailerTest extends PHPUnit
 
     public function testSetHeaders()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -100,7 +100,7 @@ class MailerTest extends PHPUnit
 
     public function testSetOneHeader()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -113,7 +113,7 @@ class MailerTest extends PHPUnit
 
     public function testAddAttachment()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -126,7 +126,7 @@ class MailerTest extends PHPUnit
 
     public function testAddAttachmentWithName()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test message subject'));
@@ -139,7 +139,7 @@ class MailerTest extends PHPUnit
 
     public function testComplex()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->complex('admin@example.com', 'Test message subject', 'Test complex method'));
     }
@@ -149,7 +149,7 @@ class MailerTest extends PHPUnit
      */
     public function testEmptySubjectException()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isFalse($mail->setSubject(' '));
@@ -163,7 +163,7 @@ class MailerTest extends PHPUnit
      */
     public function testEmptyBodyException()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isTrue($mail->setTo('admin@example.com'));
         isTrue($mail->setSubject('Test empty body'));
@@ -177,7 +177,7 @@ class MailerTest extends PHPUnit
      */
     public function testEmptyRecipientException()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         isFalse($mail->setTo('no valid email'));
         isTrue($mail->setSubject('Test empty recipient'));
@@ -188,7 +188,7 @@ class MailerTest extends PHPUnit
 
     public function testDisableValidation()
     {
-        $mail = Cms::_('mailer')->clean();
+        $mail = $this->_cms['mailer']->clean();
 
         $mail->setValidateMode(AbstractMailer::VALIDATE_NO_EXEPTION);
 

@@ -21,7 +21,7 @@ use JBZoo\Utils\Cli;
  * Class AbstractSession
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractEnv
+abstract class AbstractEnv extends AbstractHelper
 {
     /**
      * @return string

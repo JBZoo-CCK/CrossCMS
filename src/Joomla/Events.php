@@ -41,20 +41,23 @@ class Events extends AbstractEvents
      *              }
      *          }
      *
-     *          Cms::_('events')->trigger(AbstractEvent::EVENT_INIT);
+     *          $cms = Cms::getInstance();
+     *          $cms['events']->trigger(AbstractEvent::EVENT_INIT);
      *      }
      *
      *      // Header render
      *      public function onBeforeCompileHead()
      *      {
-     *          Cms::_('events')->trigger(AbstractEvent::EVENT_HEADER);
+     *          $cms = Cms::getInstance();
+     *          $cms['events']->trigger(AbstractEvent::EVENT_HEADER);
      *      }
      *
      *      // Content handlers (for macroses)
      *      public function onAfterRespond()
      *      {
-     *          Cms::_('events')->triggerContent();
-     *          Cms::_('events')->trigger(AbstractEvent::EVENT_SHUTDOWN);
+     *          $cms = Cms::getInstance();
+     *          $cms['events']->triggerContent();
+     *          $cms['events']->trigger(AbstractEvent::EVENT_SHUTDOWN);
      *      }
      *  }
      */

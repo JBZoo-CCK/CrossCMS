@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class UserTest
  * @package JBZoo\PHPUnit
  */
-class UserTest extends PHPUnit
+class UserTest extends CrossCMS
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractUser
@@ -47,7 +47,7 @@ class UserTest extends PHPUnit
 
     public function testGetAdminByID()
     {
-        if (Cms::_('type') === Cms::TYPE_WORDPRESS) {
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
 
             /** @var \JBZoo\CrossCMS\Wordpress\User $helper */
             $helper = $this->_getUser();
@@ -76,7 +76,7 @@ class UserTest extends PHPUnit
             isSame('admin', $user->getName());
             isSame(1, $user->getId());
 
-        } elseif (Cms::_('type') === Cms::TYPE_JOOMLA) {
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
 
             /** @var \JBZoo\CrossCMS\Joomla\User $helper */
             $helper = $this->_getUser();

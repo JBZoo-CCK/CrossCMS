@@ -35,8 +35,9 @@ class Response extends AbstractResponse
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_wp_query = Vars::get($GLOBALS['wp_query']);
     }
 
@@ -45,7 +46,7 @@ class Response extends AbstractResponse
      */
     public function set404($message = 'Not Found')
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $this->_wp_query->set_404();
         status_header(404);
@@ -59,10 +60,10 @@ class Response extends AbstractResponse
      */
     public function set500($message = 'Internal Server Error')
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $trace = '';
-        if (Cms::_('config')->isDebug()) {
+        if ($this->_cms['config']->isDebug()) {
             ob_start();
             debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
             $trace = '<pre>' . ob_get_contents() . '</pre>';
@@ -95,7 +96,7 @@ class Response extends AbstractResponse
      */
     public function redirect($url, $status = 303)
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         wp_redirect($url, (int)$status);
     }
@@ -107,7 +108,7 @@ class Response extends AbstractResponse
      */
     public function json(array $data = array(), $result = true)
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
@@ -125,7 +126,7 @@ class Response extends AbstractResponse
      */
     public function raw()
     {
-        Cms::_('request')->set('tmpl', 'raw'); // logical hack
+        $this->_cms['request']->set('tmpl', 'raw'); // logical hack
     }
 
     /**
@@ -134,7 +135,7 @@ class Response extends AbstractResponse
      */
     public function component()
     {
-        Cms::_('request')->set('tmpl', 'component'); // logical hack
+        $this->_cms['request']->set('tmpl', 'component'); // logical hack
     }
 
     /**

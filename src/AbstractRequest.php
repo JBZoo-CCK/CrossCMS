@@ -18,7 +18,6 @@ namespace JBZoo\CrossCMS;
 use JBZoo\Data\Data;
 use JBZoo\Utils\Filter;
 use JBZoo\Utils\Http;
-use JBZoo\Utils\Str;
 use JBZoo\Utils\Url;
 use JBZoo\Utils\Vars;
 
@@ -27,7 +26,7 @@ use JBZoo\Utils\Vars;
  * @package JBZoo\CrossCMS
  * @SuppressWarnings(PHPMD.Superglobals)
  */
-abstract class AbstractRequest
+abstract class AbstractRequest extends AbstractHelper
 {
     /**
      * Get variable from HTTP headers

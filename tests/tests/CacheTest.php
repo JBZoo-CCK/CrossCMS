@@ -15,17 +15,15 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\CrossCMS\Cms;
-
 /**
  * Class CacheTest
  * @package JBZoo\PHPUnit
  */
-class CacheTest extends PHPUnit
+class CacheTest extends CrossCMS
 {
     public function testEnabled()
     {
-        $cache = Cms::_('cache');
+        $cache = $this->_cms['cache'];
 
         //isTrue($cache->isEnabled());
         $cache->isEnabled();
@@ -33,7 +31,7 @@ class CacheTest extends PHPUnit
 
     public function testVariableCache()
     {
-        $cache = Cms::_('cache');
+        $cache = $this->_cms['cache'];
 
         $someVar = array(
             'true' => true,
@@ -48,7 +46,7 @@ class CacheTest extends PHPUnit
 
     public function testOutputCache()
     {
-        $cache = Cms::_('cache');
+        $cache = $this->_cms['cache'];
 
         $randKey = uniqid('', true);
         $output  = 'output-' . $randKey;

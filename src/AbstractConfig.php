@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class AbstractConfig
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractConfig
+abstract class AbstractConfig extends AbstractHelper
 {
     /**
      * @return string

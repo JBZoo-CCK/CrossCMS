@@ -38,3 +38,4 @@ if (!$isWeb) {
 
 // Forsed show PHP errors
 require_once __DIR__ . '/errors.php';
+require_once __DIR__ . '/../tests/CrossCMS.php';

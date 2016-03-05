@@ -39,8 +39,9 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_app = \JFactory::getApplication();
         $this->_doc = \JFactory::getDocument();
     }
@@ -51,7 +52,7 @@ class Response extends AbstractResponse
      */
     public function set404($message = 'Not Found')
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $this->noCache();
         throw new \Exception($message, 404);
@@ -63,7 +64,7 @@ class Response extends AbstractResponse
      */
     public function set500($message = 'Internal Server Error')
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $this->noCache();
         throw new \Exception($message, 500);
@@ -75,7 +76,7 @@ class Response extends AbstractResponse
      */
     public function json(array $data = array(), $result = true)
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
@@ -93,7 +94,7 @@ class Response extends AbstractResponse
      */
     public function raw()
     {
-        Cms::_('request')->set('tmpl', 'raw');
+        $this->_cms['request']->set('tmpl', 'raw');
     }
 
     /**
@@ -101,7 +102,7 @@ class Response extends AbstractResponse
      */
     public function component()
     {
-        Cms::_('request')->set('tmpl', 'component');
+        $this->_cms['request']->set('tmpl', 'component');
     }
 
     /**
@@ -119,7 +120,7 @@ class Response extends AbstractResponse
      */
     public function redirect($url, $status = 303)
     {
-        Cms::_('events')->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
 
         \JFactory::getApplication()->redirect($url, $status);
     }

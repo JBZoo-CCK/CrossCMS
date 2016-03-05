@@ -19,7 +19,7 @@ namespace JBZoo\PHPUnit;
  * Class EventsTest
  * @package JBZoo\PHPUnit
  */
-class EventsTest extends PHPUnit
+class EventsTest extends CrossCMS
 {
     public function testInit()
     {

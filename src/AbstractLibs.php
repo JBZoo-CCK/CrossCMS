@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class AbstractLibs
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractLibs
+abstract class AbstractLibs extends AbstractHelper
 {
     /**
      * @return bool

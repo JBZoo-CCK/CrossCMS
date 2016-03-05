@@ -22,7 +22,7 @@ use JBZoo\Utils\Vars;
  * Class AbstractUser
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractUser
+abstract class AbstractUser extends AbstractHelper
 {
     /**
      * @var array

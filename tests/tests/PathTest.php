@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class PathTest
  * @package JBZoo\PHPUnit
  */
-class PathTest extends PHPUnit
+class PathTest extends CrossCMS
 {
     /**
      * @param string $aliasPath
@@ -33,7 +33,7 @@ class PathTest extends PHPUnit
         $cms = Cms::getInstance();
 
         if ($cms['type'] === Cms::TYPE_JOOMLA) {
-            $path = Cms::_('path');
+            $path = $this->_cms['path'];
             isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }
     }
@@ -61,7 +61,7 @@ class PathTest extends PHPUnit
         $cms = Cms::getInstance();
 
         if ($cms['type'] === Cms::TYPE_WORDPRESS) {
-            $path = Cms::_('path');
+            $path = $this->_cms['path'];
 
             isSame(realpath($exceptPath), realpath($path->get($aliasPath . ':')));
         }

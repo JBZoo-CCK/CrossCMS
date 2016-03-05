@@ -24,7 +24,7 @@ use JBZoo\Utils\Arr;
  * Class AbstractMailer
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractMailer
+abstract class AbstractMailer extends AbstractHelper
 {
     const VALIDATE_ALL         = 0;
     const VALIDATE_NO_CHECK    = 1;

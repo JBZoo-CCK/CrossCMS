@@ -1,0 +1,87 @@
+[
+    {
+        "name": "assets",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractAssets"
+    },
+    {
+        "name": "cache",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractCache"
+    },
+    {
+        "name": "config",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractConfig"
+    },
+    {
+        "name": "date",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractDate"
+    },
+    {
+        "name": "db",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractDatabase"
+    },
+    {
+        "name": "env",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractEnv"
+    },
+    {
+        "name": "events",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractEvents"
+    },
+    {
+        "name": "http",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractHttp"
+    },
+    {
+        "name": "lang",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractLang"
+    },
+    {
+        "name": "mailer",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractMailer"
+    },
+    {
+        "name": "ns",
+        "type": "string",
+        "value": "JBZoo\\CrossCMS\\Abstract"
+    },
+    {
+        "name": "path",
+        "type": "class",
+        "value": "JBZoo\\Path\\Path"
+    },
+    {
+        "name": "request",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractRequest"
+    },
+    {
+        "name": "response",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractResponse"
+    },
+    {
+        "name": "session",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractSession"
+    },
+    {
+        "name": "type",
+        "type": "string",
+        "value": "Current CMS Type"
+    },
+    {
+        "name": "user",
+        "type": "class",
+        "value": "JBZoo\\CrossCMS\\AbstractUser"
+    }
+]

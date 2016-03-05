@@ -15,16 +15,16 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\CrossCMS\Cms;
-
 /**
  * Class RequestTest
  * @package JBZoo\PHPUnit
  */
-class RequestTest extends PHPUnit
+class RequestTest extends CrossCMS
 {
     protected function setUp()
     {
+        parent::setUp();
+
         $_REQUEST = array();
         $_GET     = array();
         $_POST    = array();
@@ -34,27 +34,27 @@ class RequestTest extends PHPUnit
 
     public function testMethod()
     {
-        is('GET', Cms::_('request')->getMethod());
+        is('GET', $this->_cms['request']->getMethod());
     }
 
     public function testIsGet()
     {
-        isTrue(Cms::_('request')->isGet());
+        isTrue($this->_cms['request']->isGet());
     }
 
     public function testIsPost()
     {
-        isFalse(Cms::_('request')->isPost());
+        isFalse($this->_cms['request']->isPost());
     }
 
     public function testIsAjax()
     {
-        isFalse(Cms::_('request')->isAjax());
+        isFalse($this->_cms['request']->isAjax());
     }
 
     public function testSet()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         $req->set('foo', '123456');
 
@@ -66,17 +66,17 @@ class RequestTest extends PHPUnit
     public function testCheckEmptyToken()
     {
         //skip('TODO: Joomla fail test');
-        //Cms::_('request')->checkToken();
+        //$this->_cms['request']->checkToken();
     }
 
     public function testGetUri()
     {
-        isTrue(Cms::_('request')->getUri());
+        isTrue($this->_cms['request']->getUri());
     }
 
     public function testGetUndefined()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         isNull($req->get('undefined'));
         isNull($req->get('undefined', null));
@@ -85,7 +85,7 @@ class RequestTest extends PHPUnit
 
     public function testGetFilterRaw()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         $req->set('foo', ' 123,456 ');
 
@@ -97,7 +97,7 @@ class RequestTest extends PHPUnit
 
     public function testGetFilterSeveral()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         $req->set('foo', '    <b>124.456</b> asd');
 
@@ -110,7 +110,7 @@ class RequestTest extends PHPUnit
 
     public function testGetFilterCustom()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         $req->set('foo', '    124-456');
 
@@ -123,7 +123,7 @@ class RequestTest extends PHPUnit
 
     public function testHeader()
     {
-        $req = Cms::_('request');
+        $req = $this->_cms['request'];
 
         isSame('JBZoo PHPUnit Tester', $req->getHeader('user_agent'));
         isSame('jbzoo-phpunit-tester', $req->getHeader('user_agent', 'null', 'alias'));

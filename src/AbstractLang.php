@@ -21,7 +21,7 @@ use JBZoo\Lang\Lang;
  * Class AbstractLang
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractLang
+abstract class AbstractLang extends AbstractHelper
 {
     /**
      * @var Lang

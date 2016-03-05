@@ -21,20 +21,18 @@ use JBZoo\CrossCMS\Cms;
  * Class EnvTest
  * @package JBZoo\PHPUnit
  */
-class EnvTest extends PHPUnit
+class EnvTest extends CrossCMS
 {
     public function test()
     {
-        $env = Cms::_('env');
+        $cms = Cms::getInstance();
 
-        $version = $env->getVersion();
+        $version = $cms['env']->getVersion();
 
         isTrue(version_compare('1.0.0', $version, '<'));
 
-        isFalse($env->isAdmin());
-        isTrue($env->isSite());
-        isTrue($env->isCli());
-
+        isFalse($cms['env']->isAdmin());
+        isTrue($cms['env']->isSite());
+        isTrue($cms['env']->isCli());
     }
-
 }

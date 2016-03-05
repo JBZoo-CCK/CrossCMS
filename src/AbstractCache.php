@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class AbstractCache
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractCache
+abstract class AbstractCache extends AbstractHelper
 {
     const GROUP_PREFIX  = 'crosscms';
     const GROUP_DEFAULT = 'default';

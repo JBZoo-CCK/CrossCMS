@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class TestCms
  * @package JBZoo\PHPUnit
  */
-class CmsTest extends PHPUnit
+class CmsTest extends CrossCMS
 {
 
     public function testInit()

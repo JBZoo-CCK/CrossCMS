@@ -40,16 +40,6 @@ class Cms extends Container
     );
 
     /**
-     * @param string $helper
-     * @return mixed
-     */
-    public static function _($helper)
-    {
-        $cms = self::getInstance();
-        return $cms[$helper];
-    }
-
-    /**
      * @return Cms
      */
     public static function getInstance()
@@ -77,7 +67,7 @@ class Cms extends Container
         $this['db'] = function ($cms) {
             SqlBuilder::set($cms['type']); // init SQLBuilder Driver
             $className = $cms['ns'] . 'Database';
-            $database  = new $className();
+            $database  = new $className($cms);
             return $database;
         };
 
@@ -85,7 +75,7 @@ class Cms extends Container
             $className = $cms['ns'] . 'Path';
 
             /** @var AbstractPath $helper */
-            $helper = new $className();
+            $helper = new $className($cms);
             $path   = Path::getInstance('crosscms');
 
             $path->setRoot($helper->getRoot());
@@ -103,13 +93,13 @@ class Cms extends Container
         $this['events'] = function ($cms) {
             $eventManager = new EventManager();
             $className    = $cms['ns'] . 'Events';
-            $helper       = new $className($eventManager);
+            $helper       = new $className($cms, $eventManager);
             return $helper;
         };
 
         $this['lang'] = function ($cms) {
             $className = $cms['ns'] . 'Lang';
-            $helper    = new $className();
+            $helper    = new $className($cms);
 
             $lang = new Lang($helper->getCode());
             $helper->setCustomLang($lang);
@@ -150,10 +140,12 @@ class Cms extends Container
     {
         $id = strtolower($id);
 
+        $cms = $this;
+
         if (!isset($this[$id])) {
-            $this[$id] = function ($cms) use ($id) {
+            $this[$id] = function ($cms) use ($id, $cms) {
                 $className = $cms['ns'] . ucfirst($id);
-                $helper    = new $className();
+                $helper    = new $className($cms);
                 return $helper;
             };
         }

@@ -26,6 +26,11 @@ defined('_JEXEC') or die;
  */
 class PlgSystemJBZooPHPUnit extends JPlugin
 {
+    /**
+     * @var Cms
+     */
+    protected $_cms;
+
     public function onAfterInitialise()
     {
         if (!class_exists('\JBZoo\CrossCMS\Cms')) {
@@ -34,10 +39,11 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             }
         }
 
+        $this->_cms = Cms::getInstance();
+
+
         /* Event ******************************************************************************************************/
         $this->_eventInitTests();
-
-
     }
 
     public function onAfterRoute()
@@ -52,72 +58,72 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         /* Assets *****************************************************************************************************/
         if ($test = $this->_request('test-assets-jsfile')) {
-            Cms::_('assets')->jsFile($test . '.js');
+            $this->_cms['assets']->jsFile($test . '.js');
         }
 
         if ($test = $this->_request('test-assets-jscode')) {
-            Cms::_('assets')->jsCode($test);
+            $this->_cms['assets']->jsCode($test);
         }
 
         if ($test = $this->_request('test-assets-cssfile')) {
-            Cms::_('assets')->cssFile($test . '.css');
+            $this->_cms['assets']->cssFile($test . '.css');
         }
 
         if ($test = $this->_request('test-assets-csscode')) {
-            Cms::_('assets')->cssCode($test);
+            $this->_cms['assets']->cssCode($test);
         }
 
         /* Response ***************************************************************************************************/
         if ($test = $this->_request('test-response-set404')) {
-            Cms::_('response')->set404();
+            $this->_cms['response']->set404();
         }
 
         if ($test = $this->_request('test-response-set500')) {
-            Cms::_('response')->set500($test);
+            $this->_cms['response']->set500($test);
         }
 
         if ($test = $this->_request('test-response-redirect')) {
-            Cms::_('response')->redirect($test);
+            $this->_cms['response']->redirect($test);
         }
 
         if ($test = $this->_request('test-response-json')) {
-            Cms::_('response')->json((array)$test, true);
+            $this->_cms['response']->json((array)$test, true);
         }
 
         if ($test = $this->_request('test-response-text')) {
-            Cms::_('response')->text();
+            $this->_cms['response']->text();
         }
 
         if ($test = $this->_request('test-response-title')) {
-            Cms::_('response')->setTitle($test);
+            $this->_cms['response']->setTitle($test);
         }
 
         if ($test = $this->_request('test-response-keywords')) {
-            Cms::_('response')->setKeywords($test);
+            $this->_cms['response']->setKeywords($test);
         }
 
         if ($test = $this->_request('test-response-description')) {
-            Cms::_('response')->setDesc($test);
+            $this->_cms['response']->setDesc($test);
         }
 
         if ($test = $this->_request('test-response-noindex')) {
-            Cms::_('response')->noindex();
+            $this->_cms['response']->noindex();
         }
 
         if ($test = $this->_request('test-response-nocache')) {
-            Cms::_('response')->noCache();
+            $this->_cms['response']->noCache();
         }
 
         if ($test = $this->_request('test-response-raw')) {
-            Cms::_('response')->raw();
+            $this->_cms['response']->raw();
         }
 
         if ($test = $this->_request('test-response-component')) {
-            Cms::_('response')->component();
+            $this->_cms['response']->component();
         }
 
         if ($test = $this->_request('test-response-addmeta')) {
-            Cms::_('response')->addMeta(
+            $this->_cms['response']->addMeta(
                 $_REQUEST['test-response-addmeta']['meta'],
                 Vars::get($_REQUEST['test-response-addmeta']['value'])
             );
@@ -125,23 +131,23 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         /* Libs *******************************************************************************************************/
         if ($test = $this->_request('test-libs-jquery')) {
-            Cms::_('libs')->jQuery();
+            $this->_cms['libs']->jQuery();
         }
 
         if ($test = $this->_request('test-libs-jqueryui')) {
-            Cms::_('libs')->jQueryUI();
+            $this->_cms['libs']->jQueryUI();
         }
 
         if ($test = $this->_request('test-libs-autocomplete')) {
-            Cms::_('libs')->jQueryAutocomplete();
+            $this->_cms['libs']->jQueryAutocomplete();
         }
 
         if ($test = $this->_request('test-libs-datepicker')) {
-            Cms::_('libs')->jQueryDatePicker();
+            $this->_cms['libs']->jQueryDatePicker();
         }
 
         if ($test = $this->_request('test-libs-colorpicker')) {
-            Cms::_('libs')->colorPicker();
+            $this->_cms['libs']->colorPicker();
         }
     }
 
@@ -153,19 +159,19 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     {
         /* Events:content **********************************************************************************************/
         if ($this->_request('test-events-content')) {
-            Cms::_('events')->on('cms.content.site', function (&$body) {
+            $this->_cms['events']->on('cms.content.site', function (&$body) {
                 $body .= $_REQUEST['test-events-content']['content.site'];
             });
 
-            Cms::_('events')->on('cms.content.admin', function (&$body) {
+            $this->_cms['events']->on('cms.content.admin', function (&$body) {
                 $body .= $_REQUEST['test-events-content']['content.admin'];
             }, EventManager::LOW);
 
-            Cms::_('events')->on('cms.content', function (&$body) {
+            $this->_cms['events']->on('cms.content', function (&$body) {
                 $body .= $_REQUEST['test-events-content']['content'];
             }, EventManager::HIGH);
 
-            Cms::_('events')->filterContent();
+            $this->_cms['events']->filterContent();
         }
     }
 
@@ -177,19 +183,19 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         /* Events:header ***********************************************************************************************/
         if ($this->_request('test-events-header')) {
-            Cms::_('events')->on('cms.header.site', function () {
+            $this->_cms['events']->on('cms.header.site', function () {
                 echo $_REQUEST['test-events-header']['header.site'];
             });
 
-            Cms::_('events')->on('cms.header.admin', function () {
+            $this->_cms['events']->on('cms.header.admin', function () {
                 echo $_REQUEST['test-events-header']['header.admin'];
             }, EventManager::LOW);
 
-            Cms::_('events')->on('cms.header', function () {
+            $this->_cms['events']->on('cms.header', function () {
                 echo $_REQUEST['test-events-header']['header'];
             }, EventManager::HIGH);
 
-            Cms::_('events')->trigger(AbstractEvents::EVENT_HEADER);
+            $this->_cms['events']->trigger(AbstractEvents::EVENT_HEADER);
         }
     }
 
@@ -206,20 +212,20 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     {
         /* Events:init *************************************************************************************************/
         if ($this->_request('test-events-init')) {
-            Cms::_('events')->on('cms.init.site', function () {
+            $this->_cms['events']->on('cms.init.site', function () {
                 echo $_REQUEST['test-events-init']['init.site'];
             });
 
-            Cms::_('events')->on('cms.init.admin', function () {
+            $this->_cms['events']->on('cms.init.admin', function () {
                 echo $_REQUEST['test-events-init']['init.admin'];
             }, EventManager::LOW);
 
-            Cms::_('events')->on('cms.init', function () {
+            $this->_cms['events']->on('cms.init', function () {
                 echo $_REQUEST['test-events-init']['init'];
             }, EventManager::HIGH);
 
             // Execute Trigger
-            Cms::_('events')->trigger(AbstractEvents::EVENT_INIT);
+            $this->_cms['events']->trigger(AbstractEvents::EVENT_INIT);
         }
     }
 

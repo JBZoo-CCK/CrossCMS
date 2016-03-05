@@ -15,13 +15,11 @@
 
 namespace JBZoo\CrossCMS;
 
-use JBZoo\Path\Path;
-
 /**
  * Class AbstractPath
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractPath
+abstract class AbstractPath extends AbstractHelper
 {
     /**
      * @return string

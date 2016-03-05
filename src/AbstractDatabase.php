@@ -21,7 +21,7 @@ use JBZoo\SqlBuilder\Query\Query;
  * Class AbstractDatabase
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractDatabase
+abstract class AbstractDatabase extends AbstractHelper
 {
     /**
      * @return string

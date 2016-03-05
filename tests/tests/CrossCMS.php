@@ -16,23 +16,28 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\CrossCMS\Cms;
+use JBZoo\PimpleDumper\PimpleDumper;
 
 /**
- * Class BenchmarkTest
+ * Class AssetsTest
  * @package JBZoo\PHPUnit
  */
-class BenchmarkTest extends CrossCMS
+abstract class CrossCMS extends PHPUnit
 {
+    /**
+     * @var Cms
+     */
+    protected $_cms;
 
-    public function testTranslate()
+    /**
+     *
+     */
+    protected function setUp()
     {
-        $cms = Cms::getInstance();
+        parent::setUp();
+        $this->_cms = Cms::getInstance();
 
-        runBench([
-            'translate' => function () use ($cms) {
-                $cms['lang']->translate('January');
-            },
-        ], ['count' => 1000]);
-
+        $dumper = new PimpleDumper();
+        $this->_cms->register($dumper);
     }
 }

@@ -36,7 +36,9 @@ class Helper
         $testName = trim($testName, '-');
         $testName = strtolower($testName);
 
-        $cmsType = strtolower(Cms::_('type'));
+        $cms = Cms::getInstance();
+
+        $cmsType = strtolower($cms['type']);
 
         $html = cmd('php ./tests/bin/browser.php tests/tests/BrowserEmulatorTest.php', array(
             'configuration'   => 'phpunit-' . $cmsType . '-browser.xml.dist',

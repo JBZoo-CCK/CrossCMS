@@ -21,7 +21,7 @@ use JBZoo\Event\EventManager;
  * Class AbstractEvent
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractEvents
+abstract class AbstractEvents extends AbstractHelper
 {
     const POSTFIX_ADMIN = '.admin';
     const POSTFIX_SITE  = '.site';
@@ -37,10 +37,13 @@ abstract class AbstractEvents
     protected $_eManager;
 
     /**
+     * AbstractEvents constructor
+     * @param Cms          $cms
      * @param EventManager $eManager
      */
-    public function __construct(EventManager $eManager)
+    public function __construct(Cms $cms, EventManager $eManager)
     {
+        parent::__construct($cms);
         $this->_eManager = $eManager;
     }
 
@@ -91,6 +94,6 @@ abstract class AbstractEvents
      */
     protected function _isAdmin()
     {
-        return Cms::_('env')->isAdmin();
+        return $this->_cms['env']->isAdmin();
     }
 }

@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class AbstractDate
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractDate
+abstract class AbstractDate extends AbstractHelper
 {
 
     protected $_formats = [

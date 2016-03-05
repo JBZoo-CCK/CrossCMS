@@ -47,7 +47,7 @@ class Assets extends AbstractAssets
      */
     public function cssCode($code)
     {
-        $env    = Cms::_('env');
+        $env    = $this->_cms['env'];
         $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
         $filter = $env->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
 
@@ -61,7 +61,7 @@ class Assets extends AbstractAssets
      */
     public function jsCode($code)
     {
-        $env    = Cms::_('env');
+        $env    = $this->_cms['env'];
         $code   = sprintf('<script>%s</script>' . PHP_EOL, $code);
         $filter = $env->isAdmin() ? 'admin_print_scripts' : 'wp_print_scripts';
 

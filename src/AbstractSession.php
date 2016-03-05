@@ -19,7 +19,7 @@ namespace JBZoo\CrossCMS;
  * Class AbstractSession
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractSession
+abstract class AbstractSession extends AbstractHelper
 {
     const GROUP_DFAULT = 'jbzoo';
 

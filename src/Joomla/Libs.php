@@ -45,7 +45,7 @@ class Libs extends AbstractLibs
      */
     public function jQueryAutocomplete()
     {
-        $isDebug = Cms::_('config')->isDebug();
+        $isDebug = $this->_cms['config']->isDebug();
         \JHtml::_('script', 'jui/jquery.autocomplete.min.js', false, true, false, false, $isDebug);
     }
 
