@@ -69,8 +69,6 @@ abstract class AbstractEvents
      */
     public function trigger($triggerName, array $arguments = array())
     {
-        $triggerName = $triggerName;
-
         $count = $this->_eManager->trigger($triggerName, $arguments);
 
         if ($this->_isAdmin()) {

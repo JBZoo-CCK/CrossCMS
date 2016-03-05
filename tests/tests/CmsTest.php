@@ -41,7 +41,7 @@ class CmsTest extends PHPUnit
             "config"   => '\JBZoo\CrossCMS\AbstractConfig',
             "assets"   => '\JBZoo\CrossCMS\AbstractAssets',
             "mailer"   => '\JBZoo\CrossCMS\AbstractMailer',
-            "event"    => '\JBZoo\CrossCMS\AbstractEvent',
+            "events"   => '\JBZoo\CrossCMS\AbstractEvents',
             "cache"    => '\JBZoo\CrossCMS\AbstractCache',
             "http"     => '\JBZoo\CrossCMS\AbstractHttp',
             "env"      => '\JBZoo\CrossCMS\AbstractEnv',
