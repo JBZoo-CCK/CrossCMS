@@ -100,9 +100,9 @@ class Cms extends Container
             return $path;
         };
 
-        $this['event'] = function ($cms) {
+        $this['events'] = function ($cms) {
             $eventManager = new EventManager();
-            $className    = $cms['ns'] . 'Event';
+            $className    = $cms['ns'] . 'Events';
             $helper       = new $className($eventManager);
             return $helper;
         };

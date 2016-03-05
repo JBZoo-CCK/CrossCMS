@@ -15,13 +15,13 @@
 
 namespace JBZoo\CrossCMS\Wordpress;
 
-use JBZoo\CrossCMS\AbstractEvent;
+use JBZoo\CrossCMS\AbstractEvents;
 
 /**
  * Class Event
  * @package JBZoo\CrossCMS
  */
-class Event extends AbstractEvent
+class Events extends AbstractEvents
 {
     /**
      *  Example of Wordpress Plugin with hooks
@@ -57,6 +57,6 @@ class Event extends AbstractEvent
      */
     public function filterContent(&$content = null)
     {
-        $this->trigger(AbstractEvent::EVENT_CONTENT, array(&$content));
+        $this->trigger(AbstractEvents::EVENT_CONTENT, array(&$content));
     }
 }

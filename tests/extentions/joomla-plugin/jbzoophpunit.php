@@ -13,7 +13,7 @@
  * @author    Denis Smetannikov <denis@jbzoo.com>
  */
 
-use JBZoo\CrossCMS\AbstractEvent;
+use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\Cms;
 use JBZoo\Event\EventManager;
 use JBZoo\Utils\Vars;
@@ -151,21 +151,21 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
     public function onAfterRender()
     {
-        /* Event:content **********************************************************************************************/
-        if ($this->_request('test-event-content')) {
-            Cms::_('event')->on('cms.content.site', function (&$body) {
-                $body .= $_REQUEST['test-event-content']['content.site'];
+        /* Events:content **********************************************************************************************/
+        if ($this->_request('test-events-content')) {
+            Cms::_('events')->on('cms.content.site', function (&$body) {
+                $body .= $_REQUEST['test-events-content']['content.site'];
             });
 
-            Cms::_('event')->on('cms.content.admin', function (&$body) {
-                $body .= $_REQUEST['test-event-content']['content.admin'];
+            Cms::_('events')->on('cms.content.admin', function (&$body) {
+                $body .= $_REQUEST['test-events-content']['content.admin'];
             }, EventManager::LOW);
 
-            Cms::_('event')->on('cms.content', function (&$body) {
-                $body .= $_REQUEST['test-event-content']['content'];
+            Cms::_('events')->on('cms.content', function (&$body) {
+                $body .= $_REQUEST['test-events-content']['content'];
             }, EventManager::HIGH);
 
-            Cms::_('event')->filterContent();
+            Cms::_('events')->filterContent();
         }
     }
 
@@ -175,21 +175,21 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             return;
         }
 
-        /* Event:header ***********************************************************************************************/
-        if ($this->_request('test-event-header')) {
-            Cms::_('event')->on('cms.header.site', function () {
-                echo $_REQUEST['test-event-header']['header.site'];
+        /* Events:header ***********************************************************************************************/
+        if ($this->_request('test-events-header')) {
+            Cms::_('events')->on('cms.header.site', function () {
+                echo $_REQUEST['test-events-header']['header.site'];
             });
 
-            Cms::_('event')->on('cms.header.admin', function () {
-                echo $_REQUEST['test-event-header']['header.admin'];
+            Cms::_('events')->on('cms.header.admin', function () {
+                echo $_REQUEST['test-events-header']['header.admin'];
             }, EventManager::LOW);
 
-            Cms::_('event')->on('cms.header', function () {
-                echo $_REQUEST['test-event-header']['header'];
+            Cms::_('events')->on('cms.header', function () {
+                echo $_REQUEST['test-events-header']['header'];
             }, EventManager::HIGH);
 
-            Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
+            Cms::_('events')->trigger(AbstractEvents::EVENT_HEADER);
         }
     }
 
@@ -204,22 +204,22 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
     protected function _eventInitTests()
     {
-        /* Event:init *************************************************************************************************/
-        if ($this->_request('test-event-init')) {
-            Cms::_('event')->on('cms.init.site', function () {
-                echo $_REQUEST['test-event-init']['init.site'];
+        /* Events:init *************************************************************************************************/
+        if ($this->_request('test-events-init')) {
+            Cms::_('events')->on('cms.init.site', function () {
+                echo $_REQUEST['test-events-init']['init.site'];
             });
 
-            Cms::_('event')->on('cms.init.admin', function () {
-                echo $_REQUEST['test-event-init']['init.admin'];
+            Cms::_('events')->on('cms.init.admin', function () {
+                echo $_REQUEST['test-events-init']['init.admin'];
             }, EventManager::LOW);
 
-            Cms::_('event')->on('cms.init', function () {
-                echo $_REQUEST['test-event-init']['init'];
+            Cms::_('events')->on('cms.init', function () {
+                echo $_REQUEST['test-events-init']['init'];
             }, EventManager::HIGH);
 
             // Execute Trigger
-            Cms::_('event')->trigger(AbstractEvent::EVENT_INIT);
+            Cms::_('events')->trigger(AbstractEvents::EVENT_INIT);
         }
     }
 

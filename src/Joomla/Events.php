@@ -15,13 +15,13 @@
 
 namespace JBZoo\CrossCMS\Joomla;
 
-use JBZoo\CrossCMS\AbstractEvent;
+use JBZoo\CrossCMS\AbstractEvents;
 
 /**
  * Class Event
  * @package JBZoo\CrossCMS
  */
-class Event extends AbstractEvent
+class Events extends AbstractEvents
 {
     /**
      *  Example of Joomla Plugin (system)
@@ -66,7 +66,7 @@ class Event extends AbstractEvent
     {
         $body = \JFactory::getApplication()->getBody();
 
-        $this->trigger(AbstractEvent::EVENT_CONTENT, array(&$body));
+        $this->trigger(AbstractEvents::EVENT_CONTENT, array(&$body));
 
         \JFactory::getApplication()->setBody($body);
     }

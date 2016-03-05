@@ -16,14 +16,14 @@
 namespace JBZoo\PHPUnit;
 
 /**
- * Class EventTest
+ * Class EventsTest
  * @package JBZoo\PHPUnit
  */
-class EventTest extends PHPUnit
+class EventsTest extends PHPUnit
 {
     public function testInit()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-event-init' => array(
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-init' => array(
             'init'       => '-qw-',
             'init.site'  => '-er-',
             'init.admin' => '-ty-',
@@ -34,7 +34,7 @@ class EventTest extends PHPUnit
 
     public function testHeader()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-event-header' => array(
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-header' => array(
             'header'       => '-123-',
             'header.site'  => '-456-',
             'header.admin' => '-789-',
@@ -45,7 +45,7 @@ class EventTest extends PHPUnit
 
     public function testContent()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-event-content' => array(
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-content' => array(
             'content'       => '-ab-',
             'content.site'  => '-cd-',
             'content.admin' => '-ef-',

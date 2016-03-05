@@ -21,7 +21,7 @@ use JBZoo\Event\EventManager;
  * Class AbstractEvent
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractEvent
+abstract class AbstractEvents
 {
     const POSTFIX_ADMIN = '.admin';
     const POSTFIX_SITE  = '.site';
