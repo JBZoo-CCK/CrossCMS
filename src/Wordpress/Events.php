@@ -29,26 +29,26 @@ class Events extends AbstractEvents
      *
      *  // Init
      *  add_action('wp', function () {
-     *      Cms::_('event')->trigger(AbstractEvent::EVENT_INIT);
+     *      Cms::_('events')->trigger(AbstractEvent::EVENT_INIT);
      *  });
      *
      *
      *  // Header render
      *  add_action('wp_head', function () {
-     *      Cms::_('event')->trigger(AbstractEvent::EVENT_HEADER);
+     *      Cms::_('events')->trigger(AbstractEvent::EVENT_HEADER);
      *  });
      *
      *
      *  // Content handlers (for macroses)
      *  add_filter('the_content', function ($content) {
-     *      Cms::_('event')->filterContent($content);
+     *      Cms::_('events')->filterContent($content);
      *      return $content;
      *  });
      *
      *
      *  // Shutdown callback
      *  add_action('shutdown', function () {
-     *      Cms::_('event')->trigger(AbstractEvent::EVENT_SHUTDOWN);
+     *      Cms::_('events')->trigger(AbstractEvent::EVENT_SHUTDOWN);
      *  });
      */
 
