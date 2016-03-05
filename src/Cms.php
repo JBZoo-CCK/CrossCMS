@@ -54,12 +54,12 @@ class Cms extends Container
     }
 
     /**
-     * Constructor
-     * @throws Exception
+     * Cms constructor.
+     * @param array $values
      */
-    public function __construct()
+    public function __construct(array $values = array())
     {
-        parent::__construct(array());
+        parent::__construct($values);
 
         $this['type'] = $this->_getCmsType();
         $this['ns']   = __NAMESPACE__ . '\\' . $this['type'] . '\\';
