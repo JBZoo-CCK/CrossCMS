@@ -72,6 +72,8 @@ abstract class AbstractEvents extends AbstractHelper
      */
     public function trigger($triggerName, array $arguments = array())
     {
+        array_unshift($arguments, $this->_cms);
+
         $count = $this->_eManager->trigger($triggerName, $arguments);
 
         if ($this->_isAdmin()) {

@@ -166,15 +166,15 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
     /* Events::content *************************************************************************************************/
     if (isset($_REQUEST['test-events-content'])) {
-        $cms['events']->on('cms.content.site', function (&$body) {
+        $cms['events']->on('cms.content.site', function (Cms $app, &$body) {
             $body .= $_REQUEST['test-events-content']['content.site'];
         });
 
-        $cms['events']->on('cms.content.admin', function (&$body) {
+        $cms['events']->on('cms.content.admin', function (Cms $app, &$body) {
             $body .= $_REQUEST['test-events-content']['content.admin'];
         }, EventManager::LOW);
 
-        $cms['events']->on('cms.content', function (&$body) {
+        $cms['events']->on('cms.content', function (Cms $app, &$body) {
             $body .= $_REQUEST['test-events-content']['content'];
         }, EventManager::HIGH);
 

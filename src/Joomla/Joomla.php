@@ -26,6 +26,6 @@ class Joomla
      */
     public static function check()
     {
-        return defined('_JEXEC') && _JEXEC;
+        return class_exists('JFactory');
     }
 }

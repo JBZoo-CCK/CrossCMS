@@ -159,15 +159,15 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     {
         /* Events:content **********************************************************************************************/
         if ($this->_request('test-events-content')) {
-            $this->_cms['events']->on('cms.content.site', function (&$body) {
+            $this->_cms['events']->on('cms.content.site', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content.site'];
             });
 
-            $this->_cms['events']->on('cms.content.admin', function (&$body) {
+            $this->_cms['events']->on('cms.content.admin', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content.admin'];
             }, EventManager::LOW);
 
-            $this->_cms['events']->on('cms.content', function (&$body) {
+            $this->_cms['events']->on('cms.content', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content'];
             }, EventManager::HIGH);
 
