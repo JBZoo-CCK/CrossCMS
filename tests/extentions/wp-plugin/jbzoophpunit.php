@@ -54,6 +54,36 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
         if (isset($_REQUEST['test-header-csscode'])) {
             $cms['header']->cssCode($_REQUEST['test-header-csscode']);
         }
+
+        if (isset($_REQUEST['test-header-title'])) {
+            $cms['header']->setTitle($_REQUEST['test-header-title']);
+        }
+
+        if (isset($_REQUEST['test-header-noindex'])) {
+            $cms['header']->noindex();
+        }
+
+        if (isset($_REQUEST['test-header-description'])) {
+            $cms['header']->setDesc($_REQUEST['test-header-description']);
+        }
+
+        if (isset($_REQUEST['test-header-keywords'])) {
+            $cms['header']->setKeywords($_REQUEST['test-header-keywords']);
+        }
+
+        if (isset($_REQUEST['test-header-addmeta'])) {
+
+            $_REQUEST['test-header-addmeta']['meta'] = str_replace(
+                array('\\"', "\\'"),
+                array('"', "'"),
+                $_REQUEST['test-header-addmeta']['meta']
+            );
+
+            $cms['header']->addMeta(
+                $_REQUEST['test-header-addmeta']['meta'],
+                Vars::get($_REQUEST['test-header-addmeta']['value'])
+            );
+        }
     });
 
     /* Response *******************************************************************************************************/
@@ -79,22 +109,6 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
             $cms['response']->text();
         }
 
-        if (isset($_REQUEST['test-response-title'])) {
-            $cms['response']->setTitle($_REQUEST['test-response-title']);
-        }
-
-        if (isset($_REQUEST['test-response-noindex'])) {
-            $cms['response']->noindex();
-        }
-
-        if (isset($_REQUEST['test-response-description'])) {
-            $cms['response']->setDesc($_REQUEST['test-response-description']);
-        }
-
-        if (isset($_REQUEST['test-response-keywords'])) {
-            $cms['response']->setKeywords($_REQUEST['test-response-keywords']);
-        }
-
         if (isset($_REQUEST['test-response-nocache'])) {
             $cms['response']->noCache();
         }
@@ -105,20 +119,6 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
         if (isset($_REQUEST['test-response-component'])) {
             $cms['response']->component();
-        }
-
-        if (isset($_REQUEST['test-response-addmeta'])) {
-
-            $_REQUEST['test-response-addmeta']['meta'] = str_replace(
-                array('\\"', "\\'"),
-                array('"', "'"),
-                $_REQUEST['test-response-addmeta']['meta']
-            );
-
-            $cms['response']->addMeta(
-                $_REQUEST['test-response-addmeta']['meta'],
-                Vars::get($_REQUEST['test-response-addmeta']['value'])
-            );
         }
     });
 

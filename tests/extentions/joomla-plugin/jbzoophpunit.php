@@ -57,20 +57,43 @@ class PlgSystemJBZooPHPUnit extends JPlugin
         }
 
         /* Header *****************************************************************************************************/
-        if ($test = $this->_request('test-header-jsfile')) {
-            $this->_cms['header']->jsFile($test . '.js');
+        if ($test = $this->_request('test-header-title')) {
+            $this->_cms['header']->setTitle($test);
         }
 
-        if ($test = $this->_request('test-header-jscode')) {
-            $this->_cms['header']->jsCode($test);
+        if ($test = $this->_request('test-header-keywords')) {
+            $this->_cms['header']->setKeywords($test);
+        }
+
+        if ($test = $this->_request('test-header-description')) {
+            $this->_cms['header']->setDesc($test);
+        }
+
+        if ($test = $this->_request('test-header-noindex')) {
+            $this->_cms['header']->noindex();
+        }
+
+        if ($test = $this->_request('test-header-jsfile')) {
+            $this->_cms['header']->jsFile($test . '.js');
         }
 
         if ($test = $this->_request('test-header-cssfile')) {
             $this->_cms['header']->cssFile($test . '.css');
         }
 
+        if ($test = $this->_request('test-header-jscode')) {
+            $this->_cms['header']->jsCode($test);
+        }
+
         if ($test = $this->_request('test-header-csscode')) {
             $this->_cms['header']->cssCode($test);
+        }
+
+        if ($test = $this->_request('test-header-addmeta')) {
+            $this->_cms['header']->addMeta(
+                $_REQUEST['test-header-addmeta']['meta'],
+                Vars::get($_REQUEST['test-header-addmeta']['value'])
+            );
         }
 
         /* Response ***************************************************************************************************/
@@ -94,22 +117,6 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             $this->_cms['response']->text();
         }
 
-        if ($test = $this->_request('test-response-title')) {
-            $this->_cms['response']->setTitle($test);
-        }
-
-        if ($test = $this->_request('test-response-keywords')) {
-            $this->_cms['response']->setKeywords($test);
-        }
-
-        if ($test = $this->_request('test-response-description')) {
-            $this->_cms['response']->setDesc($test);
-        }
-
-        if ($test = $this->_request('test-response-noindex')) {
-            $this->_cms['response']->noindex();
-        }
-
         if ($test = $this->_request('test-response-nocache')) {
             $this->_cms['response']->noCache();
         }
@@ -120,13 +127,6 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         if ($test = $this->_request('test-response-component')) {
             $this->_cms['response']->component();
-        }
-
-        if ($test = $this->_request('test-response-addmeta')) {
-            $this->_cms['response']->addMeta(
-                $_REQUEST['test-response-addmeta']['meta'],
-                Vars::get($_REQUEST['test-response-addmeta']['value'])
-            );
         }
 
         /* Libs *******************************************************************************************************/

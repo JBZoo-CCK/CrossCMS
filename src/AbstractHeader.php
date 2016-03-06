@@ -22,16 +22,47 @@ namespace JBZoo\CrossCMS;
 abstract class AbstractHeader extends AbstractHelper
 {
     /**
-     * @param string $file
-     * @return bool
+     * Set document title
+     * @param string $title
      */
-    abstract public function cssFile($file);
+    abstract public function setTitle($title);
+
+    /**
+     * Set document description
+     * @param string $description
+     */
+    abstract public function setDesc($description);
+
+    /**
+     * Set document keywords
+     * @param string $keywords
+     */
+    abstract public function setKeywords($keywords);
+
+    /**
+     * Set document metadata
+     * @param string      $meta
+     * @param string|null $value
+     * @return mixed
+     */
+    abstract public function addMeta($meta, $value = null);
+
+    /**
+     * Add noindex and nofollow meta
+     */
+    abstract public function noindex();
 
     /**
      * @param string $file
      * @return bool
      */
     abstract public function jsFile($file);
+
+    /**
+     * @param string $file
+     * @return bool
+     */
+    abstract public function cssFile($file);
 
     /**
      * @param string $code

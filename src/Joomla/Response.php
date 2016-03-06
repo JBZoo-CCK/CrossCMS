@@ -27,11 +27,6 @@ use JBZoo\Utils\Vars;
 class Response extends AbstractResponse
 {
     /**
-     * @var \JDocumentHTML
-     */
-    private $_doc = null;
-
-    /**
      * @var \JApplicationCms
      */
     private $_app = null;
@@ -43,7 +38,6 @@ class Response extends AbstractResponse
     {
         parent::__construct($cms);
         $this->_app = \JFactory::getApplication();
-        $this->_doc = \JFactory::getDocument();
     }
 
     /**
@@ -123,15 +117,6 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function noindex()
-    {
-        $this->_doc->setMetadata('robots', 'noindex, nofollow');
-        $this->setHeader('X-Robots-Tag', 'noindex, nofollow');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setHeader($name, $value)
     {
         $this->_app->setHeader($name, $value, true);
@@ -144,42 +129,5 @@ class Response extends AbstractResponse
     {
         $this->_app->allowCache(false);
         $this->_noCache();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addMeta($meta, $value = null)
-    {
-        if (null === $value) {
-            $this->_doc->addCustomTag($meta);
-        } else {
-            $this->_doc->setMetadata($meta, $value);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDesc($description)
-    {
-        $this->_doc->setDescription($description);
-        $this->_doc->setMetadata('description', $description);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKeywords($keywords)
-    {
-        $this->_doc->setMetadata('keywords', $keywords);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->_doc->setTitle($title);
     }
 }

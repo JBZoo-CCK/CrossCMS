@@ -69,17 +69,6 @@ abstract class AbstractResponse extends AbstractHelper
     abstract public function component();
 
     /**
-     * Add noindex and nofollow meta
-     */
-    abstract public function noindex();
-
-    /**
-     * Set document title
-     * @param string $title
-     */
-    abstract public function setTitle($title);
-
-    /**
      * Add nocache headers
      */
     abstract public function noCache();
@@ -90,26 +79,6 @@ abstract class AbstractResponse extends AbstractHelper
      * @param string $value
      */
     abstract public function setHeader($name, $value);
-
-    /**
-     * Set document description
-     * @param string $description
-     */
-    abstract public function setDesc($description);
-
-    /**
-     * Set document keywords
-     * @param string $keywords
-     */
-    abstract public function setKeywords($keywords);
-
-    /**
-     * Set document metadata
-     * @param string      $meta
-     * @param string|null $value
-     * @return mixed
-     */
-    abstract public function addMeta($meta, $value = null);
 
     /**
      * General nocache headers

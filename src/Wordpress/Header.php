@@ -27,10 +27,50 @@ class Header extends AbstractHeader
     /**
      * {@inheritdoc}
      */
-    public function cssFile($file)
+    public function setTitle($title)
     {
-        $handle = uniqid('crosscms-css-', true);
-        \wp_enqueue_style($handle, $file);
+        add_filter('pre_get_document_title', function () use ($title) {
+            return $title;
+        }, 9999);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDesc($description)
+    {
+        $this->addMeta('description', $description);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setKeywords($keywords)
+    {
+        $this->addMeta('keywords', $keywords);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMeta($meta, $value = null)
+    {
+        add_action('wp_head', function () use ($meta, $value) {
+            if (null === $value) {
+                echo $meta . PHP_EOL;
+            } else {
+                echo '<meta name="' . $meta . '" content="' . $value . '" />' . PHP_EOL;
+            }
+        }, 9999);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function noindex()
+    {
+        $this->addMeta('robots', 'noindex, nofollow');
+        $this->_cms['response']->setHeader('X-Robots-Tag', 'noindex, nofollow');
     }
 
     /**
@@ -45,14 +85,10 @@ class Header extends AbstractHeader
     /**
      * {@inheritdoc}
      */
-    public function cssCode($code)
+    public function cssFile($file)
     {
-        $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
-        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
-
-        add_action($filter, function () use ($code) {
-            echo $code;
-        });
+        $handle = uniqid('crosscms-css-', true);
+        \wp_enqueue_style($handle, $file);
     }
 
     /**
@@ -66,5 +102,18 @@ class Header extends AbstractHeader
         add_action($filter, function () use ($code) {
             echo $code;
         }, 30);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cssCode($code)
+    {
+        $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
+        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
+
+        add_action($filter, function () use ($code) {
+            echo $code;
+        });
     }
 }

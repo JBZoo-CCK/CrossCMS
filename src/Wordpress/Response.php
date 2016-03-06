@@ -140,15 +140,6 @@ class Response extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function noindex()
-    {
-        $this->addMeta('robots', 'noindex, nofollow');
-        $this->setHeader('X-Robots-Tag', 'noindex, nofollow');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function text()
     {
         $this->setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -171,45 +162,5 @@ class Response extends AbstractResponse
     {
         nocache_headers();
         $this->_noCache();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        add_filter('pre_get_document_title', function () use ($title) {
-            return $title;
-        }, 9999);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addMeta($meta, $value = null)
-    {
-        add_action('wp_head', function () use ($meta, $value) {
-            if (null === $value) {
-                echo $meta . PHP_EOL;
-            } else {
-                echo '<meta name="' . $meta . '" content="' . $value . '" />' . PHP_EOL;
-            }
-        }, 9999);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDesc($description)
-    {
-        $this->addMeta('description', $description);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKeywords($keywords)
-    {
-        $this->addMeta('keywords', $keywords);
     }
 }

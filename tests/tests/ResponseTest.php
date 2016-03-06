@@ -68,38 +68,6 @@ class ResponseTest extends CrossCMS
         isTrue(true); // We can't check HTTP-headers on CLI mode
     }
 
-    public function testTitle()
-    {
-        $uniq = uniqid();
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-title' => $uniq));
-
-        isContain('<title>' . $uniq . '</title>', $html);
-    }
-
-    public function testKeywords()
-    {
-        $uniq = uniqid();
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-keywords' => $uniq));
-
-        isLike('#<meta name=[\'\"]keywords[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $html);
-    }
-
-    public function testDescription()
-    {
-        $uniq = uniqid();
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-description' => $uniq));
-
-        isLike('#<meta name=[\'\"]description[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $html);
-    }
-
-    public function testNoindex()
-    {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-noindex' => 1));
-
-        isContain('noindex', $html);
-        isContain('nofollow', $html);
-    }
-
     public function testNocache()
     {
         Helper::runIsolatedCMS(__METHOD__, array('test-response-nocache' => 1));
@@ -113,21 +81,5 @@ class ResponseTest extends CrossCMS
     public function testComponent()
     {
         Helper::runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
-    }
-
-    public function testAddMeta()
-    {
-        $value = uniqid();
-        $html  = Helper::runIsolatedCMS(__METHOD__, array('test-response-addmeta' => array(
-            'meta'  => 'somemeta1',
-            'value' => $value,
-        )));
-        isLike('#<meta name=[\'\"]somemeta1[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $html);
-
-        $value = uniqid();
-        $html  = Helper::runIsolatedCMS(__METHOD__, array('test-response-addmeta' => array(
-            'meta' => '<meta name=\'somemeta2\' content=\'' . $value . '\' />',
-        )));
-        isLike('#<meta name=[\'\"]somemeta2[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $html);
     }
 }
