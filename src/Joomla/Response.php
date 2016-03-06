@@ -53,6 +53,7 @@ class Response extends AbstractResponse
     public function set404($message = 'Not Found')
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.404', [&$message]);
 
         $this->noCache();
         throw new \Exception($message, 404);
@@ -65,6 +66,7 @@ class Response extends AbstractResponse
     public function set500($message = 'Internal Server Error')
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.500', [&$message]);
 
         $this->noCache();
         throw new \Exception($message, 500);
@@ -74,9 +76,22 @@ class Response extends AbstractResponse
      * {@inheritdoc}
      * @codeCoverageIgnore
      */
+    public function redirect($url, $status = 303)
+    {
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.redirect', [&$url, &$status]);
+
+        \JFactory::getApplication()->redirect($url, $status);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @codeCoverageIgnore
+     */
     public function json(array $data = array(), $result = true)
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.json', [&$data, &$result]);
 
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
@@ -112,17 +127,6 @@ class Response extends AbstractResponse
     {
         $this->_doc->setMetadata('robots', 'noindex, nofollow');
         $this->setHeader('X-Robots-Tag', 'noindex, nofollow');
-    }
-
-    /**
-     * {@inheritdoc}
-     * @codeCoverageIgnore
-     */
-    public function redirect($url, $status = 303)
-    {
-        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
-
-        \JFactory::getApplication()->redirect($url, $status);
     }
 
     /**

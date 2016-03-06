@@ -47,6 +47,7 @@ class Response extends AbstractResponse
     public function set404($message = 'Not Found')
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.404', [&$message]);
 
         $this->_wp_query->set_404();
         status_header(404);
@@ -66,6 +67,7 @@ class Response extends AbstractResponse
     public function set500($message = 'Internal Server Error')
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.500', [&$message]);
 
         $trace = '';
         if ($this->_cms['config']->isDebug()) {
@@ -92,6 +94,7 @@ class Response extends AbstractResponse
     public function redirect($url, $status = 303)
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.redirect', [&$url, &$status]);
 
         wp_redirect($url, (int)$status);
     }
@@ -104,6 +107,7 @@ class Response extends AbstractResponse
     public function json(array $data = array(), $result = true)
     {
         $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN);
+        $this->_cms['events']->trigger(AbstractEvents::EVENT_SHUTDOWN . '.json', [&$data, &$result]);
 
         $data['message'] = Vars::get($data['message']);
         $data['result']  = (int)$result;
