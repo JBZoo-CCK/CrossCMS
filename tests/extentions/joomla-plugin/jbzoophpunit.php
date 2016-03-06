@@ -56,21 +56,21 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             return false;
         }
 
-        /* Assets *****************************************************************************************************/
-        if ($test = $this->_request('test-assets-jsfile')) {
-            $this->_cms['assets']->jsFile($test . '.js');
+        /* Header *****************************************************************************************************/
+        if ($test = $this->_request('test-header-jsfile')) {
+            $this->_cms['header']->jsFile($test . '.js');
         }
 
-        if ($test = $this->_request('test-assets-jscode')) {
-            $this->_cms['assets']->jsCode($test);
+        if ($test = $this->_request('test-header-jscode')) {
+            $this->_cms['header']->jsCode($test);
         }
 
-        if ($test = $this->_request('test-assets-cssfile')) {
-            $this->_cms['assets']->cssFile($test . '.css');
+        if ($test = $this->_request('test-header-cssfile')) {
+            $this->_cms['header']->cssFile($test . '.css');
         }
 
-        if ($test = $this->_request('test-assets-csscode')) {
-            $this->_cms['assets']->cssCode($test);
+        if ($test = $this->_request('test-header-csscode')) {
+            $this->_cms['header']->cssCode($test);
         }
 
         /* Response ***************************************************************************************************/

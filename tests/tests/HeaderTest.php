@@ -16,37 +16,37 @@
 namespace JBZoo\PHPUnit;
 
 /**
- * Class AssetsTest
+ * Class HeaderTest
  * @package JBZoo\PHPUnit
  */
-class AssetsTest extends CrossCMS
+class HeaderTest extends CrossCMS
 {
 
     public function testJSFile()
     {
         $uniq = uniqid('', true);
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-assets-jsfile' => $uniq));
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-header-jsfile' => $uniq));
         isContain($uniq, $html);
     }
 
     public function testJSCode()
     {
         $uniq = uniqid('', true);
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-assets-jscode' => $uniq));
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-header-jscode' => $uniq));
         isContain($uniq, $html);
     }
 
     public function testCSSFile()
     {
         $uniq = uniqid('', true);
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-assets-cssfile' => $uniq));
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-header-cssfile' => $uniq));
         isContain($uniq, $html);
     }
 
     public function testCSSCode()
     {
         $uniq = uniqid('', true);
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-assets-csscode' => $uniq));
+        $html = Helper::runIsolatedCMS(__METHOD__, array('test-header-csscode' => $uniq));
         isContain($uniq, $html);
     }
 }

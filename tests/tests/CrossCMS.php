@@ -19,7 +19,7 @@ use JBZoo\CrossCMS\Cms;
 use JBZoo\PimpleDumper\PimpleDumper;
 
 /**
- * Class AssetsTest
+ * Class CrossCMS
  * @package JBZoo\PHPUnit
  */
 abstract class CrossCMS extends PHPUnit

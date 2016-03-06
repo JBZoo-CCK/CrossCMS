@@ -15,14 +15,14 @@
 
 namespace JBZoo\CrossCMS\Wordpress;
 
-use JBZoo\CrossCMS\AbstractAssets;
+use JBZoo\CrossCMS\AbstractHeader;
 use JBZoo\CrossCMS\Cms;
 
 /**
- * Class Assets
+ * Class Header
  * @package JBZoo\CrossCMS
  */
-class Assets extends AbstractAssets
+class Header extends AbstractHeader
 {
     /**
      * {@inheritdoc}
@@ -47,9 +47,8 @@ class Assets extends AbstractAssets
      */
     public function cssCode($code)
     {
-        $env    = $this->_cms['env'];
         $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
-        $filter = $env->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
+        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
 
         add_action($filter, function () use ($code) {
             echo $code;
@@ -61,9 +60,8 @@ class Assets extends AbstractAssets
      */
     public function jsCode($code)
     {
-        $env    = $this->_cms['env'];
         $code   = sprintf('<script>%s</script>' . PHP_EOL, $code);
-        $filter = $env->isAdmin() ? 'admin_print_scripts' : 'wp_print_scripts';
+        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_scripts' : 'wp_print_scripts';
 
         add_action($filter, function () use ($code) {
             echo $code;

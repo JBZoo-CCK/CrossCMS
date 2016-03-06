@@ -20,7 +20,7 @@ use JBZoo\Utils\Arr;
 use JBZoo\Utils\Url;
 
 /**
- * Class AbstractAssets
+ * Class User
  * @package JBZoo\CrossCMS
  */
 class User

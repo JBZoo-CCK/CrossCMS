@@ -16,10 +16,10 @@
 namespace JBZoo\CrossCMS;
 
 /**
- * Class AbstractAssets
+ * Class AbstractHeader
  * @package JBZoo\CrossCMS
  */
-abstract class AbstractAssets extends AbstractHelper
+abstract class AbstractHeader extends AbstractHelper
 {
     /**
      * @param string $file

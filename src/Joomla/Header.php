@@ -15,14 +15,14 @@
 
 namespace JBZoo\CrossCMS\Joomla;
 
-use JBZoo\CrossCMS\AbstractAssets;
+use JBZoo\CrossCMS\AbstractHeader;
 use JBZoo\CrossCMS\Cms;
 
 /**
- * Class Assets
+ * Class Header
  * @package JBZoo\CrossCMS
  */
-class Assets extends AbstractAssets
+class Header extends AbstractHeader
 {
     /**
      * @var \JDocumentHTML

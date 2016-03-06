@@ -36,23 +36,23 @@ if (isset($_REQUEST['jbzoo-phpunit']) && class_exists('\JBZoo\CrossCMS\Cms')) {
 
     $cms = Cms::getInstance();
 
-    /* Assets *********************************************************************************************************/
+    /* Header *********************************************************************************************************/
     add_action('wp', function () use ($cms) {
 
-        if (isset($_REQUEST['test-assets-jsfile'])) {
-            $cms['assets']->jsFile('http://site.com/' . $_REQUEST['test-assets-jsfile'] . 'js');
+        if (isset($_REQUEST['test-header-jsfile'])) {
+            $cms['header']->jsFile('http://site.com/' . $_REQUEST['test-header-jsfile'] . 'js');
         }
 
-        if (isset($_REQUEST['test-assets-jscode'])) {
-            $cms['assets']->jsCode($_REQUEST['test-assets-jscode']);
+        if (isset($_REQUEST['test-header-jscode'])) {
+            $cms['header']->jsCode($_REQUEST['test-header-jscode']);
         }
 
-        if (isset($_REQUEST['test-assets-cssfile'])) {
-            $cms['assets']->cssFile('http://site.com/' . $_REQUEST['test-assets-cssfile'] . 'css');
+        if (isset($_REQUEST['test-header-cssfile'])) {
+            $cms['header']->cssFile('http://site.com/' . $_REQUEST['test-header-cssfile'] . 'css');
         }
 
-        if (isset($_REQUEST['test-assets-csscode'])) {
-            $cms['assets']->cssCode($_REQUEST['test-assets-csscode']);
+        if (isset($_REQUEST['test-header-csscode'])) {
+            $cms['header']->cssCode($_REQUEST['test-header-csscode']);
         }
     });
 

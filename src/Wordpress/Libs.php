@@ -18,7 +18,7 @@ namespace JBZoo\CrossCMS\Wordpress;
 use JBZoo\CrossCMS\AbstractLibs;
 
 /**
- * Class Assets
+ * Class Libs
  * @package JBZoo\CrossCMS
  */
 class Libs extends AbstractLibs

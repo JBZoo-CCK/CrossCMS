@@ -39,7 +39,7 @@ class CmsTest extends CrossCMS
             "session"  => '\JBZoo\CrossCMS\AbstractSession',
             "request"  => '\JBZoo\CrossCMS\AbstractRequest',
             "config"   => '\JBZoo\CrossCMS\AbstractConfig',
-            "assets"   => '\JBZoo\CrossCMS\AbstractAssets',
+            "header"   => '\JBZoo\CrossCMS\AbstractHeader',
             "mailer"   => '\JBZoo\CrossCMS\AbstractMailer',
             "events"   => '\JBZoo\CrossCMS\AbstractEvents',
             "cache"    => '\JBZoo\CrossCMS\AbstractCache',
