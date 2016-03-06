@@ -15,13 +15,12 @@
 
 namespace JBZoo\CrossCMS\Wordpress;
 
-use JBZoo\CrossCMS\AbstractRequest;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\CrossCMS\AbstractRequest;
 
 /**
  * Class Request
  * @package JBZoo\CrossCMS
- * @SuppressWarnings(PHPMD.Superglobals)
  */
 class Request extends AbstractRequest
 {
@@ -36,7 +35,7 @@ class Request extends AbstractRequest
     public function __construct(Cms $cms)
     {
         parent::__construct($cms);
-        $this->_wp_query = $GLOBALS['wp_query'];
+        $this->_wp_query = new \WP_Query($_REQUEST);
     }
 
     /**
