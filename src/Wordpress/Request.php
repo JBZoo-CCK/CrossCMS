@@ -31,6 +31,7 @@ class Request extends AbstractRequest
 
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function __construct(Cms $cms)
     {

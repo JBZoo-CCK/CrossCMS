@@ -16,10 +16,10 @@
 namespace JBZoo\CrossCMS;
 
 use JBZoo\Data\Data;
-use JBZoo\Utils\Filter;
-use JBZoo\Utils\Http;
 use JBZoo\Utils\Url;
+use JBZoo\Utils\Http;
 use JBZoo\Utils\Vars;
+use JBZoo\Utils\Filter;
 
 /**
  * Class AbstractRequest
