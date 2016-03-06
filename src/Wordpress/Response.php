@@ -51,6 +51,11 @@ class Response extends AbstractResponse
         $this->_wp_query->set_404();
         status_header(404);
         $this->noCache();
+
+        \_default_wp_die_handler($message, $message, array(
+            'response'  => 404,
+            'back_link' => true,
+        ));
     }
 
     /**
@@ -74,20 +79,10 @@ class Response extends AbstractResponse
         $this->noCache();
         $this->setHeader('Content-Type', 'text/html; charset=utf-8');
 
-        echo implode(PHP_EOL, array(
-            '<!DOCTYPE html>',
-            '<html xmlns="http://www.w3.org/1999/xhtml"' . (is_rtl() ? ' dir="rtl"' : '') . '>',
-            '<head>',
-            '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />',
-            '    <title>' . esc_attr(translate('500 - Internal Server Error')) . '</title>',
-            '</head>',
-            '<body>',
-            '<h1>' . esc_html(translate($message)) . '</h1>',
-            $trace,
-            '</body>',
-            '</html>',
+        \_default_wp_die_handler($message . '<hr>' . $trace, '', array(
+            'response'  => 500,
+            'back_link' => true,
         ));
-        die();
     }
 
     /**
