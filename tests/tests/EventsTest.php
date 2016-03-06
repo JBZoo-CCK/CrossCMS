@@ -15,12 +15,20 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\CrossCMS\Cms;
+
 /**
  * Class EventsTest
  * @package JBZoo\PHPUnit
  */
 class EventsTest extends CrossCMS
 {
+    public function testGetEventManager()
+    {
+        $cms = Cms::getInstance();
+        isClass('\JBZoo\Event\EventManager', $cms['events']->getManager());
+    }
+
     public function testInit()
     {
         $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-init' => array(

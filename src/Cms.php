@@ -61,7 +61,7 @@ class Cms extends Container
     {
         parent::__construct($values);
 
-        $this['type'] = $this->_getCmsType();
+        $this['type'] = $this->_getCMSType();
         $this['ns']   = __NAMESPACE__ . '\\' . $this['type'] . '\\';
 
         $this['db'] = function ($cms) {
@@ -164,13 +164,11 @@ class Cms extends Container
     }
 
     /**
-     * @param string $id
-     * @return mixed
+     * {@inheritdoc}
      */
     public function offsetGet($id)
     {
-        $id = strtolower($id);
-
+        $id  = strtolower(trim($id));
         $cms = $this;
 
         if (!isset($this[$id])) {

@@ -37,6 +37,11 @@ abstract class AbstractEvents extends AbstractHelper
     protected $_eManager;
 
     /**
+     * @var bool
+     */
+    protected $_isAdmin;
+
+    /**
      * AbstractEvents constructor
      * @param Cms          $cms
      * @param EventManager $eManager
@@ -45,6 +50,7 @@ abstract class AbstractEvents extends AbstractHelper
     {
         parent::__construct($cms);
         $this->_eManager = $eManager;
+        $this->_isAdmin  = $this->_cms['env']->isAdmin();
     }
 
     /**
@@ -78,7 +84,7 @@ abstract class AbstractEvents extends AbstractHelper
 
         $count = $this->_eManager->trigger($triggerName, $arguments);
 
-        if ($this->_isAdmin()) {
+        if ($this->_isAdmin) {
             $count += $this->_eManager->trigger($triggerName . self::POSTFIX_ADMIN, $arguments);
         } else {
             $count += $this->_eManager->trigger($triggerName . self::POSTFIX_SITE, $arguments);
@@ -88,16 +94,16 @@ abstract class AbstractEvents extends AbstractHelper
     }
 
     /**
+     * @return EventManager
+     */
+    public function getManager()
+    {
+        return $this->_eManager;
+    }
+
+    /**
      * @param string|null $content
      * @return mixed
      */
     abstract public function filterContent(&$content = null);
-
-    /**
-     * @return bool
-     */
-    protected function _isAdmin()
-    {
-        return $this->_cms['env']->isAdmin();
-    }
 }
