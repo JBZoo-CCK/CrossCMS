@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractAssets;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Assets
@@ -31,8 +32,9 @@ class Assets extends AbstractAssets
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_document = \JFactory::getDocument();
     }
 

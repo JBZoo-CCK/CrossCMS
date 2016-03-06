@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractSession;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Session
@@ -36,8 +37,9 @@ class Session extends AbstractSession
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_session = \JFactory::getSession();
     }
 

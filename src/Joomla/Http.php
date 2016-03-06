@@ -24,7 +24,6 @@ use JBZoo\Data\Data;
  */
 class Http extends AbstractHttp
 {
-
     /**
      * {@inheritdoc}
      */

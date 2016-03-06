@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractRequest;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Request
@@ -31,8 +32,9 @@ class Request extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_input = \JFactory::getApplication()->input;
     }
 

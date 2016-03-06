@@ -25,13 +25,6 @@ use JBZoo\Utils\Vars;
 class Config extends AbstractConfig
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function sitename()

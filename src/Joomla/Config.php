@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractConfig;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Config
@@ -29,10 +30,11 @@ class Config extends AbstractConfig
     protected $_config = null;
 
     /**
-     * Constructor
+     * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_config = \JFactory::getConfig();
     }
 

@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractDatabase;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Database
@@ -29,10 +30,11 @@ class Database extends AbstractDatabase
     protected $_db = null;
 
     /**
-     * Constructor
+     * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_db = \JFactory::getDbo();
     }
 

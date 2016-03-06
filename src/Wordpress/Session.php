@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractSession;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Session
@@ -32,8 +33,9 @@ class Session extends AbstractSession
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         if (!session_id() && !headers_sent()) {
             session_start(); // @codeCoverageIgnore
         }

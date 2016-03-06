@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractRequest;
+use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Request
@@ -32,8 +33,9 @@ class Request extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_wp_query = $GLOBALS['wp_query'];
     }
 

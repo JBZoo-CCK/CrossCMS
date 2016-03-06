@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractDatabase;
+use JBZoo\CrossCMS\Cms;
 use JBZoo\SqlBuilder\Query\Query;
 
 /**
@@ -33,8 +34,9 @@ class Database extends AbstractDatabase
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function __construct()
+    public function __construct(Cms $cms)
     {
+        parent::__construct($cms);
         $this->_db = $GLOBALS['wpdb'];
     }
 
