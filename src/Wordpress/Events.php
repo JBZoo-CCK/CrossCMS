@@ -26,33 +26,32 @@ class Events extends AbstractEvents
     /**
      *  Example of Wordpress Plugin with hooks
      *
-     *
      *  // Init
      *  add_action('wp', function () {
-     *      $cms = Cms::getInstance();
-     *      $cms['events']->trigger(AbstractEvent::EVENT_INIT);
+     *      $app = Cms::getInstance();
+     *      $app->trigger(AbstractEvent::EVENT_INIT);
      *  });
      *
      *
      *  // Header render
      *  add_action('wp_head', function () {
-     *      $cms = Cms::getInstance();
-     *      $cms['events']->trigger(AbstractEvent::EVENT_HEADER);
+     *      $app = Cms::getInstance();
+     *      $app->trigger(AbstractEvent::EVENT_HEADER);
      *  });
      *
      *
      *  // Content handlers (for macroses)
      *  add_filter('the_content', function ($content) {
-     *      $cms = Cms::getInstance();
-     *      $cms['events']->filterContent($content);
+     *      $app = Cms::getInstance();
+     *      $app['events']->filterContent($content);
      *      return $content;
      *  });
      *
      *
      *  // Shutdown callback
      *  add_action('shutdown', function () {
-     *      $cms = Cms::getInstance();
-     *      $cms['events']->trigger(AbstractEvent::EVENT_SHUTDOWN);
+     *      $app = Cms::getInstance();
+     *      $app->trigger(AbstractEvent::EVENT_SHUTDOWN);
      *  });
      */
 
@@ -61,6 +60,6 @@ class Events extends AbstractEvents
      */
     public function filterContent(&$content = null)
     {
-        $this->trigger(AbstractEvents::EVENT_CONTENT, array(&$content));
+        $this->_cms->trigger(AbstractEvents::EVENT_CONTENT, array(&$content));
     }
 }

@@ -159,15 +159,15 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     {
         /* Events:content **********************************************************************************************/
         if ($this->_request('test-events-content')) {
-            $this->_cms['events']->on('cms.content.site', function (Cms $app, &$body) {
+            $this->_cms->on('cms.content.site', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content.site'];
             });
 
-            $this->_cms['events']->on('cms.content.admin', function (Cms $app, &$body) {
+            $this->_cms->on('cms.content.admin', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content.admin'];
             }, EventManager::LOW);
 
-            $this->_cms['events']->on('cms.content', function (Cms $app, &$body) {
+            $this->_cms->on('cms.content', function (Cms $app, &$body) {
                 $body .= $_REQUEST['test-events-content']['content'];
             }, EventManager::HIGH);
 
@@ -183,19 +183,19 @@ class PlgSystemJBZooPHPUnit extends JPlugin
 
         /* Events:header ***********************************************************************************************/
         if ($this->_request('test-events-header')) {
-            $this->_cms['events']->on('cms.header.site', function () {
+            $this->_cms->on('cms.header.site', function () {
                 echo $_REQUEST['test-events-header']['header.site'];
             });
 
-            $this->_cms['events']->on('cms.header.admin', function () {
+            $this->_cms->on('cms.header.admin', function () {
                 echo $_REQUEST['test-events-header']['header.admin'];
             }, EventManager::LOW);
 
-            $this->_cms['events']->on('cms.header', function () {
+            $this->_cms->on('cms.header', function () {
                 echo $_REQUEST['test-events-header']['header'];
             }, EventManager::HIGH);
 
-            $this->_cms['events']->trigger(AbstractEvents::EVENT_HEADER);
+            $this->_cms->trigger(AbstractEvents::EVENT_HEADER);
         }
     }
 
@@ -212,20 +212,20 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     {
         /* Events:init *************************************************************************************************/
         if ($this->_request('test-events-init')) {
-            $this->_cms['events']->on('cms.init.site', function () {
+            $this->_cms->on('cms.init.site', function () {
                 echo $_REQUEST['test-events-init']['init.site'];
             });
 
-            $this->_cms['events']->on('cms.init.admin', function () {
+            $this->_cms->on('cms.init.admin', function () {
                 echo $_REQUEST['test-events-init']['init.admin'];
             }, EventManager::LOW);
 
-            $this->_cms['events']->on('cms.init', function () {
+            $this->_cms->on('cms.init', function () {
                 echo $_REQUEST['test-events-init']['init'];
             }, EventManager::HIGH);
 
             // Execute Trigger
-            $this->_cms['events']->trigger(AbstractEvents::EVENT_INIT);
+            $this->_cms->trigger(AbstractEvents::EVENT_INIT);
         }
     }
 

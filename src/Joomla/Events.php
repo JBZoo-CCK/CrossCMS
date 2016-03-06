@@ -26,38 +26,38 @@ class Events extends AbstractEvents
     /**
      *  Example of Joomla Plugin (system)
      *
-     *
      *  use JBZoo\CrossCMS\Cms;
      *  use JBZoo\CrossCMS\AbstractEvent;
      *
      *  class PlgSystemJBZoo extends JPlugin
      *  {
+     *      // $var Cms
+     *      protected $this->_app;
+     *
      *      // Init
      *      public function onAfterInitialise()
      *      {
-     *          if (!class_exists('\JBZoo\CrossCMS\Cms')) {
-     *              if ($autoloadPath = realpath('./vendor/autoload.php')) {
-     *                  require_once $autoloadPath;
-     *              }
-     *          }
+     *          require_once './vendor/autoload.php';
      *
-     *          $cms = Cms::getInstance();
-     *          $cms['events']->trigger(AbstractEvent::EVENT_INIT);
+     *          $this->_app = Cms::getInstance();
+     *
+     *          $this->_app->trigger(AbstractEvent::EVENT_INIT);
      *      }
      *
      *      // Header render
      *      public function onBeforeCompileHead()
      *      {
-     *          $cms = Cms::getInstance();
-     *          $cms['events']->trigger(AbstractEvent::EVENT_HEADER);
+     *          $this->_app->trigger(AbstractEvent::EVENT_HEADER);
      *      }
      *
      *      // Content handlers (for macroses)
      *      public function onAfterRespond()
      *      {
-     *          $cms = Cms::getInstance();
-     *          $cms['events']->triggerContent();
-     *          $cms['events']->trigger(AbstractEvent::EVENT_SHUTDOWN);
+     *          $body = JFactory::getApplication()->getBody();
+     *          $this->_app->trigger(AbstractEvent::EVENT_CONTENT, [$body]);
+     *          JFactory::getApplication()->setBody($body);
+     *
+     *          $this->_app->trigger(AbstractEvent::EVENT_SHUTDOWN, [&$body]);
      *      }
      *  }
      */
@@ -69,7 +69,7 @@ class Events extends AbstractEvents
     {
         $body = \JFactory::getApplication()->getBody();
 
-        $this->trigger(AbstractEvents::EVENT_CONTENT, array(&$body));
+        $this->_cms->trigger(AbstractEvents::EVENT_CONTENT, array(&$body));
 
         \JFactory::getApplication()->setBody($body);
     }

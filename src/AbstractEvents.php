@@ -53,12 +53,14 @@ abstract class AbstractEvents extends AbstractHelper
      * @param string   $triggerName
      * @param callable $function
      * @param int      $priority
+     * @return $this
      *
      * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public function on($triggerName, callable $function, $priority = EventManager::MID)
     {
         $this->_eManager->on($triggerName, $function, $priority);
+        return $this;
     }
 
     /**

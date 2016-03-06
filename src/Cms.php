@@ -79,13 +79,13 @@ class Cms extends Container
             $path   = Path::getInstance('crosscms');
 
             $path->setRoot($helper->getRoot());
-            $path->add($helper->getRoot(), 'root');
-            $path->add($helper->getUpload(), 'upload');
-            $path->add($helper->getCache(), 'cache');
-            $path->add($helper->getTmpl(), 'tmpl');
-            $path->add($helper->getLogs(), 'logs');
-            $path->add($helper->getTmp(), 'tmp');
-            $path->add(__DIR__ . '/../src', 'crosscms');
+            $path->set('root', $helper->getRoot());
+            $path->set('upload', $helper->getUpload());
+            $path->set('cache', $helper->getCache());
+            $path->set('tmpl', $helper->getTmpl());
+            $path->set('logs', $helper->getLogs());
+            $path->set('tmp', $helper->getTmp());
+            $path->set('crosscms', __DIR__ . '/../src');
 
             return $path;
         };
@@ -99,13 +99,44 @@ class Cms extends Container
 
         $this['lang'] = function ($cms) {
             $className = $cms['ns'] . 'Lang';
-            $helper    = new $className($cms);
 
-            $lang = new Lang($helper->getCode());
+            /** @var AbstractLang $helper */
+            $helper = new $className($cms);
+            $lang   = new Lang($helper->getCode());
             $helper->setCustomLang($lang);
 
             return $helper;
         };
+    }
+
+    /**
+     * Adds an event listener
+     *
+     * @param string   $event
+     * @param callable $listener
+     * @param int      $priority
+     *
+     * @return AbstractEvents
+     *
+     * @SuppressWarnings(PHPMD.ShortMethodName)
+     */
+    public function on($event, $listener, $priority = EventManager::MID)
+    {
+        $this['events']->on($event, $listener, $priority);
+
+        return $this;
+    }
+
+    /**
+     * Trigger all event listners
+     *
+     * @param  string $event
+     * @param  array  $arguments
+     * @return int
+     */
+    public function trigger($event, array $arguments = array())
+    {
+        return $this['events']->trigger($event, $arguments);
     }
 
     /**
