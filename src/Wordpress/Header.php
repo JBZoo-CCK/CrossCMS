@@ -17,6 +17,7 @@ namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractHeader;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Str;
 
 /**
  * Class Header
@@ -78,8 +79,8 @@ class Header extends AbstractHeader
      */
     public function jsFile($file)
     {
-        $handle = uniqid('crosscms-js-', true);
-        wp_enqueue_script($handle, $file);
+        $handle = 'crosscms-js-' . md5($file);
+        \wp_enqueue_script($handle, $file);
     }
 
     /**
@@ -87,7 +88,7 @@ class Header extends AbstractHeader
      */
     public function cssFile($file)
     {
-        $handle = uniqid('crosscms-css-', true);
+        $handle = 'crosscms-css-' . md5($file);
         \wp_enqueue_style($handle, $file);
     }
 
@@ -96,12 +97,7 @@ class Header extends AbstractHeader
      */
     public function jsCode($code)
     {
-        $code   = sprintf('<script>%s</script>' . PHP_EOL, $code);
-        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_scripts' : 'wp_print_scripts';
-
-        add_action($filter, function () use ($code) {
-            echo $code;
-        }, 30);
+        echo '<script type="text/javascript">' . PHP_EOL . $code . PHP_EOL . '</script>' . PHP_EOL;
     }
 
     /**
@@ -109,11 +105,6 @@ class Header extends AbstractHeader
      */
     public function cssCode($code)
     {
-        $code   = sprintf('<style>%s</style>' . PHP_EOL, $code);
-        $filter = $this->_cms['env']->isAdmin() ? 'admin_print_styles' : 'wp_print_styles';
-
-        add_action($filter, function () use ($code) {
-            echo $code;
-        });
+        echo '<style type="text/css">' . $code . '</style>' . PHP_EOL;
     }
 }
