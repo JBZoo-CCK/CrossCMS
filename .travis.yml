@@ -62,6 +62,3 @@ script:
 
 after_script:
   - composer coveralls
-
-notifications:
-  slack: jbzoo:lKYRTvAF36tRDfKTOK5zhFh9
