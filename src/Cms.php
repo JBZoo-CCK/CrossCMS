@@ -79,7 +79,6 @@ class Cms extends Container
             $path   = Path::getInstance('crosscms');
 
             $path->setRoot($helper->getRoot());
-            $path->set('root', $helper->getRoot());
             $path->set('upload', $helper->getUpload());
             $path->set('cache', $helper->getCache());
             $path->set('tmpl', $helper->getTmpl());
