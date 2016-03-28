@@ -53,6 +53,7 @@ script:
   - composer phpunit-wordpress
 
   - composer prepare-joomla
+  - cat ./resources/joomla/configuration.php
   - composer phpunit-joomla
 
   # Other tests
