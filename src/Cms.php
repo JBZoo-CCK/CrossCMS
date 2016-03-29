@@ -77,14 +77,24 @@ class Cms extends Container
             /** @var AbstractPath $helper */
             $helper = new $className($cms);
             $path   = Path::getInstance('crosscms');
-
             $path->setRoot($helper->getRoot());
-            $path->set('upload', $helper->getUpload());
-            $path->set('cache', $helper->getCache());
-            $path->set('tmpl', $helper->getTmpl());
-            $path->set('logs', $helper->getLogs());
-            $path->set('tmp', $helper->getTmp());
-            $path->set('crosscms', __DIR__ . '/../src');
+
+            $preDefinedPaths = [
+                'upload'   => $helper->getUpload(),
+                'cache'    => $helper->getCache(),
+                'tmpl'     => $helper->getTmpl(),
+                'logs'     => $helper->getLogs(),
+                'tmp'      => $helper->getTmp(),
+                'crosscms' => __DIR__ . '/../src',
+            ];
+
+            foreach ($preDefinedPaths as $alias => $pathValue) {
+                if (!is_dir($pathValue)) {
+                    mkdir($pathValue, 0755, true);
+                }
+
+                $path->set($alias, $pathValue);
+            }
 
             return $path;
         };

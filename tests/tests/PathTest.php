@@ -45,8 +45,8 @@ class PathTest extends CrossCMS
             array('upload', PROJECT_RES . '/joomla/images'),
             array('cache', PROJECT_RES . '/joomla/cache'),
             array('tmpl', PROJECT_RES . '/joomla/templates'),
-            array('logs', PROJECT_RES . '/joomla/logs'),
-            array('tmp', PROJECT_RES . '/joomla/tmp'),
+            //array('logs', PROJECT_RES . '/joomla/logs'),
+            //array('tmp', PROJECT_RES . '/joomla/tmp'),
             array('crosscms', './src'),
         );
     }
