@@ -51,7 +51,7 @@ class Path extends AbstractPath
      */
     public function getCache()
     {
-        return JPATH_CACHE;
+        return JPATH_ROOT . '/cache';
     }
 
     /**
