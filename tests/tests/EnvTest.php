@@ -34,5 +34,6 @@ class EnvTest extends CrossCMS
         isFalse($cms['env']->isAdmin());
         isTrue($cms['env']->isSite());
         isTrue($cms['env']->isCli());
+        isContain('http:', $cms['env']->getRootUrl());
     }
 }

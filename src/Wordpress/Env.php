@@ -48,4 +48,12 @@ class Env extends AbstractEnv
     {
         return is_admin();
     }
+
+    /**
+     * @return string
+     */
+    public function getRootUrl()
+    {
+        return site_url();
+    }
 }

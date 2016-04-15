@@ -48,4 +48,12 @@ class Env extends AbstractEnv
     {
         return \JFactory::getApplication()->isAdmin();
     }
+
+    /**
+     * @return string
+     */
+    public function getRootUrl()
+    {
+        return \JUri::root();
+    }
 }

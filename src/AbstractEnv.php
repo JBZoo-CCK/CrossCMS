@@ -39,6 +39,11 @@ abstract class AbstractEnv extends AbstractHelper
     abstract public function isAdmin();
 
     /**
+     * @return string
+     */
+    abstract public function getRootUrl();
+
+    /**
      * @return bool
      */
     public function isCli()
