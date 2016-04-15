@@ -181,11 +181,13 @@ class Cms extends Container
         $cms = $this;
 
         if (!isset($this[$id])) {
-            $this[$id] = function ($cms) use ($id, $cms) {
-                $className = $cms['ns'] . ucfirst($id);
-                $helper    = new $className($cms);
-                return $helper;
-            };
+            $className = $cms['ns'] . ucfirst($id);
+
+            if (class_exists($className)) {
+                $this[$id] = function ($cms) use ($className, $cms) {
+                    return new $className($cms);
+                };
+            }
         }
 
         return parent::offsetGet($id);
