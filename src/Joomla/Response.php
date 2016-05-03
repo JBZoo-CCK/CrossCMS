@@ -87,8 +87,8 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.json', [&$data, &$result]);
 
-        $data['message'] = Vars::get($data['message']);
-        $data['result']  = (int)$result;
+        //$data['message'] = Vars::get($data['message']);
+        //$data['result']  = (int)$result;
 
         $this->noCache();
         $this->setHeader('Content-Type', 'application/json; charset=utf-8');

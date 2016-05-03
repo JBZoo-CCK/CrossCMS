@@ -51,14 +51,14 @@ class ResponseTest extends CrossCMS
         $uniq = uniqid();
 
         $json = Helper::runIsolatedCMS(__METHOD__, array('test-response-json' => array(
-            'message' => 'Error message',
-            $uniq     => $uniq,
+            //'message' => 'Error message',
+            $uniq => $uniq,
         )));
 
         isSame(array(
-            "message" => "Error message",
-            $uniq     => $uniq,
-            "result"  => 1,
+            //"message" => "Error message",
+            $uniq => $uniq,
+            //"result"  => 1,
         ), json_decode($json, true));
     }
 
