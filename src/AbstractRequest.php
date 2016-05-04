@@ -143,26 +143,26 @@ abstract class AbstractRequest extends AbstractHelper
      * @param string $name
      * @param null   $default
      * @param null   $filters
-     * @return Data
+     * @return Data|mixed
      */
     public function getJSON($name = null, $default = null, $filters = null)
     {
         static $data;
 
         $input = null;
-        if (is_null($data)) {
-            if ($this->getHeader('Content-Type') === 'application/json') {
+        if (null === $data) {
+            if ($this->getHeader('Content-Type', 'text/html', 'low') === 'application/json') {
                 $input = file_get_contents('php://input');
             }
+
+            $data = new JSON($input);
         }
 
-        $data = new JSON($input);
-
-        if ($name) {
-            return $data->find($name, $default, $filters);
+        if (null === $name) {
+            return $data;
         }
 
-        return $data;
+        return $data->find($name, $default, $filters);
     }
 
     /**
