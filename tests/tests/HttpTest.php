@@ -26,6 +26,12 @@ class HttpTest extends CrossCMS
 {
     protected $_url = 'http://mockbin.org/bin/28cbba67-c8f3-42f2-bc4d-5610f044e913';
 
+    protected function setUp()
+    {
+        parent::setUp();
+        sleep(3); // timeout for mockbin.org
+    }
+
     /* Simple *********************************************************************************************************/
 
     public function testSimple_request()
