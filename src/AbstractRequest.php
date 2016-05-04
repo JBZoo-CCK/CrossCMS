@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS;
 
 use JBZoo\Data\Data;
+use JBZoo\Data\JSON;
 use JBZoo\Utils\Url;
 use JBZoo\Utils\Http;
 use JBZoo\Utils\Vars;
@@ -134,6 +135,30 @@ abstract class AbstractRequest extends AbstractHelper
     public function getUri()
     {
         return Url::current();
+    }
+
+    /**
+     * Get JSON from php://input stream
+     *
+     * @param string $name
+     * @param null   $default
+     * @param null   $filters
+     * @return Data
+     */
+    public function getJSON($name, $default = null, $filters = null)
+    {
+        static $data;
+
+        $input = null;
+        if (is_null($data)) {
+            if ($this->getHeader('Content-Type') === 'application/json') {
+                $input = file_get_contents('php://input');
+            }
+        }
+
+        $data = new JSON($input);
+
+        return $data->find($name, $default, $filters);
     }
 
     /**
