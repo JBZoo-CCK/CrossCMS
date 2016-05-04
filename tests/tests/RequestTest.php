@@ -50,6 +50,9 @@ class RequestTest extends CrossCMS
     public function testIsAjax()
     {
         isFalse($this->_cms['request']->isAjax());
+
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        isTrue($this->_cms['request']->isAjax());
     }
 
     public function testSet()

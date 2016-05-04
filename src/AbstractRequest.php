@@ -124,7 +124,7 @@ abstract class AbstractRequest extends AbstractHelper
     {
         $method = Vars::get($_SERVER['HTTP_X_REQUESTED_WITH'], '');
         $method = Filter::cmd($method);
-        $orig   = Filter::cmd('XMLHttpRequestt');
+        $orig   = Filter::cmd('XMLHttpRequest');
 
         return $orig === $method;
     }
