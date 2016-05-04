@@ -16,7 +16,6 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\CrossCMS\AbstractHttp;
-use JBZoo\CrossCMS\Cms;
 use JBZoo\Data\JSON;
 
 /**

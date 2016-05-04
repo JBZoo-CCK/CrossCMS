@@ -104,6 +104,8 @@ class Session extends AbstractSession
      */
     public function getToken()
     {
+        require_once(ABSPATH . 'wp-includes/pluggable.php');
+
         return wp_create_nonce();
     }
 }
