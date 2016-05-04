@@ -145,7 +145,7 @@ abstract class AbstractRequest extends AbstractHelper
      * @param null   $filters
      * @return Data
      */
-    public function getJSON($name, $default = null, $filters = null)
+    public function getJSON($name = null, $default = null, $filters = null)
     {
         static $data;
 
@@ -158,7 +158,11 @@ abstract class AbstractRequest extends AbstractHelper
 
         $data = new JSON($input);
 
-        return $data->find($name, $default, $filters);
+        if ($name) {
+            return $data->find($name, $default, $filters);
+        }
+
+        return $data;
     }
 
     /**
