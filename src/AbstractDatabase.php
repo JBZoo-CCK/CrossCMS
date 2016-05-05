@@ -23,6 +23,8 @@ use JBZoo\SqlBuilder\Query\Query;
  */
 abstract class AbstractDatabase extends AbstractHelper
 {
+    protected $_pseudoPrefix = '#__';
+
     /**
      * @return string
      */
@@ -69,6 +71,9 @@ abstract class AbstractDatabase extends AbstractHelper
      */
     protected function _prepareSql($sql)
     {
-        return (string)$sql;
+        $sql = (string)$sql;
+        $sql = str_replace($this->_pseudoPrefix, $this->getPrefix(), $sql);
+
+        return $sql;
     }
 }
