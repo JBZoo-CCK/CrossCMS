@@ -41,8 +41,12 @@ class Request extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    protected function _get($name, $default = null)
+    protected function _get($name, $default = null, $isArray = false)
     {
+        if ($isArray) {
+            return $this->_input->get($name, $default, 'array');
+        }
+
         // Yeap, HTML is not RAW, but it safes your website
         return $this->_input->get($name, $default, 'html');
     }

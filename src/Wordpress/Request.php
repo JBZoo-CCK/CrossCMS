@@ -42,7 +42,7 @@ class Request extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    protected function _get($name, $default = null)
+    protected function _get($name, $default = null, $isArray = false)
     {
         return $this->_wp_query->get($name, $default);
     }

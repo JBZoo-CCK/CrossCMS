@@ -58,13 +58,32 @@ abstract class AbstractRequest extends AbstractHelper
      */
     public function get($name, $default = null, $filters = null)
     {
-        $value = $this->_get($name, $default);
+        $value = $this->_get($name, $default, $filters === 'arr');
 
         if ($filters) {
             $value = Filter::_($value, $filters);
         }
 
         return $value;
+    }
+
+    /**
+     * Get array variable from request
+     *
+     * @param string          $name
+     * @param mixed           $default
+     * @param string|\Closure $filters
+     * @return mixed
+     */
+    public function getArray($name, $default = null, $filters = null)
+    {
+        $value = $this->_get($name, $default, true);
+
+        if ($filters) {
+            $value = Filter::_($value, $filters);
+        }
+
+        return new Data($value);
     }
 
     /**
@@ -188,10 +207,10 @@ abstract class AbstractRequest extends AbstractHelper
     /**
      * @param string $name
      * @param mixed  $default
+     * @param bool   $isArray
      * @return mixed
-     * @internal param bool $isRaw
      */
-    abstract protected function _get($name, $default = null);
+    abstract protected function _get($name, $default = null, $isArray = false);
 
     /**
      * @param string $name

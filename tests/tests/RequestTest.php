@@ -66,6 +66,32 @@ class RequestTest extends CrossCMS
         isSame('123456', $req->get('foo'));
     }
 
+    public function testGetAndSetArray()
+    {
+        $req = $this->_cms['request'];
+
+        $data = [
+            'key_1'  => 'value_1',
+            'nested' => [
+                'key_2' => 'value_2'
+            ]
+        ];
+
+        $req->set('arr', $data);
+
+        isSame($data, $req->get('arr', [], 'arr'));
+        isClass('\JBZoo\Data\Data', $req->getArray('arr'));
+        isSame($data, (array)$req->getArray('arr'));
+
+        $data['qwe'] = 'rty';
+        isSame($data, (array)$req->getArray('arr', null, function ($value) {
+            $value['qwe'] = 'rty';
+            return $value;
+        }));
+
+        isSame('value_2', $req->getArray('arr')->find('nested.key_2'));
+    }
+
     public function testCheckEmptyToken()
     {
         //skip('TODO: Joomla fail test');
