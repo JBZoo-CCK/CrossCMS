@@ -24,7 +24,13 @@ use JBZoo\Data\JSON;
  */
 class HttpTest extends CrossCMS
 {
-    protected $_url = 'http://mockbin.org/bin/28cbba67-c8f3-42f2-bc4d-5610f044e913';
+    protected $_url = 'http://mockbin.org/bin/5fb64e6d-d5ff-4ff6-9333-025b94d686a7';
+
+    protected function setUp()
+    {
+        parent::setUp();
+        sleep(1); // timeout for mockbin.org
+    }
 
     /* Simple *********************************************************************************************************/
 

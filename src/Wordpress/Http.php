@@ -55,12 +55,13 @@ class Http extends AbstractHttp
      */
     protected function _compactResponse($apiResponse)
     {
-        $apiResponse = new Data($apiResponse);
+        $dataResponse = new Data($apiResponse);
 
         $response = array(
-            'code'    => $apiResponse->find('response.code', 0, 'int'),
-            'headers' => array_change_key_case((array)$apiResponse->get('headers', array()), CASE_LOWER),
-            'body'    => $apiResponse->get('body'),
+            'code'      => $dataResponse->find('response.code', 0, 'int'),
+            'headers'   => array_change_key_case((array)$dataResponse->get('headers', array()), CASE_LOWER),
+            'body'      => $dataResponse->get('body'),
+            '_wp_clean' => $apiResponse,
         );
 
         $response = new Data($response);
