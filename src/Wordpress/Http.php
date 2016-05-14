@@ -29,7 +29,7 @@ class Http extends AbstractHttp
      */
     protected function _request($url, array $args, Data $options)
     {
-        $httpClient = new \WP_Http()
+        $httpClient = new \WP_Http();
 
         $apiResponse = $httpClient->request($url, array(
             'body'        => $args,
