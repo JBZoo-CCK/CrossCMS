@@ -126,13 +126,8 @@ abstract class AbstractHttp extends AbstractHelper
 
         } catch (\Exception $e) {
 
-            $body = null;
-            if ($isDebug) {
-                $body = 'CrossCMS Error: ' . $e->getMessage();
-            }
-
             $apiResp = new Data(array(
-                'body'    => $body,
+                'body'    => 'CrossCMS Error: ' . $e->getMessage() . PHP_EOL . PHP_EOL . $e->getTraceAsString(),
                 'headers' => array(),
                 'code'    => 0,
             ));
