@@ -58,10 +58,9 @@ class Http extends AbstractHttp
         $dataResponse = new Data($apiResponse);
 
         $response = array(
-            'code'      => $dataResponse->find('response.code', 0, 'int'),
-            'headers'   => array_change_key_case((array)$dataResponse->get('headers', array()), CASE_LOWER),
-            'body'      => $dataResponse->get('body'),
-            '_wp_clean' => $apiResponse,
+            'code'    => $dataResponse->find('response.code', 0, 'int'),
+            'headers' => array_change_key_case((array)$dataResponse->get('headers', array()), CASE_LOWER),
+            'body'    => $dataResponse->get('body'),
         );
 
         $response = new Data($response);
