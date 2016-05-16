@@ -259,27 +259,6 @@ class HttpTest extends CrossCMS
         isSame('"Custom name' . $uniq . '"', $resp);
     }
 
-    public function testOption_debug()
-    {
-        $resp = $this->_cms['http']->request('http://mockbin.org/request', array(), array(
-            'response' => AbstractHttp::RESULT_FULL,
-            'method'   => 'undefined',
-            'debug'    => 0,
-        ));
-
-        isNull($resp->get('body'));
-        //isFalse($resp->get('info'));
-
-        $resp = $this->_cms['http']->request('http://mockbin.org/request', array(), array(
-            'response' => AbstractHttp::RESULT_FULL,
-            'method'   => 'undefined',
-            'debug'    => 1,
-        ));
-
-        isContain('CrossCMS Error: ', $resp->get('body'));
-        //isTrue($resp->get('info')); // TODO Add extended debug information (trace, times, memory, etc)
-    }
-
     /* Redirects ******************************************************************************************************/
 
     public function testRedirect_simple()
