@@ -76,7 +76,6 @@ class RequestTest extends CrossCMS
 
         isSame('123456', $_REQUEST['arr']['key_1']);
         isSame('123456', $_GET['arr']['key_1']);
-        isSame(['key_1' => '123456'], $req->get('arr'));
     }
 
     public function testGetAndSetArray()
