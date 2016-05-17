@@ -71,15 +71,12 @@ class RequestTest extends CrossCMS
         $req = $this->_cms['request'];
 
         $req->set('arr', [
-            'key_1'  => 'value_1',
-            'nested' => [
-                'key_2' => 'value_2'
-            ]
+            'key_1' => '123456',
         ]);
 
-        isSame('123456', $_REQUEST['foo']);
-        isSame('123456', $_GET['foo']);
-        isSame('123456', $req->get('foo'));
+        isSame('123456', $_REQUEST['arr']['key_1']);
+        isSame('123456', $_GET['arr']['key_1']);
+        isSame(['key_1' => '123456'], $req->get('arr'));
     }
 
     public function testGetAndSetArray()
