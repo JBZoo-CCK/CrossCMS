@@ -8,13 +8,11 @@ php:
   - 5.5
   - 5.6
   - 7.0
-  - hhvm
 
 matrix:
   fast_finish: true
   allow_failures:
     - php: 7.0
-    - php: hhvm
   include:
     - php: 5.6
       env: XDEBUG_OFF="yes"
@@ -22,10 +20,17 @@ matrix:
       env: XDEBUG_OFF="yes"
 
 before_install:
-  # Mock mail service
-  - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then sudo bash tests/bin/prepare.sh; fi
+  # Mock mail services
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq postfix
 
 before_script:
+  # Mock mail service
+  - sudo service postfix stop
+  - smtp-sink -d "%d.%H.%M.%S" 127.0.0.1:2500 1000 &
+  - echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
+  - echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
+
   # Prepare Filesystem
   - mkdir -p ./build
   - mkdir -p ./build/logs
