@@ -233,6 +233,8 @@ class HttpTest extends CrossCMS
 
     public function testOption_timeout()
     {
+        skip();
+
         $resp = $this->_cms['http']->request('http://mockbin.org/delay/5001', array(), array(
             'timeout' => 2,
         ));
