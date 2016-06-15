@@ -16,7 +16,6 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractUser;
-use JBZoo\CrossCMS\Cms;
 use JBZoo\CrossCMS\Entity\User as UserEntity;
 use JBZoo\Data\Data;
 use JBZoo\SqlBuilder\Query\Select;

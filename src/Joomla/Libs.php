@@ -16,7 +16,6 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractLibs;
-use JBZoo\CrossCMS\Cms;
 
 /**
  * Class Libs

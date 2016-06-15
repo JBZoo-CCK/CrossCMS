@@ -17,7 +17,6 @@ namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractDatabase;
 use JBZoo\CrossCMS\Cms;
-use JBZoo\SqlBuilder\Query\Query;
 
 /**
  * Class Database

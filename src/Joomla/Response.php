@@ -18,7 +18,6 @@ namespace JBZoo\CrossCMS\Joomla;
 use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\AbstractResponse;
 use JBZoo\CrossCMS\Cms;
-use JBZoo\Utils\Vars;
 
 /**
  * Class Request

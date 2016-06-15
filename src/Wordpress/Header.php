@@ -16,8 +16,6 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractHeader;
-use JBZoo\CrossCMS\Cms;
-use JBZoo\Utils\Str;
 
 /**
  * Class Header
