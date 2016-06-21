@@ -17,7 +17,7 @@
         "pimple/pimple"    : "^3.0",
         "jbzoo/sqlbuilder" : "^1.0",
         "jbzoo/data"       : "^1.3.4",
-        "jbzoo/utils"      : "^1.4.3",
+        "jbzoo/utils"      : "^1.7.0",
         "jbzoo/path"       : "^1.0",
         "jbzoo/event"      : "^1.2.1",
         "jbzoo/lang"       : "^1.0"
