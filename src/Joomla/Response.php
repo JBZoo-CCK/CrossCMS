@@ -18,6 +18,7 @@ namespace JBZoo\CrossCMS\Joomla;
 use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\AbstractResponse;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Ob;
 
 /**
  * Class Request
@@ -48,7 +49,9 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.404', [&$message]);
 
+        Ob::clean();
         $this->noCache();
+
         throw new \Exception($message, 404);
     }
 
@@ -61,7 +64,9 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.500', [&$message]);
 
+        Ob::clean();
         $this->noCache();
+
         throw new \Exception($message, 500);
     }
 
@@ -86,9 +91,7 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.json', [&$data, &$result]);
 
-        //$data['message'] = Vars::get($data['message']);
-        //$data['result']  = (int)$result;
-
+        Ob::clean();
         $this->noCache();
         $this->setHeader('Content-Type', 'application/json; charset=utf-8');
         $this->_app->sendHeaders();

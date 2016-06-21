@@ -18,6 +18,7 @@ namespace JBZoo\CrossCMS\Wordpress;
 use JBZoo\CrossCMS\AbstractEvents;
 use JBZoo\CrossCMS\AbstractResponse;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Ob;
 use JBZoo\Utils\Vars;
 
 /**
@@ -49,6 +50,7 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.404', [&$message]);
 
+        Ob::clean();
         $this->_wp_query->set_404();
         status_header(404);
         $this->noCache();
@@ -77,6 +79,7 @@ class Response extends AbstractResponse
             ob_end_clean();
         }
 
+        Ob::clean();
         status_header(500);
         $this->noCache();
         $this->setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -109,9 +112,7 @@ class Response extends AbstractResponse
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN);
         $this->_cms->trigger(AbstractEvents::EVENT_SHUTDOWN . '.json', [&$data, &$result]);
 
-        //$data['message'] = Vars::get($data['message']);
-        //$data['result']  = (int)$result;
-
+        Ob::clean();
         $this->noCache();
         $this->setHeader('Content-Type', 'application/json; charset=utf-8');
 
