@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS;
 
 use JBZoo\SqlBuilder\Query\Query;
+use JBZoo\SqlBuilder\SqlBuilder;
 
 /**
  * Class AbstractDatabase
@@ -64,6 +65,47 @@ abstract class AbstractDatabase extends AbstractHelper
      * @return int
      */
     abstract public function insertId();
+
+    /**
+     * Quotes and optionally escapes a string to database requirements for use in database queries.
+     *
+     * @param   mixed   $text   A string or an array of strings to quote.
+     * @param   boolean $escape True (default) to escape the string, false to leave it unchanged.
+     * @return  string
+     *
+     * @codeCoverageIgnore
+     */
+    public function quote($text, $escape = true)
+    {
+        return SqlBuilder::get()->quote($text, $escape);
+    }
+
+    /**
+     * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
+     * risks and reserved word conflicts.
+     *
+     * @param   string $name
+     * @param   string $alias
+     * @return  mixed
+     *
+     * @codeCoverageIgnore
+     */
+    public function quoteName($name, $alias = null)
+    {
+        return SqlBuilder::get()->quoteName($name, $alias);
+    }
+
+    /**
+     * @param string $condition
+     * @param string $value
+     * @return string
+     *
+     * @codeCoverageIgnore
+     */
+    public function clean($condition, $value = null)
+    {
+        return SqlBuilder::get()->clean($condition, $value);
+    }
 
     /**
      * @param string|Query $sql
