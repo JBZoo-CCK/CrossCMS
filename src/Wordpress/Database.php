@@ -17,6 +17,7 @@ namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractDatabase;
 use JBZoo\CrossCMS\Cms;
+use JBZoo\CrossCMS\Exception\Exception;
 
 /**
  * Class Database
@@ -55,6 +56,8 @@ class Database extends AbstractDatabase
         $sql    = $this->_prepareSql($sql);
         $result = $this->_db->query($sql);
 
+        $this->_checkError();
+
         return $result;
     }
 
@@ -65,6 +68,8 @@ class Database extends AbstractDatabase
     {
         $sql    = $this->_prepareSql($sql);
         $result = $this->_db->get_results($sql, ARRAY_A);
+
+        $this->_checkError();
 
         return $result;
     }
@@ -77,6 +82,8 @@ class Database extends AbstractDatabase
         $sql    = $this->_prepareSql($sql);
         $result = $this->_db->get_row($sql, ARRAY_A);
 
+        $this->_checkError();
+
         return $result;
     }
 
@@ -87,6 +94,8 @@ class Database extends AbstractDatabase
     {
         $sql    = $this->_prepareSql($sql);
         $result = $this->_db->get_row($sql, ARRAY_N);
+
+        $this->_checkError();
 
         return $result;
     }
@@ -105,5 +114,15 @@ class Database extends AbstractDatabase
     public function insertId()
     {
         return $this->_db->insert_id;
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function _checkError()
+    {
+        if ($this->_db->last_error) {
+            throw new Exception('Database Error: ' . $this->_db->last_error);
+        }
     }
 }

@@ -73,4 +73,13 @@ class DatabaseTest extends CrossCMS
         isTrue(strlen($db->getPrefix()) > 0);
     }
 
+    /**
+     * @expectedException Exception
+     */
+    public function testInvalidQuery()
+    {
+        $db     = $this->_getDb();
+        $select = new Select('information_schema.qwerty123');
+        $db->fetchRow($select);
+    }
 }
