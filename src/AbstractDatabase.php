@@ -108,6 +108,37 @@ abstract class AbstractDatabase extends AbstractHelper
     }
 
     /**
+     * Get the list of columns for the table
+     *
+     * @param   string  $table    The name of the database table.
+     * @param   boolean $typeOnly True to only return field types.
+     * @return  array  An array of fields for the database table.
+     */
+    public function getTableColumns($table, $typeOnly = true)
+    {
+        // Set the query to get the table fields statement.
+        $sql    = 'SHOW FULL COLUMNS FROM ' . $this->quoteName($this->escape($table));
+        $fields = $this->fetchAll($sql);
+
+        $result = [];
+
+        if ($typeOnly) { // If we only want the type as the value add just that to the list.
+
+            foreach ($fields as $field) {
+                $result[$field['Field']] = preg_replace("/[(0-9)]/", '', $field['Type']);
+            }
+
+        } else { // If we want the whole field data object add that to the list.
+
+            foreach ($fields as $field) {
+                $result[$field['Field']] = $field;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param string|Query $sql
      * @return string
      */

@@ -24,6 +24,21 @@ use JBZoo\SqlBuilder\Query\Select;
  */
 class DatabaseTest extends CrossCMS
 {
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $sql = "CREATE TABLE IF NOT EXISTS `#__jbzoo` (
+              `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+              `title` varchar(80) DEFAULT NULL,
+              PRIMARY KEY (`id`)
+        )
+        COLLATE='utf8_general_ci'
+        ENGINE=InnoDB;";
+
+        $this->_getDb()->query($sql);
+    }
+
     /**
      * @return \JBZoo\CrossCMS\AbstractDatabase
      */
@@ -81,5 +96,43 @@ class DatabaseTest extends CrossCMS
         $db     = $this->_getDb();
         $select = new Select('information_schema.qwerty123');
         $db->fetchRow($select);
+    }
+
+    public function testGetTableColumnsOnlyType()
+    {
+        $fields = $this->_getDb()->getTableColumns('#__jbzoo', true);
+        isSame(array(
+            "id"    => "int unsigned",
+            "title" => "varchar",
+        ), $fields);
+    }
+
+    public function testGetTableColumnsFull()
+    {
+        $fields = $this->_getDb()->getTableColumns('#__jbzoo', false);
+        isSame(array(
+            'id'    => array(
+                'Field'      => 'id',
+                'Type'       => 'int(10) unsigned',
+                'Collation'  => null,
+                'Null'       => 'NO',
+                'Key'        => 'PRI',
+                'Default'    => null,
+                'Extra'      => 'auto_increment',
+                'Privileges' => 'select,insert,update,references',
+                'Comment'    => '',
+            ),
+            'title' => array(
+                'Field'      => 'title',
+                'Type'       => 'varchar(80)',
+                'Collation'  => 'utf8_general_ci',
+                'Null'       => 'YES',
+                'Key'        => '',
+                'Default'    => null,
+                'Extra'      => '',
+                'Privileges' => 'select,insert,update,references',
+                'Comment'    => '',
+            )
+        ), $fields);
     }
 }
