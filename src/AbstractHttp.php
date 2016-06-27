@@ -66,7 +66,7 @@ abstract class AbstractHttp extends AbstractHelper
      * @return mixed
      * @throws \Exception
      */
-    abstract protected function _request($url, array $args, Data $options);
+    abstract protected function _request($url, $args, Data $options);
 
     /**
      * @param mixed $apiResponse
@@ -78,7 +78,7 @@ abstract class AbstractHttp extends AbstractHelper
     /**
      * {@inheritdoc}
      */
-    public function request($url, array $args = array(), array $options = array())
+    public function request($url, $args, array $options = array())
     {
         $result = null;
 
@@ -87,7 +87,7 @@ abstract class AbstractHttp extends AbstractHelper
         $options = new Data($options);
 
         // Prepare options for request
-        $args       = (array)$args;
+        $args       = is_string($args) ? $args : (array)$args;
         $timeout    = (int)$options->get('timeout');
         $isDebug    = (int)$options->get('debug');
         $sslVerify  = (int)$options->get('ssl_verify');

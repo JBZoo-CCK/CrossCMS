@@ -27,7 +27,7 @@ class Http extends AbstractHttp
     /**
      * {@inheritdoc}
      */
-    protected function _request($url, array $args, Data $options)
+    protected function _request($url, $args, Data $options)
     {
         $httpClient = new \WP_Http();
 

@@ -62,6 +62,20 @@ class HttpTest extends CrossCMS
         }
     }
 
+    public function testSimple_POSTpayload()
+    {
+        $payload = json_encode(array('key' => 'value'));
+
+        $resp = $this->_cms['http']->request('https://mockbin.org/request', $payload, array(
+            'method'     => 'POST',
+            'debug'      => 1,
+            'ssl_verify' => 0, // For travis ... =(
+        ));
+        $data = new JSON($resp);
+
+        isSame($payload, $data->find('postData.text'));
+    }
+
     public function testSimple_404()
     {
         $resp = $this->_cms['http']->request('http://mockbin.org/code/404', array(), array(
