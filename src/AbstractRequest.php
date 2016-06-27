@@ -181,7 +181,12 @@ abstract class AbstractRequest extends AbstractHelper
             return $data;
         }
 
-        return $data->find($name, $default, $filters);
+        $data = $data->find($name, null, $filters);
+        if (null === $data) {
+            return $this->get($name, $default, $filters);
+        }
+
+        return $data;
     }
 
     /**
