@@ -66,18 +66,13 @@ class HttpTest extends CrossCMS
     {
         $payload = json_encode(array('key' => 'value'));
 
-        $resp = $this->_cms['http']->request('https://mockbin.org/request', $payload, array(
+        $resp = $this->_cms['http']->request('http://mockbin.org/request', $payload, array(
             'method'     => 'POST',
             'debug'      => 1,
-            'headers'    => array(
-                'Content-Type' => 'application/json'
-            ),
             'ssl_verify' => 0, // For travis ... =(
         ));
 
-        print_r($resp);
         $data = new JSON($resp->body);
-        print_r($data);
 
         isSame($payload, $data->find('postData.text'));
     }
