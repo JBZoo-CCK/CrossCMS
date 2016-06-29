@@ -49,7 +49,7 @@ abstract class AbstractHttp extends AbstractHelper
         'timeout'    => 5,
         'method'     => self::METHOD_GET,
         'headers'    => array(),
-        'response'   => self::RESULT_BODY,
+        'response'   => self::RESULT_FULL,
         'cache'      => 0,
         'cache_ttl'  => 60, // in minutes!
         'user_agent' => 'CrossCMS HTTP Client v1.x-dev',
@@ -78,7 +78,7 @@ abstract class AbstractHttp extends AbstractHelper
     /**
      * {@inheritdoc}
      */
-    public function request($url, $args, array $options = array())
+    public function request($url, $args = array(), array $options = array())
     {
         $result = null;
 

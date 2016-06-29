@@ -24,12 +24,12 @@ use JBZoo\Data\JSON;
  */
 class HttpTest extends CrossCMS
 {
-    protected $_url = 'http://mockbin.org/bin/5fb64e6d-d5ff-4ff6-9333-025b94d686a7';
+    protected $_url = 'http://www.mocky.io/v2/5773641a0f0000f104597a4e';
 
     protected function setUp()
     {
         parent::setUp();
-        sleep(1); // timeout for mockbin.org
+        //sleep(1); // timeout for mockbin.org
     }
 
     /* Simple *********************************************************************************************************/
@@ -37,7 +37,7 @@ class HttpTest extends CrossCMS
     public function testSimple_request()
     {
         $resp = $this->_cms['http']->request($this->_url, array('qwerty' => '123456'));
-        isSame('{"key":"value"}', $resp);
+        isSame('{"key":"value"}', $resp->body);
     }
 
     public function testSimple_https()
@@ -69,9 +69,12 @@ class HttpTest extends CrossCMS
         $resp = $this->_cms['http']->request('https://mockbin.org/request', $payload, array(
             'method'     => 'POST',
             'debug'      => 1,
+            'headers'    => array(
+                'Content-Type' => 'application/json'
+            ),
             'ssl_verify' => 0, // For travis ... =(
         ));
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame($payload, $data->find('postData.text'));
     }
@@ -87,7 +90,7 @@ class HttpTest extends CrossCMS
     public function testSimple_gzip()
     {
         $resp = $this->_cms['http']->request('http://mockbin.org/gzip', array());
-        isSame('"Hello World!"', $resp);
+        isSame('"Hello World!"', $resp->body);
     }
 
     /* Methods ********************************************************************************************************/
@@ -97,7 +100,7 @@ class HttpTest extends CrossCMS
         $uniq = uniqid();
         $resp = $this->_cms['http']->request('http://mockbin.org/request', array('qwerty' => $uniq));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('GET', $data->get('method'));
         isSame($uniq, $data->find('queryString.qwerty'));
@@ -108,7 +111,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_GET,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('GET', $data->get('method'));
         isSame($uniq, $data->find('queryString.qwerty'));
@@ -122,7 +125,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_POST,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('POST', $data->get('method'));
         isSame($uniq, $data->find('postData.params.qwerty'));
@@ -146,7 +149,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_PUT,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('PUT', $data->get('method'));
         isSame($uniq, $data->find('postData.params.qwerty'));
@@ -158,7 +161,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_DELETE,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('DELETE', $data->get('method'));
     }
@@ -169,7 +172,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_OPTIONS,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('OPTIONS', $data->get('method'));
     }
@@ -180,7 +183,7 @@ class HttpTest extends CrossCMS
             'method' => AbstractHttp::METHOD_PATCH,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
 
         isSame('PATCH', $data->get('method'));
     }
@@ -247,32 +250,30 @@ class HttpTest extends CrossCMS
 
     public function testOption_timeout()
     {
-        skip();
-
         $resp = $this->_cms['http']->request('http://mockbin.org/delay/5001', array(), array(
             'timeout' => 2,
         ));
-        isNull($resp);
+        is(0, $resp->code);
 
         $resp = $this->_cms['http']->request('http://mockbin.org/delay/5002', array(), array(
             'timeout' => 10,
         ));
 
-        $data = new JSON($resp);
+        $data = new JSON($resp->body);
         isSame(5002, $data->get('delay'));
     }
 
     public function testOption_userAgent()
     {
         $resp = $this->_cms['http']->request('http://mockbin.org/agent');
-        isSame('"CrossCMS HTTP Client v1.x-dev"', $resp);
+        isSame('"CrossCMS HTTP Client v1.x-dev"', $resp->body);
 
         $uniq = uniqid();
         $resp = $this->_cms['http']->request('http://mockbin.org/agent', array(), array(
             'user_agent' => ' Custom name' . $uniq . ' ',
         ));
 
-        isSame('"Custom name' . $uniq . '"', $resp);
+        isSame('"Custom name' . $uniq . '"', $resp->body);
     }
 
     /* Redirects ******************************************************************************************************/
@@ -280,20 +281,20 @@ class HttpTest extends CrossCMS
     public function testRedirect_simple()
     {
         $resp = $this->_cms['http']->request('http://mockbin.org/redirect/303', array());
-        isSame('"redirect finished"', $resp);
+        isSame('"redirect finished"', $resp->body);
     }
 
     public function testRedirect_toUrl()
     {
         $resp = $this->_cms['http']->request('http://mockbin.org/redirect/303', array('to' => 'http://mockbin.org/gzip'));
-        isSame('"Hello World!"', $resp);
+        isSame('"Hello World!"', $resp->body);
     }
 
     public function testRedirect_loop()
     {
         $args = array('to' => 'http://mockbin.org/gzip');
         $resp = $this->_cms['http']->request('http://mockbin.org/redirect/308/10', $args);
-        isSame('"Hello World!"', $resp);
+        isSame('"Hello World!"', $resp->body);
     }
 
     /* Other **********************************************************************************************************/
@@ -306,7 +307,7 @@ class HttpTest extends CrossCMS
                 'x-custom-header' => $uniq,
             ),
         ));
-        $data     = new JSON($resp);
+        $data     = new JSON($resp->body);
         $dataFlat = $data->flattenRecursive();
 
         isTrue(in_array('x-custom-header', $dataFlat, true));
