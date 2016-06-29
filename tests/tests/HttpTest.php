@@ -29,7 +29,7 @@ class HttpTest extends CrossCMS
     protected function setUp()
     {
         parent::setUp();
-        //sleep(1); // timeout for mockbin.org
+        sleep(1); // timeout for mockbin.org
     }
 
     /* Simple *********************************************************************************************************/
@@ -124,6 +124,8 @@ class HttpTest extends CrossCMS
         $resp = $this->_cms['http']->request('http://mockbin.org/request', array('qwerty' => $uniq), array(
             'method' => AbstractHttp::METHOD_POST,
         ));
+
+        var_dump($resp);
 
         $data = new JSON($resp->body);
 
