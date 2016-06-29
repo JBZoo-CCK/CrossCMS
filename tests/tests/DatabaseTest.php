@@ -93,6 +93,11 @@ class DatabaseTest extends CrossCMS
      */
     public function testInvalidQuery()
     {
+        $cms = Cms::getInstance();
+        if ($cms['type'] == Cms::TYPE_WORDPRESS) {
+            skip('Stupid Wordpress can\'t handle exceptions...');
+        }
+
         $db     = $this->_getDb();
         $select = new Select('information_schema.qwerty123');
         $db->fetchRow($select);
