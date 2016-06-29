@@ -74,7 +74,10 @@ class HttpTest extends CrossCMS
             ),
             'ssl_verify' => 0, // For travis ... =(
         ));
+
+        print_r($resp);
         $data = new JSON($resp->body);
+        print_r($data);
 
         isSame($payload, $data->find('postData.text'));
     }
@@ -124,8 +127,6 @@ class HttpTest extends CrossCMS
         $resp = $this->_cms['http']->request('http://mockbin.org/request', array('qwerty' => $uniq), array(
             'method' => AbstractHttp::METHOD_POST,
         ));
-
-        var_dump($resp);
 
         $data = new JSON($resp->body);
 
