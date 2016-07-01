@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Joomla;
 
 use JBZoo\CrossCMS\AbstractDate;
+use JBZoo\Utils\Dates;
 
 /**
  * Class Date
@@ -26,17 +27,18 @@ class Date extends AbstractDate
     /**
      * {@inheritdoc}
      */
-    public function format($date = null, $format = 'sql')
+    public function format($date = null, $format = self::SQL)
     {
+        if ($date === Dates::SQL_NULL && $format == self::SQL) {
+            return $date;
+        }
+
         $date = new \JDate($date);
 
         $format = trim($format);
+        $format = $this->getFormat($format);
 
-        if (isset($this->_formats[$format])) {
-            $format = $this->_formats[$format];
-        }
-
-        if ($format === 'timestamp') {
+        if ($format === self::TIMESTAMP) {
             return $date->getTimestamp();
         }
 

@@ -15,15 +15,15 @@
     "require"           : {
         "php"              : ">=5.4",
         "pimple/pimple"    : "^3.0",
-        "jbzoo/sqlbuilder" : "^1.0",
-        "jbzoo/data"       : "^1.3.4",
-        "jbzoo/utils"      : "^1.7.0",
-        "jbzoo/path"       : "^1.0",
+        "jbzoo/sqlbuilder" : "^1.1",
+        "jbzoo/data"       : "^1.4.1",
+        "jbzoo/utils"      : "^1.7.2",
+        "jbzoo/path"       : "^1.3",
         "jbzoo/event"      : "^1.2.1",
         "jbzoo/lang"       : "^1.0"
     },
     "require-dev"       : {
-        "jbzoo/phpunit"       : "^1.2",
+        "jbzoo/phpunit"       : "^1.5",
         "joomlatools/console" : "^1.4",
         "wp-cli/wp-cli"       : "^0.21",
         "symfony/process"     : "^2.8",

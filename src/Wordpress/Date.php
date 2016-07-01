@@ -16,6 +16,7 @@
 namespace JBZoo\CrossCMS\Wordpress;
 
 use JBZoo\CrossCMS\AbstractDate;
+use JBZoo\Utils\Dates;
 
 /**
  * Class Date
@@ -26,19 +27,21 @@ class Date extends AbstractDate
     /**
      * {@inheritdoc}
      */
-    public function format($date = null, $format = 'sql')
+    public function format($date = null, $format = self::SQL)
     {
+        if ($date === Dates::SQL_NULL && $format == self::SQL) {
+            return $date;
+        }
+
         $format = trim($format);
 
         if (is_string($date) && !is_numeric($date)) {
             $date = strtotime($date);
         }
 
-        if (isset($this->_formats[$format])) {
-            $format = $this->_formats[$format];
-        }
+        $format = $this->getFormat($format);
 
-        if ($format === 'timestamp') {
+        if ($format === self::TIMESTAMP) {
             $sqlDate = date_i18n('Y-m-d H:i:s', $date);
             return strtotime($sqlDate);
         }

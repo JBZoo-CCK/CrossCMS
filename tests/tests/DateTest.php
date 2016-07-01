@@ -15,6 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\CrossCMS\AbstractDate;
 use JBZoo\CrossCMS\Cms;
 use JBZoo\Utils\Dates;
 
@@ -44,14 +45,21 @@ class DateTest extends CrossCMS
         isSame('2011-12-13 01:02:03', $date->format($time), 'default format');
 
         // System
-        isSame('2011-12-13 01:02:03', $date->format($time, 'sql'), 'sql');
-        isSame(1323738123, $date->format($time, 'timestamp'), 'timestamp');
+        isSame('2011-12-13 01:02:03', $date->format($time, AbstractDate::SQL), AbstractDate::SQL);
+        isSame(1323738123, $date->format($time, 'timestamp'), AbstractDate::TIMESTAMP);
 
-        isSame('Tuesday, Dec 13 2011 01:02', $date->format($time, 'detail'), 'detail');
-        isSame('Tuesday, Dec 13 2011', $date->format($time, 'full'), 'full');
-        isSame('13 December, 2011', $date->format($time, 'long'), 'long');
-        isSame('Dec 13, 2011', $date->format($time, 'medium'), 'medium');
-        isSame('12/13/11', $date->format($time, 'short'), 'short');
-        isSame('01:02', $date->format($time, 'time'), 'time');
+        isSame('Tuesday, Dec 13 2011 01:02', $date->format($time, 'detail'), AbstractDate::DETAIL);
+        isSame('Tuesday, Dec 13 2011', $date->format($time, 'full'), AbstractDate::FULL);
+        isSame('13 December, 2011', $date->format($time, 'long'), AbstractDate::LONG);
+        isSame('Dec 13, 2011', $date->format($time, 'medium'), AbstractDate::MEDIUM);
+        isSame('12/13/11', $date->format($time, 'short'), AbstractDate::SHORT);
+        isSame('01:02', $date->format($time, 'time'), AbstractDate::TIME);
+    }
+
+    public function testSQLNullDate()
+    {
+        $date = $this->_getDate();
+
+        isSame(Dates::SQL_NULL, $date->format(Dates::SQL_NULL, AbstractDate::SQL));
     }
 }

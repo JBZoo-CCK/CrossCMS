@@ -15,23 +15,32 @@
 
 namespace JBZoo\CrossCMS;
 
+use JBZoo\Utils\Dates;
+
 /**
  * Class AbstractDate
  * @package JBZoo\CrossCMS
  */
 abstract class AbstractDate extends AbstractHelper
 {
+    const SQL       = 'sql';
+    const TIMESTAMP = 'timestamp';
+    const DETAIL    = 'detail';
+    const FULL      = 'full';
+    const LONG      = 'long';
+    const MEDIUM    = 'medium';
+    const SHORT     = 'short';
+    const TIME      = 'time';
 
     protected $_formats = [
-        'sql'       => 'Y-m-d H:i:s',
-        'timestamp' => 'timestamp',
-        'detail'    => 'l, M d Y H:i',
-        'full'      => 'l, M d Y',
-        'long'      => 'd F, Y',
-        'medium'    => 'M d, Y',
-        'short'     => 'n/d/y',
-        'time'      => 'H:i',
-
+        self::SQL       => Dates::SQL_FORMAT,
+        self::TIMESTAMP => 'timestamp',
+        self::DETAIL    => 'l, M d Y H:i',
+        self::FULL      => 'l, M d Y',
+        self::LONG      => 'd F, Y',
+        self::MEDIUM    => 'M d, Y',
+        self::SHORT     => 'n/d/y',
+        self::TIME      => 'H:i',
     ];
 
     /**
@@ -41,7 +50,7 @@ abstract class AbstractDate extends AbstractHelper
      * @param  string $format
      * @return string
      */
-    abstract public function format($date = null, $format = 'sql');
+    abstract public function format($date = null, $format = self::SQL);
 
     /**
      * @return array
@@ -49,6 +58,21 @@ abstract class AbstractDate extends AbstractHelper
     public function getFormats()
     {
         return $this->_formats;
+    }
+
+    /**
+     * @param $formatName
+     * @return string|null
+     */
+    public function getFormat($formatName)
+    {
+        $result = $formatName;
+
+        if (isset($this->_formats[$formatName])) {
+            $result = $this->_formats[$formatName];
+        }
+
+        return $result;
     }
 
     /**
