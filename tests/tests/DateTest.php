@@ -16,6 +16,7 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Utils\Dates;
 
 /**
  * Class UserTest
@@ -39,6 +40,7 @@ class DateTest extends CrossCMS
         $time = '1323738123'; // '2011-12-13 01:02:03'
 
         // Sql is default
+        isTrue(Dates::toStamp($date->format()) > 0);
         isSame('2011-12-13 01:02:03', $date->format($time), 'default format');
 
         // System

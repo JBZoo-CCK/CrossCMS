@@ -26,7 +26,7 @@ class Date extends AbstractDate
     /**
      * {@inheritdoc}
      */
-    public function format($date, $format = 'sql')
+    public function format($date = null, $format = 'sql')
     {
         $format = trim($format);
 

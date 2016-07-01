@@ -41,7 +41,7 @@ abstract class AbstractDate extends AbstractHelper
      * @param  string $format
      * @return string
      */
-    abstract public function format($date, $format = 'sql');
+    abstract public function format($date = null, $format = 'sql');
 
     /**
      * @return array
