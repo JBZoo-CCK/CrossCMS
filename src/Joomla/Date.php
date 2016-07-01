@@ -29,8 +29,8 @@ class Date extends AbstractDate
      */
     public function format($date = null, $format = self::SQL)
     {
-        if ($date === Dates::SQL_NULL && $format == self::SQL) {
-            return $date;
+        if (($date === Dates::SQL_NULL || null === $date) && $format == self::SQL) {
+            return Dates::SQL_NULL;
         }
 
         $date = new \JDate($date);
