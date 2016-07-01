@@ -62,5 +62,7 @@ class DateTest extends CrossCMS
 
         isSame(Dates::SQL_NULL, $date->format(Dates::SQL_NULL, AbstractDate::SQL));
         isSame(Dates::SQL_NULL, $date->format());
+        isSame(Dates::SQL_NULL, $date->format(null));
+        isSame(Dates::SQL_NULL, $date->format(''));
     }
 }
