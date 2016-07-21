@@ -47,15 +47,17 @@ class HttpTest extends CrossCMS
             'ssl_verify' => 0, // For travis ... =(
         ));
 
-        if ('"Hello World!"' === $resp) {
-            isSame('"Hello World!"', $resp);
+        if ('"Hello World!"' === $resp->body) {
+            isSame('"Hello World!"', $resp->body);
 
-            $resp = $this->_cms['http']->request('https://mockbin.org/request', array(), array(
+            $url = 'https://mockbin.org/bin/bbe7f656-12d6-4877-9fa8-5cd61f9522a9';
+            $resp = $this->_cms['http']->request($url, array(), array(
                 'debug'      => 1,
                 'ssl_verify' => 0, // For travis ... =(
             ));
-            $data = new JSON($resp);
-            isSame('https://mockbin.org/request', $data->get('url'));
+
+            $data = new JSON($resp->body);
+            isSame('Hello Word', $data->get('foo'));
 
         } else {
             cliMessage('CrossCMS SSL Error: ' . $resp);

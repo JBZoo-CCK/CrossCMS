@@ -34,6 +34,10 @@ class Http extends AbstractHttp
         $timeout   = $options->get('timeout');
         $sslVerify = $options->get('ssl_verify');
 
+        if (empty($headers)) {
+            $headers = null;
+        }
+        
         if ($sslVerify) {
             // "curl" driver doesn't have such option
             $httpClient = \JHttpFactory::getHttp(); // try to find curl driver
