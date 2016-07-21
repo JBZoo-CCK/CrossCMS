@@ -1,7 +1,9 @@
+.PHONY: build test
+
 build:
-	prepare
 	composer self-update --no-interaction
 	composer update --optimize-autoloader --no-interaction
+	make prepare
 
 test:
 	composer phpunit-joomla

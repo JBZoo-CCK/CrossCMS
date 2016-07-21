@@ -49,21 +49,21 @@ script:
   - make build
   - make test-all
 
-  # Full stack
-  - composer manifest
-  - composer autoload
-
-  - composer prepare-wordpress
-  - composer phpunit-wordpress
-
-  - composer prepare-joomla
-  - composer phpunit-joomla
-
-  # Other tests
-  - composer phpmd
-  - composer phpcs
-  - composer phpcpd
-  - composer phploc
+  # # Full stack
+  # - composer manifest
+  # - composer autoload
+  #
+  # - composer prepare-wordpress
+  # - composer phpunit-wordpress
+  #
+  # - composer prepare-joomla
+  # - composer phpunit-joomla
+  #
+  # # Other tests
+  # - composer phpmd
+  # - composer phpcs
+  # - composer phpcpd
+  # - composer phploc
 
 after_script:
   - composer coveralls
