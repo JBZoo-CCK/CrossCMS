@@ -292,7 +292,7 @@ $cms = Cms::getInstance();
 echo $cms['lang']->translate('january');                        // "January" | "Январь"
 echo $cms['lang']->translate('%s and %s', 'qwerty', 123456));   // "qwerty and 123456" | 'qwerty и 123456'
 
-// Коротка функция
+// Короткая функция
 function _text($message) {
     $cms = Cms::getInstance();
     return call_user_func_array(array($cms['lang'], 'translate'), func_get_args());
