@@ -1,9 +1,12 @@
 .PHONY: build test
 
 build:
+	make update
+	make prepare
+
+update:
 	composer self-update --no-interaction
 	composer update --optimize-autoloader --no-interaction
-	make prepare
 
 test:
 	composer phpunit-joomla
