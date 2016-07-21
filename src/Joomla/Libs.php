@@ -62,6 +62,5 @@ class Libs extends AbstractLibs
     public function colorPicker()
     {
         \JHtml::_('behavior.colorpicker');
-
     }
 }

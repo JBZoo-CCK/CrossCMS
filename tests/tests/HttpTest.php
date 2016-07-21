@@ -29,7 +29,7 @@ class HttpTest extends CrossCMS
     protected function setUp()
     {
         parent::setUp();
-        sleep(1); // timeout for mockbin.org
+        sleep(1); // timeout for mockbin.org and mocky.io
     }
 
     /* Simple *********************************************************************************************************/
