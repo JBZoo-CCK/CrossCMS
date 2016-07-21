@@ -45,6 +45,10 @@ before_script:
   - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
 
 script:
+  # Make (experimental)
+  - make build
+  - make test-all
+
   # Full stack
   - composer manifest
   - composer autoload
