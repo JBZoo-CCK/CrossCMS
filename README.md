@@ -374,7 +374,7 @@ $mail->complex('admin@example.com', 'Test message subject', 'Test complex method
 $cms = Cms::getInstance();
 
 $cms['path']->get('root:');     // Корень сайта
-$cms['path']->get('upload:);    // Место для загрузок файлов
+$cms['path']->get('upload:');    // Место для загрузок файлов
 $cms['path']->get('tmpl:');     // Шаблоны
 $cms['path']->get('cache:');    // Файловый кеш
 $cms['path']->get('logs:');     // Логи сайта
@@ -481,6 +481,7 @@ $user->$user->getAvatar(128);   // Получить аватар 128*128px на 
 
 
 ## TODO
+ * Перевод на английский!!!
  * Пример маленького расширения на CrossCMS (соц. кнопки)
  * Работа с правами и уровнями доступа
  * Больше функций для пользователей (авторизация, активация, регистрация, изменения прав итд )
