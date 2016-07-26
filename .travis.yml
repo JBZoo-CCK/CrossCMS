@@ -20,15 +20,15 @@ matrix:
       env: XDEBUG_OFF="yes"
 
 before_install:
-  - make prepare-mail-install
+  - sudo make prepare-mail-install
 
 before_script:
   # Disable xdebug PHP module
   - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
-  - make prepare
+  - sudo make prepare
 
 script:
-  - make build
+  - sudo make build
   - make test-all
 
 after_script:
