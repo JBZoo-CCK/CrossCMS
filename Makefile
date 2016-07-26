@@ -18,7 +18,6 @@ build:
 	@make prepare
 
 prepare:
-	@make prepare-mail-before
 	@make prepare-fs
 	@make prepare-joomla
 	@make prepare-wordpress
@@ -38,18 +37,6 @@ prepare-fs:
 	@mkdir -p ./build/logs
 	@mkdir -p ./build/clover
 	@mkdir -p ./resource
-
-prepare-mail-install:
-	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> Mock mail services (Install)\033[0m"
-	@sudo apt-get update -qq
-	@sudo apt-get install -y -qq postfix
-
-prepare-mail-before:
-	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> Mock mail services (replace and prepare)\033[0m"
-	@sudo service postfix stop
-	@smtp-sink -d "%d.%H.%M.%S" 127.0.0.1:2500 1000 &
-	@echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
-	@echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
 
 prepare-joomla:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> Prepare Joomla! CMS before tests\033[0m"
