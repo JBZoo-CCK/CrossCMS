@@ -37,7 +37,7 @@ before_script:
   - composer self-update
 
 script:
-  - make build
+  - make
   - make test-all
 
 after_script:
