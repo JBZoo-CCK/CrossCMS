@@ -49,6 +49,8 @@ class Helper
             ], $request)
         );
 
+        var_dump($result);
+
         return $result;
     }
 
