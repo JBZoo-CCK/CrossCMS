@@ -30,7 +30,7 @@ CrossCMS был создан для расширения [JBZoo CCK](http://jbzo
 Узкие места, которые могут сильно повлиять на производительность сайта, протестированы бенчмарками. Например вызов локализации текстовых констант.
 См тесты [BenchmarkTest.php](https://github.com/JBZoo/CrossCMS/blob/master/tests/tests/BenchmarkTest.php) Результат видно в [консоли PHPUnit](https://travis-ci.org/JBZoo/CrossCMS/jobs/141018021#L535) .
 
-**Внимание:** Обычно последняя dev-версия из master не проходит тесты, т.к. там очень часто тестируются новые вещи. [Но все теги (релизы) проверены и работают!](https://travis-ci.org/JBZoo/CrossCMS/branches)  
+**Внимание:** Обычно последняя dev-версия из master не проходит тесты, т.к. там очень часто тестируются новые вещи. Но все теги (релизы) [проверены](https://travis-ci.org/JBZoo/CrossCMS/branches) и покрыты [тестами](https://coveralls.io/github/JBZoo/CrossCMS?branch=1.1.12)!   
 
 
 ### Поддержка CMS и версии 

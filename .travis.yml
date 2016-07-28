@@ -42,5 +42,6 @@ script:
   - make server-wordpress test-wordpress
   - make validate phpmd phpcs phpcpd phploc
 
-after_script:
+after_success:
+  - ls -la ./build/clover
   - make coveralls
