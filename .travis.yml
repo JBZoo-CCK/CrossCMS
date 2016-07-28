@@ -38,6 +38,7 @@ before_script:
 
 script:
   - make
+  - make server
   - make test-all
 
 after_script:
