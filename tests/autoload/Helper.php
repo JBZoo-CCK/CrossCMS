@@ -16,6 +16,9 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\CrossCMS\Cms;
+use JBZoo\Data\Data;
+use JBZoo\Utils\Env;
+use JBZoo\Utils\Url;
 
 /**
  * Class Helper
@@ -24,21 +27,42 @@ use JBZoo\CrossCMS\Cms;
 class Helper
 {
     /**
+     * @param $testName
+     * @param $request
+     * @return Data
+     */
+    public static function runIsolatedCMS($testName, $request)
+    {
+        $cms = Cms::getInstance();
+
+        $host     = Env::get('TEST_HOST', '127.0.0.1');
+        $port     = Env::get('TEST_PORT');
+        $url      = Url::create(['host' => $host, 'port' => $port]);
+        $testName = self::getTestName($testName);
+
+        $result = $cms['http']->request( // Yeap, we are using http-driver from CMS
+            $url,
+            array_merge([
+                'jbzoo-phpunit'      => 1,
+                'jbzoo-phpunit-test' => $testName,
+                'jbzoo-phpunit-type' => strtolower($cms['type'])
+            ], $request)
+        );
+
+        return $result;
+    }
+
+    /**
      * @param string $testName
      * @param array  $request
      * @return string
      */
-    public static function runIsolatedCMS($testName, $request)
+    public static function runIsolatedCMS_deprecated($testName, $request)
     {
-        $testName = str_replace(__NAMESPACE__, '', $testName);
-        $testName = preg_replace('#[^a-z0-9]#iu', '-', $testName);
-        $testName = preg_replace('#--#iu', '-', $testName);
-        $testName = trim($testName, '-');
-        $testName = strtolower($testName);
-
         $cms = Cms::getInstance();
 
-        $cmsType = strtolower($cms['type']);
+        $testName = self::getTestName($testName);
+        $cmsType  = strtolower($cms['type']);
 
         $html = cmd('php ./tests/bin/browser.php tests/tests/BrowserEmulatorTest.php', array(
             'configuration'   => 'phpunit-' . $cmsType . '-browser.xml.dist',
@@ -60,5 +84,20 @@ class Helper
         $data['jbzoo-phpunit'] = 1;
 
         return http_build_query($data, null, '&');
+    }
+
+    /**
+     * @param $testName
+     * @return mixed|string
+     */
+    public static function getTestName($testName)
+    {
+        $testName = str_replace(__NAMESPACE__, '', $testName);
+        $testName = preg_replace('#[^a-z0-9]#iu', '-', $testName);
+        $testName = preg_replace('#--#iu', '-', $testName);
+        $testName = trim($testName, '-');
+        $testName = strtolower($testName);
+
+        return $testName;
     }
 }

@@ -20,15 +20,16 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          syntaxCheck="true"
-         stopOnFailures="false"
-         stopOnError="false"
-         stopOnFailure="false"
+         stopOnError="true"
+         stopOnFailure="true"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-        >
+>
 
     <php>
         <env name="PATH_WORDPRESS" value="./resources/wordpress"/>
+        <env name="TEST_HOST" value="127.0.0.1"/>
+        <env name="TEST_PORT" value="8083"/>
     </php>
 
     <testsuites>

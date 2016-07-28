@@ -13,23 +13,12 @@
 # @link      https://github.com/JBZoo/CrossCMS
 #
 
-# Fake sendmail script:
+DIR="."
+WEB_HOST="127.0.0.1"
+WEB_PORT="8083"
+WEB_ROOT=$(realpath "$DIR/resources/wordpress")
+WEB_PATH=$(realpath "$DIR/tests/bin/fake-index.php")
 
-# Create a temp folder to put messages in
-numPath="${TMPDIR-/tmp/}fakemail"
-umask 037
-mkdir -p $numPath
+php -S "$WEB_HOST:$WEB_PORT" -t "$WEB_ROOT" "$WEB_PATH" &
 
-if [ ! -f $numPath/num ]; then
-  echo "0" > $numPath/num
-fi
-num=`cat $numPath/num`
-num=$(($num + 1))
-echo $num > $numPath/num
-
-name="$numPath/message_$num.eml"
-while read line
-do
-  echo $line >> $name
-done
-exit 0
+sleep 3s

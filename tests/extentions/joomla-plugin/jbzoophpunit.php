@@ -34,16 +34,12 @@ class PlgSystemJBZooPHPUnit extends JPlugin
     public function onAfterInitialise()
     {
         if (!class_exists('\JBZoo\CrossCMS\Cms')) {
-            if ($autoloadPath = realpath('./../../vendor/autoload.php')) {
-                require_once $autoloadPath;
-            }
-            if ($autoloadPath = realpath('./../../../vendor/autoload.php')) {
+            if ($autoloadPath = realpath(JPATH_ROOT . '/../../vendor/autoload.php')) {
                 require_once $autoloadPath;
             }
         }
 
         $this->_cms = Cms::getInstance();
-
 
         /* Event ******************************************************************************************************/
         $this->_eventInitTests();

@@ -27,7 +27,7 @@ use JBZoo\Event\EventManager;
 use JBZoo\Utils\Vars;
 
 if (!class_exists('\JBZoo\CrossCMS\Cms')) {
-    if ($autoloadPath = realpath('../../vendor/autoload.php')) {
+    if ($autoloadPath = realpath(ABSPATH . '/../../vendor/autoload.php')) {
         require_once $autoloadPath;
     }
 }

@@ -31,34 +31,34 @@ class EventsTest extends CrossCMS
 
     public function testInit()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-init' => array(
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-init' => array(
             'init'       => '-qw-',
             'init.site'  => '-er-',
             'init.admin' => '-ty-',
         )));
 
-        isContain('-qw--er-', $html);
+        isContain('-qw--er-', $result->body);
     }
 
     public function testHeader()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-header' => array(
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-header' => array(
             'header'       => '-123-',
             'header.site'  => '-456-',
             'header.admin' => '-789-',
         )));
 
-        isContain('-123--456-', $html);
+        isContain('-123--456-', $result->body);
     }
 
     public function testContent()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-events-content' => array(
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-content' => array(
             'content'       => '-ab-',
             'content.site'  => '-cd-',
             'content.admin' => '-ef-',
         )));
 
-        isContain('-ab--cd-', $html);
+        isContain('-ab--cd-', $result->body);
     }
 }

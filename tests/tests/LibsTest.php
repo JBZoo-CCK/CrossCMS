@@ -25,57 +25,57 @@ class LibsTest extends CrossCMS
 {
     public function testjQuery()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jquery' => 1));
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jquery' => 1));
 
-        if ($this->_cms['type'] === CMS::TYPE_WORDPRESS) {
-            isContain('wp-includes/js/jquery/jquery.js', $html);
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
+            isContain('wp-includes/js/jquery/jquery.js', $result->body);
 
-        } elseif ($this->_cms['type'] === CMS::TYPE_JOOMLA) {
-            isContain('media/jui/js/jquery.js', $html);
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
+            isContain('media/jui/js/jquery.js', $result->body);
         }
     }
 
     public function testjQueryUI()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jqueryui' => 1));
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jqueryui' => 1));
 
-        if ($this->_cms['type'] === CMS::TYPE_WORDPRESS) {
-            isContain('wp-includes/js/jquery/ui/core.min.js', $html);
-        } elseif ($this->_cms['type'] === CMS::TYPE_JOOMLA) {
-            isContain('media/jui/js/jquery.ui.core.js', $html);
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
+            isContain('wp-includes/js/jquery/ui/core.min.js', $result->body);
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
+            isContain('media/jui/js/jquery.ui.core.js', $result->body);
         }
     }
 
     public function testjQueryAutocomplete()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-libs-autocomplete' => 1));
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-autocomplete' => 1));
 
-        if ($this->_cms['type'] === CMS::TYPE_WORDPRESS) {
-            isContain('wp-includes/js/jquery/ui/autocomplete.min.js', $html);
-        } elseif ($this->_cms['type'] === CMS::TYPE_JOOMLA) {
-            isContain('media/jui/js/jquery.autocomplete.js', $html);
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
+            isContain('wp-includes/js/jquery/ui/autocomplete.min.js', $result->body);
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
+            isContain('media/jui/js/jquery.autocomplete.js', $result->body);
         }
     }
 
     public function testjQueryDatePicker()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-libs-datepicker' => 1));
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-datepicker' => 1));
 
-        if ($this->_cms['type'] === CMS::TYPE_WORDPRESS) {
-            isContain('wp-includes/js/jquery/ui/datepicker.min.js', $html);
-        } elseif ($this->_cms['type'] === CMS::TYPE_JOOMLA) {
-            isContain('media/system/js/calendar', $html);
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
+            isContain('wp-includes/js/jquery/ui/datepicker.min.js', $result->body);
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
+            isContain('media/system/js/calendar', $result->body);
         }
     }
 
     public function testColorPicker()
     {
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-libs-colorpicker' => 1));
+        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-colorpicker' => 1));
 
-        if ($this->_cms['type'] === CMS::TYPE_WORDPRESS) {
-            isContain('wp-includes/js/colorpicker.min.js', $html);
-        } elseif ($this->_cms['type'] === CMS::TYPE_JOOMLA) {
-            isContain('media/jui/js/jquery.minicolors.', $html);
+        if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
+            isContain('wp-includes/js/colorpicker.min.js', $result->body);
+        } elseif ($this->_cms['type'] === Cms::TYPE_JOOMLA) {
+            isContain('media/jui/js/jquery.minicolors.', $result->body);
         }
     }
 }
