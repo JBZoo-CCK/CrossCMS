@@ -16,8 +16,8 @@
 DIR="."
 WEB_HOST="127.0.0.1"
 WEB_PORT="8083"
-WEB_ROOT=$(realpath "$DIR/resources/wordpress")
-WEB_PATH=$(realpath "$DIR/tests/bin/fake-index.php")
+WEB_ROOT="$DIR/resources/wordpress"
+WEB_PATH="$DIR/tests/bin/fake-index.php"
 
 php -S "$WEB_HOST:$WEB_PORT" -t "$WEB_ROOT" "$WEB_PATH" &
 

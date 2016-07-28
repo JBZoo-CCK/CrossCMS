@@ -16,8 +16,8 @@
 DIR="."
 WEB_HOST="127.0.0.1"
 WEB_PORT="8082"
-WEB_ROOT=$(realpath "$DIR/resources/joomla")
-WEB_PATH=$(realpath "$DIR/tests/bin/fake-index.php")
+WEB_ROOT="$DIR/resources/joomla"
+WEB_PATH="$DIR/tests/bin/fake-index.php"
 
 php56-x -S "$WEB_HOST:$WEB_PORT" -t "$WEB_ROOT" "$WEB_PATH" &
 
