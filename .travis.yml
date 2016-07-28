@@ -38,8 +38,9 @@ before_script:
 
 script:
   - make
-  - make server
-  - make test-all
+  - make server-joomla test-joomla
+  - make server-wordpress test-wordpress
+  - make validate phpmd phpcs phpcpd phploc
 
 after_script:
   - make coveralls
