@@ -19,6 +19,6 @@ WEB_PORT="8082"
 WEB_ROOT="$DIR/resources/joomla"
 WEB_PATH="$DIR/tests/bin/fake-index.php"
 
-php56-x -S "$WEB_HOST:$WEB_PORT" -t "$WEB_ROOT" "$WEB_PATH" &
+php -S "$WEB_HOST:$WEB_PORT" -t "$WEB_ROOT" "$WEB_PATH" &
 
-sleep 1s
+sleep 3s
