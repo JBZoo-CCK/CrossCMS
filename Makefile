@@ -53,6 +53,11 @@ server-wp-cov:
 	@chmod +x ./tests/bin/server-wordpress-cov.sh
 	@./tests/bin/server-wordpress-cov.sh
 
+server-j:
+	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Start Joomla Web-server \033[0m"
+	@chmod +x ./tests/bin/server-joomla.sh
+	@./tests/bin/server-joomla.sh
+
 server-j-cov:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Start Joomla Web-server with Xdebug \033[0m"
 	@chmod +x ./tests/bin/server-joomla-cov.sh
