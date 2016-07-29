@@ -48,6 +48,7 @@ class Helper
                 'jbzoo-phpunit-type' => strtolower($cms['type'])
             ], $request),
             [
+                'timeout'    => 30,
                 'ssl_verify' => 0,
                 'debug'      => 1,
             ]
