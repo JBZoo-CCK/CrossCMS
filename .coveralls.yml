@@ -1,3 +1,2 @@
 coverage_clover:
-    build/clover/*.xml
-
+  - build/total/total.xml

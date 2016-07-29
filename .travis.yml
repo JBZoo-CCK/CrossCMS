@@ -38,9 +38,10 @@ before_script:
 
 script:
   - make
-  - make server-joomla test-joomla
+  - make server-j test-j
   - make server-wp test-wp
-  - make validate phpmd phpcs phpcpd phploc
+  - make test-other
 
 after_success:
+  - make phpcov
   - make coveralls

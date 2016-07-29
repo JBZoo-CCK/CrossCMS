@@ -75,8 +75,8 @@ if (!class_exists('JBZooPHPUnitCoverageWrapper')) {
                     mt_rand(0, 100000000)
                 ]);
 
-                $this->_covResult = realpath($this->_covRoot . '/build/clover')
-                    . '/' . $cmsType . '-' . $testName . '.xml';
+                $this->_covResult = realpath($this->_covRoot . '/build/coverage_cov')
+                    . '/' . $cmsType . '-' . $testName . '.cov';
 
                 $covFilter = new PHP_CodeCoverage_Filter();
                 $covFilter->addDirectoryToWhitelist($this->_covDir);
@@ -91,7 +91,7 @@ if (!class_exists('JBZooPHPUnitCoverageWrapper')) {
         {
             if ($this->_coverage) {
                 $this->_coverage->stop();
-                $report = new PHP_CodeCoverage_Report_Clover();
+                $report = new PHP_CodeCoverage_Report_PHP();
                 $report->process($this->_coverage, $this->_covResult);
             }
         }
