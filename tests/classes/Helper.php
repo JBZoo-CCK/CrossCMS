@@ -53,15 +53,13 @@ class Helper
         //dump($url, 0);
 
         $client     = new Client();
-        $httpResult = $client->request('GET', $url, [
+        $httpResult = $client->get($url, [
             'allow_redirects' => false,
-            'http_errors'     => false,
-            'strict'          => true,
+            'exceptions'      => false,
             'timeout'         => 30,
             'connect_timeout' => 30,
             //'debug'           => true,
             'verify'          => false,
-            'track_redirects' => true
         ]);
 
         // Prepare headers
