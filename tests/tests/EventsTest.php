@@ -37,6 +37,8 @@ class EventsTest extends CrossCMSUnit
             'init.admin' => '-ty-',
         )));
 
+        dump($result, 0);
+
         isSame(200, $result->code);
         isContain('-qw--er-', $result->body);
     }

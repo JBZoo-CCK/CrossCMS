@@ -58,7 +58,7 @@ class Helper
             'exceptions'      => false,
             'timeout'         => 30,
             'connect_timeout' => 30,
-            //'debug'           => true,
+            'debug'           => true,
             'verify'          => false,
         ]);
 
