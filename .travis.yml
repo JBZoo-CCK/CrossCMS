@@ -38,10 +38,8 @@ before_script:
 
 script:
   - make
-  - make server-j test-j
-  - make server-wp test-wp
-  - make test-other
+  - make server
+  - make test-all
 
 after_success:
-  - make phpcov
-  - make coveralls
+  - make phpcov coveralls

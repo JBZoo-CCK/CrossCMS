@@ -119,9 +119,9 @@ prepare-wp:
 	@php ./vendor/wp-cli/wp-cli/php/boot-fs.php plugin activate wp-plugin \
             --path=./resources/wordpress
 
-test-other:
+test-all:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Run all tests \033[0m"
-	@make validate phpmd phpcs phpcpd phploc
+	@make validate test phpmd phpcs phpcpd phploc
 	@echo ""
 
 validate:
