@@ -25,7 +25,7 @@ class LibsTest extends CrossCMS
 {
     public function testjQuery()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jquery' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-jquery' => 1));
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/jquery.js', $result->body);
@@ -37,7 +37,7 @@ class LibsTest extends CrossCMS
 
     public function testjQueryUI()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-jqueryui' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-jqueryui' => 1));
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/core.min.js', $result->body);
@@ -48,7 +48,7 @@ class LibsTest extends CrossCMS
 
     public function testjQueryAutocomplete()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-autocomplete' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-autocomplete' => 1));
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/autocomplete.min.js', $result->body);
@@ -59,7 +59,7 @@ class LibsTest extends CrossCMS
 
     public function testjQueryDatePicker()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-datepicker' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-datepicker' => 1));
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/datepicker.min.js', $result->body);
@@ -70,7 +70,7 @@ class LibsTest extends CrossCMS
 
     public function testColorPicker()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-libs-colorpicker' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-colorpicker' => 1));
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/colorpicker.min.js', $result->body);

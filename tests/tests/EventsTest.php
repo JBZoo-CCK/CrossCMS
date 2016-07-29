@@ -31,7 +31,7 @@ class EventsTest extends CrossCMS
 
     public function testInit()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-init' => array(
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-init' => array(
             'init'       => '-qw-',
             'init.site'  => '-er-',
             'init.admin' => '-ty-',
@@ -42,7 +42,7 @@ class EventsTest extends CrossCMS
 
     public function testHeader()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-header' => array(
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-header' => array(
             'header'       => '-123-',
             'header.site'  => '-456-',
             'header.admin' => '-789-',
@@ -53,7 +53,7 @@ class EventsTest extends CrossCMS
 
     public function testContent()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-events-content' => array(
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-content' => array(
             'content'       => '-ab-',
             'content.site'  => '-cd-',
             'content.admin' => '-ef-',

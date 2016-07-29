@@ -20,22 +20,22 @@ build:
 prepare:
 	@make prepare-fs
 	@make prepare-joomla
-	@make prepare-wordpress
+	@make prepare-wp
 
 server:
 	@make server-joomla
-	@make server-wordpress
+	@make server-wp
 
 test:
 	@make test-joomla
-	@make test-wordpress
+	@make test-wp
 
 update:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Update project \033[0m"
 	@composer update --optimize-autoloader --no-interaction
 	@echo ""
 
-server-wordpress:
+server-wp:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Start Wordpress Web-server \033[0m"
 	@chmod +x ./tests/bin/server-wordpress.sh
 	@./tests/bin/server-wordpress.sh
@@ -70,7 +70,7 @@ prepare-joomla:
 	@php ./vendor/joomlatools/console/bin/joomla extension:enable joomla jbzoophpunit \
             --www=./resources
 
-prepare-wordpress:
+prepare-wp:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Prepare Wordpress CMS before tests \033[0m"
 	@mkdir -p ./resources/wordpress
 	@mysql -e 'create database test_cms_wp'
@@ -119,7 +119,7 @@ test-joomla:
 	@php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-joomla.xml.dist
 	@echo ""
 
-test-wordpress:
+test-wp:
 	@echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Run unit-tests for Wordpress \033[0m"
 	@php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit-wordpress.xml.dist
 	@echo ""

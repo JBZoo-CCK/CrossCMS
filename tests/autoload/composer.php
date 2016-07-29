@@ -26,5 +26,5 @@ if ($autoload = realpath('./vendor/autoload.php')) {
 }
 
 // Forsed show PHP errors
-require_once __DIR__ . '/Helper.php';
+require_once __DIR__ . '/errors.php';
 

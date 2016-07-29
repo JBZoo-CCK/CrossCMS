@@ -25,7 +25,7 @@ class ResponseTest extends CrossCMS
     {
         skip();
 
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-set404' => 1));
+        $html = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-set404' => 1));
 
         isContain('404', $html);
     }
@@ -35,7 +35,7 @@ class ResponseTest extends CrossCMS
         skip();
 
         $uniq = uniqid();
-        $html = Helper::runIsolatedCMS(__METHOD__, array('test-response-set500' => $uniq));
+        $html = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-set500' => $uniq));
 
         isContain($uniq, $html);
     }
@@ -43,7 +43,7 @@ class ResponseTest extends CrossCMS
     public function testRedirect()
     {
         $uniq = '?' . uniqid() . '=1';
-        Helper::runIsolatedCMS(__METHOD__, array('test-response-redirect' => $uniq));
+        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-redirect' => $uniq));
     }
 
     public function testJson()
@@ -51,7 +51,7 @@ class ResponseTest extends CrossCMS
         skip();
         $uniq = uniqid();
 
-        $json = Helper::runIsolatedCMS(__METHOD__, array('test-response-json' => array(
+        $json = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-json' => array(
             //'message' => 'Error message',
             $uniq => $uniq,
         )));
@@ -65,22 +65,22 @@ class ResponseTest extends CrossCMS
 
     public function testText()
     {
-        Helper::runIsolatedCMS(__METHOD__, array('test-response-text' => 1));
+        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-text' => 1));
         isTrue(true); // We can't check HTTP-headers on CLI mode
     }
 
     public function testNocache()
     {
-        Helper::runIsolatedCMS(__METHOD__, array('test-response-nocache' => 1));
+        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-nocache' => 1));
     }
 
     public function testRaw()
     {
-        Helper::runIsolatedCMS(__METHOD__, array('test-response-raw' => 1));
+        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-raw' => 1));
     }
 
     public function testComponent()
     {
-        Helper::runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
+        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
     }
 }

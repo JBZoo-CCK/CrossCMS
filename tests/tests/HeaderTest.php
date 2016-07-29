@@ -24,7 +24,7 @@ class HeaderTest extends CrossCMS
     public function testTitle()
     {
         $uniq = uniqid();
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-title' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-title' => $uniq));
 
         isContain('<title>' . $uniq . '</title>', $result->body);
     }
@@ -32,7 +32,7 @@ class HeaderTest extends CrossCMS
     public function testKeywords()
     {
         $uniq = uniqid();
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-keywords' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-keywords' => $uniq));
 
         isLike('#<meta name=[\'\"]keywords[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $result->body);
     }
@@ -40,14 +40,14 @@ class HeaderTest extends CrossCMS
     public function testDescription()
     {
         $uniq = uniqid();
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-description' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-description' => $uniq));
 
         isLike('#<meta name=[\'\"]description[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $result->body);
     }
 
     public function testNoindex()
     {
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-noindex' => 1));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-noindex' => 1));
 
         isContain('noindex', $result->body);
         isContain('nofollow', $result->body);
@@ -56,14 +56,14 @@ class HeaderTest extends CrossCMS
     public function testAddMeta()
     {
         $value = uniqid();
-        $result  = Helper::runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
+        $result  = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
             'meta'  => 'somemeta1',
             'value' => $value,
         )));
         isLike('#<meta name=[\'\"]somemeta1[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $result->body);
 
         $value = uniqid();
-        $result  = Helper::runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
+        $result  = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
             'meta' => '<meta name=\'somemeta2\' content=\'' . $value . '\' />',
         )));
         isLike('#<meta name=[\'\"]somemeta2[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $result->body);
@@ -72,28 +72,28 @@ class HeaderTest extends CrossCMS
     public function testJSFile()
     {
         $uniq = uniqid('', true);
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-jsfile' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-jsfile' => $uniq));
         isContain($uniq, $result->body);
     }
 
     public function testCSSFile()
     {
         $uniq = uniqid('', true);
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-cssfile' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-cssfile' => $uniq));
         isContain($uniq, $result->body);
     }
 
     public function testJSCode()
     {
         $uniq = uniqid('', true);
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-jscode' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-jscode' => $uniq));
         isContain($uniq, $result->body);
     }
 
     public function testCSSCode()
     {
         $uniq = uniqid('', true);
-        $result = Helper::runIsolatedCMS(__METHOD__, array('test-header-csscode' => $uniq));
+        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-csscode' => $uniq));
         isContain($uniq, $result->body);
     }
 }

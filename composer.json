@@ -35,6 +35,11 @@
             "JBZoo\\CrossCMS\\" : "src"
         }
     },
+    "autoload-dev"      : {
+        "psr-4" : {
+            "JBZoo\\PHPUnit\\" : "tests/classes"
+        }
+    },
     "extra"             : {
         "branch-alias" : {
             "dev-master" : "1.x-dev"

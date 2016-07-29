@@ -39,7 +39,7 @@ before_script:
 script:
   - make
   - make server-joomla test-joomla
-  - make server-wordpress test-wordpress
+  - make server-wp test-wp
   - make validate phpmd phpcs phpcpd phploc
 
 after_success:

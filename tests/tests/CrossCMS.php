@@ -30,7 +30,12 @@ abstract class CrossCMS extends PHPUnit
     protected $_cms;
 
     /**
-     *
+     * @var Helper
+     */
+    public $helper;
+
+    /**
+     * Setup before each test
      */
     protected function setUp()
     {
@@ -39,5 +44,7 @@ abstract class CrossCMS extends PHPUnit
 
         $dumper = new PimpleDumper();
         $this->_cms->register($dumper);
+
+        $this->helper = new Helper();
     }
 }

@@ -31,14 +31,14 @@ class Helper
      * @param $request
      * @return Data
      */
-    public static function runIsolatedCMS($testName, $request)
+    public function runIsolatedCMS($testName, $request)
     {
         $cms = Cms::getInstance();
 
         $host     = Env::get('TEST_HOST', '127.0.0.1');
         $port     = Env::get('TEST_PORT');
         $url      = Url::create(['host' => $host, 'port' => $port]);
-        $testName = self::getTestName($testName);
+        $testName = $this->getTestName($testName);
 
         $result = $cms['http']->request( // Yeap, we are using http-driver from CMS
             $url,
@@ -46,10 +46,12 @@ class Helper
                 'jbzoo-phpunit'      => 1,
                 'jbzoo-phpunit-test' => $testName,
                 'jbzoo-phpunit-type' => strtolower($cms['type'])
-            ], $request)
+            ], $request),
+            [
+                'ssl_verify' => 0,
+                'debug'      => 1,
+            ]
         );
-
-        var_dump($result);
 
         return $result;
     }
@@ -59,18 +61,18 @@ class Helper
      * @param array  $request
      * @return string
      */
-    public static function runIsolatedCMS_deprecated($testName, $request)
+    public function runIsolatedCMS_deprecated($testName, $request)
     {
         $cms = Cms::getInstance();
 
-        $testName = self::getTestName($testName);
+        $testName = $this->getTestName($testName);
         $cmsType  = strtolower($cms['type']);
 
         $html = cmd('php ./tests/bin/browser.php tests/tests/BrowserEmulatorTest.php', array(
             'configuration'   => 'phpunit-' . $cmsType . '-browser.xml.dist',
             'coverage-clover' => 'build/clover/' . $cmsType . '-' . $testName . '.xml',
             //'coverage-html'   => PROJECT_ROOT . '/build/web/' . $cmsType . '-' . $testName . '/html',
-            'jbzoo-env'       => self::query($request),
+            'jbzoo-env'       => $this->query($request),
             'stderr'          => '', // Hack for CMS session starting
         ), PROJECT_ROOT, (int)getenv('PHPUNIT_CMD_DEBUG'));
 
@@ -81,7 +83,7 @@ class Helper
      * @param array $data
      * @return string
      */
-    public static function query(array $data = array())
+    public function query(array $data = array())
     {
         $data['jbzoo-phpunit'] = 1;
 
@@ -92,7 +94,7 @@ class Helper
      * @param $testName
      * @return mixed|string
      */
-    public static function getTestName($testName)
+    public function getTestName($testName)
     {
         $testName = str_replace(__NAMESPACE__, '', $testName);
         $testName = preg_replace('#[^a-z0-9]#iu', '-', $testName);
