@@ -22,7 +22,7 @@ use JBZoo\CrossCMS\Cms;
  * Class MailerTest
  * @package JBZoo\PHPUnit
  */
-class MailerTest extends CrossCMS
+class MailerTest extends CrossCMSUnit
 {
     public function testSimpleMessage()
     {

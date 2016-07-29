@@ -19,7 +19,7 @@ namespace JBZoo\PHPUnit;
  * Class CacheTest
  * @package JBZoo\PHPUnit
  */
-class CacheTest extends CrossCMS
+class CacheTest extends CrossCMSUnit
 {
     public function testEnabled()
     {

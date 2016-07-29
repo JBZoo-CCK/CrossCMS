@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class BenchmarkTest
  * @package JBZoo\PHPUnit
  */
-class BenchmarkTest extends CrossCMS
+class BenchmarkTest extends CrossCMSUnit
 {
 
     public function testTranslate()

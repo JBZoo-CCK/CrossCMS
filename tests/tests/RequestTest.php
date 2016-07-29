@@ -19,7 +19,7 @@ namespace JBZoo\PHPUnit;
  * Class RequestTest
  * @package JBZoo\PHPUnit
  */
-class RequestTest extends CrossCMS
+class RequestTest extends CrossCMSUnit
 {
     protected function setUp()
     {

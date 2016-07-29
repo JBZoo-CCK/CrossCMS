@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class ConfigTest
  * @package JBZoo\PHPUnit
  */
-class ConfigTest extends CrossCMS
+class ConfigTest extends CrossCMSUnit
 {
     public function testConfig()
     {

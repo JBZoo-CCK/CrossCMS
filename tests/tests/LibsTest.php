@@ -21,11 +21,13 @@ use JBZoo\CrossCMS\Cms;
  * Class LibsTest
  * @package JBZoo\PHPUnit
  */
-class LibsTest extends CrossCMS
+class LibsTest extends CrossCMSUnit
 {
     public function testjQuery()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-jquery' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-libs-jquery' => 1));
+
+        isSame(200, $result->code);
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/jquery.js', $result->body);
@@ -37,7 +39,9 @@ class LibsTest extends CrossCMS
 
     public function testjQueryUI()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-jqueryui' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-libs-jqueryui' => 1));
+
+        isSame(200, $result->code);
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/core.min.js', $result->body);
@@ -48,7 +52,9 @@ class LibsTest extends CrossCMS
 
     public function testjQueryAutocomplete()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-autocomplete' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-libs-autocomplete' => 1));
+
+        isSame(200, $result->code);
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/autocomplete.min.js', $result->body);
@@ -59,7 +65,9 @@ class LibsTest extends CrossCMS
 
     public function testjQueryDatePicker()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-datepicker' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-libs-datepicker' => 1));
+
+        isSame(200, $result->code);
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/jquery/ui/datepicker.min.js', $result->body);
@@ -70,7 +78,9 @@ class LibsTest extends CrossCMS
 
     public function testColorPicker()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-libs-colorpicker' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-libs-colorpicker' => 1));
+
+        isSame(200, $result->code);
 
         if ($this->_cms['type'] === Cms::TYPE_WORDPRESS) {
             isContain('wp-includes/js/colorpicker.min.js', $result->body);

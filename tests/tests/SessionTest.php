@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class SessionTest
  * @package JBZoo\PHPUnit
  */
-class SessionTest extends CrossCMS
+class SessionTest extends CrossCMSUnit
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractSession

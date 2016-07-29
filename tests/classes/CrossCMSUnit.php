@@ -22,7 +22,7 @@ use JBZoo\PimpleDumper\PimpleDumper;
  * Class CrossCMS
  * @package JBZoo\PHPUnit
  */
-abstract class CrossCMS extends PHPUnit
+abstract class CrossCMSUnit extends PHPUnit
 {
     /**
      * @var Cms

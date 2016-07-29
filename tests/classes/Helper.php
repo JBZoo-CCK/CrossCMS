@@ -15,6 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
+use GuzzleHttp\Client;
 use JBZoo\CrossCMS\Cms;
 use JBZoo\Data\Data;
 use JBZoo\Utils\Env;
@@ -31,53 +32,56 @@ class Helper
      * @param $request
      * @return Data
      */
-    public function runIsolatedCMS($testName, $request)
+    public function request($testName, $request)
     {
         $cms = Cms::getInstance();
 
-        $host     = Env::get('TEST_HOST', '127.0.0.1');
-        $port     = Env::get('TEST_PORT');
-        $url      = Url::create(['host' => $host, 'port' => $port]);
-        $testName = $this->getTestName($testName);
+        $host = Env::get('TEST_HOST', '127.0.0.1');
+        $port = Env::get('TEST_PORT');
 
-        $result = $cms['http']->request( // Yeap, we are using http-driver from CMS
-            $url,
-            array_merge([
+        $url = Url::create([
+            'host'  => $host,
+            'port'  => $port,
+            'path'  => '/',
+            'query' => array_merge([
                 'jbzoo-phpunit'      => 1,
-                'jbzoo-phpunit-test' => $testName,
+                'jbzoo-phpunit-test' => $this->getTestName($testName),
                 'jbzoo-phpunit-type' => strtolower($cms['type'])
             ], $request),
-            [
-                'timeout'    => 30,
-                'ssl_verify' => 0,
-                'debug'      => 1,
-            ]
-        );
+        ]);
+
+        //dump($url, 0);
+
+        $client     = new Client();
+        $httpResult = $client->request('GET', $url, [
+            'allow_redirects' => false,
+            'http_errors'     => false,
+            'strict'          => true,
+            'timeout'         => 30,
+            'connect_timeout' => 30,
+            //'debug'           => true,
+            'verify'          => false,
+            'track_redirects' => true
+        ]);
+
+        // Prepare headers
+        $rawHeaders = $httpResult->getHeaders();
+        $headers    = [];
+        foreach ($rawHeaders as $key => $value) {
+            $key   = strtolower($key);
+            $value = implode(' ', $value);
+
+            $headers[$key] = $value;
+        }
+
+        // To simple format
+        $result = new Data([
+            'code'    => $httpResult->getStatusCode(),
+            'headers' => $headers,
+            'body'    => $httpResult->getBody()->getContents()
+        ]);
 
         return $result;
-    }
-
-    /**
-     * @param string $testName
-     * @param array  $request
-     * @return string
-     */
-    public function runIsolatedCMS_deprecated($testName, $request)
-    {
-        $cms = Cms::getInstance();
-
-        $testName = $this->getTestName($testName);
-        $cmsType  = strtolower($cms['type']);
-
-        $html = cmd('php ./tests/bin/browser.php tests/tests/BrowserEmulatorTest.php', array(
-            'configuration'   => 'phpunit-' . $cmsType . '-browser.xml.dist',
-            'coverage-clover' => 'build/clover/' . $cmsType . '-' . $testName . '.xml',
-            //'coverage-html'   => PROJECT_ROOT . '/build/web/' . $cmsType . '-' . $testName . '/html',
-            'jbzoo-env'       => $this->query($request),
-            'stderr'          => '', // Hack for CMS session starting
-        ), PROJECT_ROOT, (int)getenv('PHPUNIT_CMD_DEBUG'));
-
-        return $html;
     }
 
     /**

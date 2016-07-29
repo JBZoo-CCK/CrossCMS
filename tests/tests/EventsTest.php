@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class EventsTest
  * @package JBZoo\PHPUnit
  */
-class EventsTest extends CrossCMS
+class EventsTest extends CrossCMSUnit
 {
     public function testGetEventManager()
     {
@@ -31,34 +31,37 @@ class EventsTest extends CrossCMS
 
     public function testInit()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-init' => array(
+        $result = $this->helper->request(__METHOD__, array('test-events-init' => array(
             'init'       => '-qw-',
             'init.site'  => '-er-',
             'init.admin' => '-ty-',
         )));
 
+        isSame(200, $result->code);
         isContain('-qw--er-', $result->body);
     }
 
     public function testHeader()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-header' => array(
+        $result = $this->helper->request(__METHOD__, array('test-events-header' => array(
             'header'       => '-123-',
             'header.site'  => '-456-',
             'header.admin' => '-789-',
         )));
 
+        isSame(200, $result->code);
         isContain('-123--456-', $result->body);
     }
 
     public function testContent()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-events-content' => array(
+        $result = $this->helper->request(__METHOD__, array('test-events-content' => array(
             'content'       => '-ab-',
             'content.site'  => '-cd-',
             'content.admin' => '-ef-',
         )));
 
+        isSame(200, $result->code);
         isContain('-ab--cd-', $result->body);
     }
 }

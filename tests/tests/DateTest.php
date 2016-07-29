@@ -23,7 +23,7 @@ use JBZoo\Utils\Dates;
  * Class UserTest
  * @package JBZoo\PHPUnit
  */
-class DateTest extends CrossCMS
+class DateTest extends CrossCMSUnit
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractDate

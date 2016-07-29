@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class LangTest
  * @package JBZoo\PHPUnit
  */
-class LangTest extends CrossCMS
+class LangTest extends CrossCMSUnit
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractLang

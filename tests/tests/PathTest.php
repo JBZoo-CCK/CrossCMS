@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class PathTest
  * @package JBZoo\PHPUnit
  */
-class PathTest extends CrossCMS
+class PathTest extends CrossCMSUnit
 {
     /**
      * @param string $aliasPath

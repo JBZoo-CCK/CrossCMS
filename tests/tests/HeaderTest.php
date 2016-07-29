@@ -19,81 +19,91 @@ namespace JBZoo\PHPUnit;
  * Class HeaderTest
  * @package JBZoo\PHPUnit
  */
-class HeaderTest extends CrossCMS
+class HeaderTest extends CrossCMSUnit
 {
     public function testTitle()
     {
         $uniq = uniqid();
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-title' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-title' => $uniq));
 
+        isSame(200, $result->code);
         isContain('<title>' . $uniq . '</title>', $result->body);
     }
 
     public function testKeywords()
     {
         $uniq = uniqid();
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-keywords' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-keywords' => $uniq));
 
+        isSame(200, $result->code);
         isLike('#<meta name=[\'\"]keywords[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $result->body);
     }
 
     public function testDescription()
     {
         $uniq = uniqid();
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-description' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-description' => $uniq));
 
+        isSame(200, $result->code);
         isLike('#<meta name=[\'\"]description[\'\"] content=[\'\"]' . $uniq . '[\'\"]#ius', $result->body);
     }
 
     public function testNoindex()
     {
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-noindex' => 1));
+        $result = $this->helper->request(__METHOD__, array('test-header-noindex' => 1));
 
-        isContain('noindex', $result->body);
-        isContain('nofollow', $result->body);
+        isSame(200, $result->code);
+        isSame('noindex, nofollow', $result->find('headers.x-robots-tag'));
+        isContain('content="noindex, nofollow"', $result->body);
     }
 
     public function testAddMeta()
     {
         $value = uniqid();
-        $result  = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
+        $result  = $this->helper->request(__METHOD__, array('test-header-addmeta' => array(
             'meta'  => 'somemeta1',
             'value' => $value,
         )));
+        isSame(200, $result->code);
         isLike('#<meta name=[\'\"]somemeta1[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $result->body);
 
         $value = uniqid();
-        $result  = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-addmeta' => array(
+        $result  = $this->helper->request(__METHOD__, array('test-header-addmeta' => array(
             'meta' => '<meta name=\'somemeta2\' content=\'' . $value . '\' />',
         )));
+        isSame(200, $result->code);
         isLike('#<meta name=[\'\"]somemeta2[\'\"] content=[\'\"]' . $value . '[\'\"]#ius', $result->body);
     }
 
     public function testJSFile()
     {
         $uniq = uniqid('', true);
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-jsfile' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-jsfile' => $uniq));
+        isSame(200, $result->code);
         isContain($uniq, $result->body);
     }
 
     public function testCSSFile()
     {
         $uniq = uniqid('', true);
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-cssfile' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-cssfile' => $uniq));
+        isSame(200, $result->code);
         isContain($uniq, $result->body);
     }
 
     public function testJSCode()
     {
         $uniq = uniqid('', true);
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-jscode' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-jscode' => $uniq));
+        isSame(200, $result->code);
         isContain($uniq, $result->body);
     }
 
     public function testCSSCode()
     {
         $uniq = uniqid('', true);
-        $result = $this->helper->runIsolatedCMS(__METHOD__, array('test-header-csscode' => $uniq));
+        $result = $this->helper->request(__METHOD__, array('test-header-csscode' => $uniq));
+        isSame(200, $result->code);
         isContain($uniq, $result->body);
     }
 }

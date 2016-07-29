@@ -22,7 +22,7 @@ use JBZoo\SqlBuilder\Query\Select;
  * Class DatabaseTest
  * @package JBZoo\PHPUnit
  */
-class DatabaseTest extends CrossCMS
+class DatabaseTest extends CrossCMSUnit
 {
     protected function setUp()
     {

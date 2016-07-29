@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class UserTest
  * @package JBZoo\PHPUnit
  */
-class UserTest extends CrossCMS
+class UserTest extends CrossCMSUnit
 {
     /**
      * @return \JBZoo\CrossCMS\AbstractUser

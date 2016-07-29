@@ -22,7 +22,7 @@ use JBZoo\Data\JSON;
  * Class HttpTest
  * @package JBZoo\PHPUnit
  */
-class HttpTest extends CrossCMS
+class HttpTest extends CrossCMSUnit
 {
     protected $_url = 'http://www.mocky.io/v2/5773641a0f0000f104597a4e';
 

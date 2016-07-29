@@ -21,6 +21,7 @@
         "jbzoo/path"       : "^1.3",
         "jbzoo/event"      : "^1.2.1",
         "jbzoo/lang"       : "^1.0"
+
     },
     "require-dev"       : {
         "jbzoo/phpunit"       : "^1.6",
@@ -28,7 +29,8 @@
         "joomlatools/console" : "^1.4",
         "wp-cli/wp-cli"       : "^0.21",
         "symfony/process"     : "^2.8",
-        "symfony/console"     : "^2.8"
+        "symfony/console"     : "^2.8",
+        "guzzlehttp/guzzle"   : "^6.2"
     },
     "autoload"          : {
         "psr-4" : {

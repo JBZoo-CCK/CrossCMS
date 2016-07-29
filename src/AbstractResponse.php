@@ -55,7 +55,7 @@ abstract class AbstractResponse extends AbstractHelper
      */
     public function text()
     {
-        $this->setHeader('Content-Type', 'text/html; charset=utf-8');
+        $this->setHeader('Content-Type', 'text/plain; charset=utf-8');
     }
 
     /**

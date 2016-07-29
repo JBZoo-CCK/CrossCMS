@@ -21,7 +21,7 @@ use JBZoo\CrossCMS\Cms;
  * Class EnvTest
  * @package JBZoo\PHPUnit
  */
-class EnvTest extends CrossCMS
+class EnvTest extends CrossCMSUnit
 {
     public function test()
     {

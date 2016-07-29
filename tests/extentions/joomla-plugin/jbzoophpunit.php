@@ -112,10 +112,6 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             $this->_cms['response']->json((array)$test, true);
         }
 
-        if ($test = $this->_request('test-response-text')) {
-            $this->_cms['response']->text();
-        }
-
         if ($test = $this->_request('test-response-nocache')) {
             $this->_cms['response']->noCache();
         }
@@ -180,7 +176,18 @@ class PlgSystemJBZooPHPUnit extends JPlugin
             return;
         }
 
-        /* Events:header ***********************************************************************************************/
+        /* Response ***************************************************************************************************/
+        if ($test = $this->_request('test-response-text')) {
+            $this->_cms['response']->text();
+
+            $app = JFactory::getApplication();
+            $app->sendHeaders();
+
+            echo '<html>test</html>';
+            $app->close(200);
+        }
+
+        /* Events:header **********************************************************************************************/
         if ($this->_request('test-events-header')) {
             $this->_cms->on('cms.header.site', function () {
                 echo $_REQUEST['test-events-header']['header.site'];

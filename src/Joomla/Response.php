@@ -42,7 +42,6 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function set404($message = 'Not Found')
     {
@@ -57,7 +56,6 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function set500($message = 'Internal Server Error')
     {
@@ -72,7 +70,6 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function redirect($url, $status = 303)
     {
@@ -84,7 +81,6 @@ class Response extends AbstractResponse
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
      */
     public function json(array $data = array(), $result = true)
     {

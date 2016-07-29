@@ -19,68 +19,63 @@ namespace JBZoo\PHPUnit;
  * Class ResponseTest
  * @package JBZoo\PHPUnit
  */
-class ResponseTest extends CrossCMS
+class ResponseTest extends CrossCMSUnit
 {
+    public function testJson()
+    {
+        $uniq = uniqid();
+
+        $result = $this->helper->request(__METHOD__, array('test-response-json' => array(
+            $uniq => $uniq,
+        )));
+
+        isSame([$uniq => $uniq], json_decode($result->body, true));
+        isSame(200, $result->code);
+        isSame('application/json; charset=utf-8', $result->find('headers.content-type'));
+        isSame('no-cache', $result->find('headers.pragma'));
+    }
+
     public function testCode404()
     {
-        skip();
-
-        $html = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-set404' => 1));
-
-        isContain('404', $html);
+        $result = $this->helper->request(__METHOD__, array('test-response-set404' => 1));
+        is(404, $result->code);
     }
 
     public function testCode500()
     {
-        skip();
+        $uniq   = uniqid();
+        $result = $this->helper->request(__METHOD__, array('test-response-set500' => $uniq));
 
-        $uniq = uniqid();
-        $html = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-set500' => $uniq));
-
-        isContain($uniq, $html);
+        isContain($uniq, $result->body);
+        is(500, $result->code);
     }
 
     public function testRedirect()
     {
-        $uniq = '?' . uniqid() . '=1';
-        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-redirect' => $uniq));
-    }
+        $uniq   = '?' . uniqid() . '=1';
+        $result = $this->helper->request(__METHOD__, array('test-response-redirect' => $uniq));
 
-    public function testJson()
-    {
-        skip();
-        $uniq = uniqid();
-
-        $json = $this->helper->runIsolatedCMS(__METHOD__, array('test-response-json' => array(
-            //'message' => 'Error message',
-            $uniq => $uniq,
-        )));
-
-        isSame(array(
-            //"message" => "Error message",
-            $uniq => $uniq,
-            //"result"  => 1,
-        ), json_decode($json, true));
+        isSame(303, $result->code);
+        isContain($uniq, $result->find('headers.location'));
     }
 
     public function testText()
     {
-        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-text' => 1));
-        isTrue(true); // We can't check HTTP-headers on CLI mode
+        $result = $this->helper->request(__METHOD__, array('test-response-text' => 1));
+
+        isSame(
+            'text/plain; charset=utf-8',
+            $result->find('headers.content-type')
+        );
     }
 
     public function testNocache()
     {
-        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-nocache' => 1));
-    }
+        $result = $this->helper->request(__METHOD__, array('test-response-nocache' => 1));
 
-    public function testRaw()
-    {
-        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-raw' => 1));
-    }
-
-    public function testComponent()
-    {
-        $this->helper->runIsolatedCMS(__METHOD__, array('test-response-component' => 1));
+        isSame('no-cache', $result->find('headers.pragma'));
+        isContain('no-store', $result->find('headers.cache-control'));
+        isContain('no-cache', $result->find('headers.cache-control'));
+        isContain('must-revalidate', $result->find('headers.cache-control'));
     }
 }
