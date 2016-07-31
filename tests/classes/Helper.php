@@ -38,46 +38,23 @@ class Helper
 
         $host = Env::get('TEST_HOST', '127.0.0.1');
         $port = Env::get('TEST_PORT');
+        $url  = Url::create(['host' => $host, 'port' => $port]);
 
-        $url = Url::create([
-            'host'  => $host,
-            'port'  => $port,
-            'path'  => '/',
-            'query' => array_merge([
+        $result = httpRequest(
+            $url,
+            array_merge([
                 'jbzoo-phpunit'      => 1,
                 'jbzoo-phpunit-test' => $this->getTestName($testName),
                 'jbzoo-phpunit-type' => strtolower($cms['type'])
             ], $request),
-        ]);
-
-        //dump($url, 0);
-
-        $client     = new Client();
-        $httpResult = $client->get($url, [
-            'allow_redirects' => false,
-            'exceptions'      => false,
-            'timeout'         => 30,
-            'connect_timeout' => 30,
-            'debug'           => false,
-            'verify'          => false,
-        ]);
-
-        // Prepare headers
-        $rawHeaders = $httpResult->getHeaders();
-        $headers    = [];
-        foreach ($rawHeaders as $key => $value) {
-            $key   = strtolower($key);
-            $value = implode(' ', $value);
-
-            $headers[$key] = $value;
-        }
-
-        // To simple format
-        $result = new Data([
-            'code'    => $httpResult->getStatusCode(),
-            'headers' => $headers,
-            'body'    => $httpResult->getBody()->getContents()
-        ]);
+            'GET',
+            [
+                'allow_redirects' => false,
+                'exceptions'      => false,
+                'timeout'         => 30,
+                'verify'          => false,
+            ]
+        );
 
         return $result;
     }
