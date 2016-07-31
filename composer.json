@@ -25,6 +25,7 @@
     },
     "require-dev"       : {
         "jbzoo/phpunit"       : "^1.7",
+        "jbzoo/http-client"   : "^1.0",
         "phpunit/phpcov"      : "^2.0.2",
         "joomlatools/console" : "^1.4",
         "wp-cli/wp-cli"       : "^0.21",
