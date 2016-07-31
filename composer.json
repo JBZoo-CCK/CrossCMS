@@ -29,8 +29,6 @@
         "phpunit/phpcov"      : "^2.0.2",
         "joomlatools/console" : "^1.4",
         "wp-cli/wp-cli"       : "^0.21",
-        "symfony/process"     : "^2.8",
-        "symfony/console"     : "^2.8",
         "guzzlehttp/guzzle"   : "^5.3|^6.2"
     },
     "autoload"          : {

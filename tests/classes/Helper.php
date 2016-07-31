@@ -51,10 +51,14 @@ class Helper
             [
                 'allow_redirects' => false,
                 'exceptions'      => false,
-                'timeout'         => 30,
+                'timeout'         => 60,
                 'verify'          => false,
             ]
         );
+
+        if (!$result->getCode()) {
+            var_dump($result);
+        }
 
         return $result;
     }
