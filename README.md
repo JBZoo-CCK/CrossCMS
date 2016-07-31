@@ -1,4 +1,4 @@
-# JBZoo CrossCMS  [![Build Status](https://travis-ci.org/JBZoo/CrossCMS.svg?branch=master)](https://travis-ci.org/JBZoo/CrossCMS)      [![Coverage Status](https://coveralls.io/repos/JBZoo/CrossCMS/badge.svg?branch=master&service=github)](https://coveralls.io/github/JBZoo/CrossCMS?branch=master)
+# JBZoo CrossCMS  [![Build Status](https://travis-ci.org/JBZoo/CrossCMS.svg?branch=master)](https://travis-ci.org/JBZoo/CrossCMS)      [![Coverage Status](https://coveralls.io/repos/github/JBZoo/CrossCMS/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/CrossCMS?branch=master)
 
 #### Одно расширение, один код — разные CMS!
 
