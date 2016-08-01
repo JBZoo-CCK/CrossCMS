@@ -14,10 +14,7 @@ CrossCMS it's collection of simple helpers, which helps you to create one cross 
 
 This library is result of combining different API systems to general appearance concealing the difference within yourself. It is necessary to consider it as a global renaming of the main functions of CMS (though it is a bit more complicated). Moreover, the library does not carry any specific implementations of functions. So, there is little overhead and memory performance for your extension.
 
-CrossCMS was created for JBZoo CCK (Content Constructor Kit) and it works fine. You can find project in the repository JBZoo/JBZoo.
-
-
-CrossCMS was created for [JBZoo CCK](http://jbzoo.ru/) (Content Constructor Kit) and it works fine.
+CrossCMS was created for [JBZoo CCK](http://jbzoo.com/) (Content Constructor Kit) and it works fine.
 You can find project in the repository [JBZoo/JBZoo](https://github.com/JBZoo/JBZoo).
 
 
