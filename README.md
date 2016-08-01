@@ -10,12 +10,11 @@
 
 
 ### Description
-CrossCMS it's collection of simple helpers, which helps you to create one cross platform extention for Joomla and Wordpress.
-So developer writes code once and runs the same tests for two different CMS. 
+CrossCMS it's collection of simple helpers, which helps you to create one cross platform extension for Joomla and WordPress. So developer writes code once and runs the same tests for two different CMS.
 
-This library is result of combining different API systems to general appearance concealing the difference within yourself.
-It is necessary to consider it as a global renaming of the main functions of CMS (though it is a bit more complicated).
-Moreover, the library does not carry any specific implementations of functions. So, there is little overhead and memory performance for your extension.
+This library is result of combining different API systems to general appearance concealing the difference within yourself. It is necessary to consider it as a global renaming of the main functions of CMS (though it is a bit more complicated). Moreover, the library does not carry any specific implementations of functions. So, there is little overhead and memory performance for your extension.
+
+CrossCMS was created for JBZoo CCK (Content Constructor Kit) and it works fine. You can find project in the repository JBZoo/JBZoo.
 
 
 CrossCMS was created for [JBZoo CCK](http://jbzoo.ru/) (Content Constructor Kit) and it works fine.
@@ -35,7 +34,6 @@ make test-all
 
 
 ### Support of CMS 
-На данный момент библиотека протестирована и работает для
 
  * Joomla CMS: 3.4.x ... 3.6.x
  * Wordpress: 4.2.x ... 4.5.x
@@ -51,7 +49,7 @@ composer require jbzoo/crosscms
 ```
 
 
-#### Main container for helpers is Pimple DI
+#### Main container
 
 [Pimple DI](http://pimple.sensiolabs.org/) contains all helpers. 
 
@@ -123,8 +121,6 @@ $cms['config']->timezone();
 
 
 #### Database
-
-Ysuallu
 
 We recommend you to use [SqlBuilder](https://github.com/JBZoo/SqlBuilder) with the database helper.
 This is a simple and secure SQL-queries builder compatible with CrossCMS, Joomla and Wordperss. It's not required. Only if you wish.
@@ -239,7 +235,7 @@ $response = $cms['http']->request(
         'var-2' => 'value-2',
     ],
     [                                                       // Options
-        'timeout'    => 5,                                  // Max wait or connation timeout 
+        'timeout'    => 5,                                  // Max wait or connection timeout 
         'method'     => 'GET',                              // HTTP-method (GET|POST|HEAD|PUT|DELETE|OPTIONS|PATCH)  
         'headers'    => [                                   // Custom headers
             'x-custom-header' => '42',
@@ -372,7 +368,7 @@ $cms['request']->get('foo', null, function ($value) {    // Custom filter (handl
 ```php
 $cms = Cms::getInstance();
 
-$cms['response']->set404($message);            // Swho page 404
+$cms['response']->set404($message);            // Show page 404
 $cms['response']->set500($message);            // Show fatal error
 $cms['response']->redirect($url, 301);         // Redirect use to new location
 $cms['response']->json(array $data = array()); // Send JSON
@@ -420,7 +416,7 @@ Plugins for Wordpress
  * [JBZoo 3.x-dev for unit-tests](https://github.com/JBZoo/JBZoo/tree/master/tests/extentions/wp_jbzoophpunit) 
  * [CrossCMS for unit-tests](https://github.com/JBZoo/CrossCMS/tree/master/tests/extentions/wp-plugin) 
 
-Extentions for Joomla!CMS
+Extensions for Joomla!CMS
 
  * [JBZoo 3.x-dev](https://github.com/JBZoo/JBZoo/tree/master/src/joomla/plg_sys_jbzoocck) 
  * [JBZoo 3.x-dev for unit-tests](https://github.com/JBZoo/JBZoo/tree/master/tests/extentions/j_jbzoophpunit) 
