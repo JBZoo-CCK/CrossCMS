@@ -497,7 +497,6 @@ $user->$user->getAvatar(128);   // Получить аватар 128*128px на 
  * [Joomlaportal.ru - CrossCMS от JBZoo](http://joomlaportal.ru/news/extensions/2743-crosscms-ot-jbzoo)
  * [JBZoo.ru - Краткая презентация CrossCMS на Joomla!Day Moscow 2016](http://jbzoo.ru/blog/joomladay-2016-review)
  * [Habrahabr.ru - PHP-Дайджест №89](https://habrahabr.ru/company/zfort/blog/306828/) 
- * 
 
 ## Лицензия
 
