@@ -462,7 +462,7 @@ $user->getEmail();              // Получить Email из профиля
 $user->getLogin();              // Логин для авторизации
 $user->getName();               // Имя пользователя 
 $user->getId();                 // Его системный ID
-$user->$user->getAvatar(128);   // Получить аватар 128*128px на основе сервиса gravatar.com
+$user->getAvatar(128);          // Получить аватар 128*128px на основе сервиса gravatar.com
 ```
 
 
