@@ -78,7 +78,7 @@ composer require jbzoo/crosscms
 Так мы можем сэкономить на инициализации хелперов и легко переопределять, расширять библиотеку.
 Каждый хелпер — это группа функций, которая отвечает только за свою область действий: база данных, статика, пользователь, реквест и т.д.
 
-Чтобы начать работать с CrossCMS достаточно подключить `'./vendor/autoload.php' от `composer` и получить инстанс приложения.
+Чтобы начать работать с CrossCMS достаточно подключить `'./vendor/autoload.php'` от `composer` и получить инстанс приложения.
 Свой код можно расположить в плагине CMS, например сразу после инициализации фреймворка. 
  
 ```php
@@ -374,7 +374,7 @@ $mail->complex('admin@example.com', 'Test message subject', 'Test complex method
 $cms = Cms::getInstance();
 
 $cms['path']->get('root:');     // Корень сайта
-$cms['path']->get('upload:');    // Место для загрузок файлов
+$cms['path']->get('upload:');   // Место для загрузок файлов
 $cms['path']->get('tmpl:');     // Шаблоны
 $cms['path']->get('cache:');    // Файловый кеш
 $cms['path']->get('logs:');     // Логи сайта
@@ -495,7 +495,9 @@ $user->$user->getAvatar(128);   // Получить аватар 128*128px на 
 ## О CrossCMS в прессе
  * [Joomlaportal.ru - Превосходство Joomla API над Wordpress](http://joomlaportal.ru/blogs/development/2598-prevoskhodstvo-api-joomla-nad-wordpress)
  * [Joomlaportal.ru - CrossCMS от JBZoo](http://joomlaportal.ru/news/extensions/2743-crosscms-ot-jbzoo)
- * [JBZoo.ru - Краткая презентация CrossCMS на Joomla!Day Moscow 2016](http://jbzoo.ru/blog/joomladay-2016-review) 
+ * [JBZoo.ru - Краткая презентация CrossCMS на Joomla!Day Moscow 2016](http://jbzoo.ru/blog/joomladay-2016-review)
+ * [Habrahabr.ru - PHP-Дайджест №89](https://habrahabr.ru/company/zfort/blog/306828/) 
+ * 
 
 ## Лицензия
 
