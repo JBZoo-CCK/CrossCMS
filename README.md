@@ -6,7 +6,7 @@
 [![Latest Stable Version](https://poser.pugx.org/JBZoo/CrossCMS/v/stable)](https://packagist.org/packages/JBZoo/CrossCMS) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JBZoo/CrossCMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JBZoo/CrossCMS/?branch=master)
 
 
-[Russian Readme](https://github.com/JBZoo/CrossCMS/blob/master/README_RUS.md)
+[RUSSIAN README !](https://github.com/JBZoo/CrossCMS/blob/master/README_RUS.md)
 
 
 ### Description
