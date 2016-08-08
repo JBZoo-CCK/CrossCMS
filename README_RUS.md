@@ -496,6 +496,7 @@ $user->getAvatar(128);          // Получить аватар 128*128px на 
  * [Joomlaportal.ru - Превосходство Joomla API над Wordpress](http://joomlaportal.ru/blogs/development/2598-prevoskhodstvo-api-joomla-nad-wordpress)
  * [Joomlaportal.ru - CrossCMS от JBZoo](http://joomlaportal.ru/news/extensions/2743-crosscms-ot-jbzoo)
  * [JBZoo.ru - Краткая презентация CrossCMS на Joomla!Day Moscow 2016](http://jbzoo.ru/blog/joomladay-2016-review) 
+ * [The advantage of Joomla API over Wordpress](http://www.eugenesivokon.com/blog/the-advantage-of-joomla-api-over-wordpress)
 
 ## Лицензия
 
