@@ -51,7 +51,7 @@ class Events extends AbstractEvents
      *      }
      *
      *      // Content handlers (for macroses)
-     *      public function onAfterRespond()
+     *      public function onAfterRender()
      *      {
      *          $body = JFactory::getApplication()->getBody();
      *          $this->_app->trigger(AbstractEvent::EVENT_CONTENT, [$body]);
